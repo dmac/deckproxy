@@ -1,0 +1,7 @@
+<% cards.each do |card| %>
+  <div class="card">
+    <img src="/scans/<%= card.edition %>/<%= card.number %>.jpg" />
+  </div>
+<% end %>
+<input type="hidden" id="loadMore" value="<%= load_more ? offset : 'none' %>" />
+

@@ -1,0 +1,36 @@
+* {
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  font-size: 12px;
+  font-family: Helvetica; }
+
+#main {
+  width: 800px;
+  margin: auto; }
+
+#buildSection #searchboxDiv {
+  margin-top: 10px;
+  text-align: center; }
+  #buildSection #searchboxDiv #searchbox {
+    width: 500px;
+    height: 30px;
+    font-size: 1.4em;
+    display: block;
+    margin: auto;
+    margin-bottom: 10px; }
+    #buildSection #searchboxDiv #searchbox.grayText {
+      color: #D2D2D2; }
+#buildSection #searchResults {
+  margin-top: 30px; }
+  #buildSection #searchResults .card {
+    display: inline-block;
+    position: relative;
+    width: 155px;
+    height: 220px; }
+    #buildSection #searchResults .card img {
+      position: absolute;
+      width: 155px;
+      top: 0px;
+      left: 0px; }

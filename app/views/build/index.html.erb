@@ -1,0 +1,116 @@
+<script type="text/javascript">
+  Builder = {
+    maxScroll: 3000,
+
+    init: function() {
+      $(document).keypress(Builder.onKeyPress);
+      $("#searchbox").focus(Builder.onSearchFocus);
+      $("#searchbox").blur(Builder.onSearchBlur);
+    },
+
+    onHoverOverCard: function(event) {
+      $(event.target).css("z-index", "1000");
+      $(event.target).animate({
+          width: 280,
+          top: -50,
+          left: -50
+      }, 100);
+    },
+
+    onHoverOutCard: function(event) {
+      var card = $(event.target);
+      card.animate({
+          width: 155,
+          top: 0,
+          left: 0
+      }, 100, function() { card.css("z-index", "0"); });
+    },
+
+    focusSearchbox: function(event) {
+      event.preventDefault();
+      $("#searchbox").focus();
+    },
+
+    newSearch: function() {
+      $("#searchResults").html("");
+      Builder.maxScroll = 3000;
+      Builder.search(0);
+    },
+
+    search: function(offset) {
+      $("#searchbox").blur();
+
+      var query = $("#searchbox").val();
+      var searchText = $("#searchText:checked").size() > 0;
+      $.ajax({
+          type: "POST",
+          url: "/build/search",
+          data: {
+            query: query,
+            search_text: searchText,
+            offset: offset
+          },
+          success: function(html) {
+            $("#searchResults").append(html);
+            $("#searchResults .card").mouseover(Builder.onHoverOverCard);
+            $("#searchResults .card").mouseout(Builder.onHoverOutCard);
+            Builder.attachScrollListener();
+          }
+      });
+    },
+
+    onSearchFocus: function() {
+      $("#searchbox").val("");
+      $("#searchbox").removeClass("grayText");
+    },
+
+    onSearchBlur: function() {
+      if ($("#searchbox").val() != "")
+        return;
+
+      $("#searchbox").addClass("grayText");
+      $("#searchbox").val('type "/" to search');
+    },
+
+    attachScrollListener: function() {
+      if ($("#loadMore").val() == "none")
+        $(document).unbind("scroll");
+      else
+        $(document).bind("scroll", Builder.onScroll);
+    },
+
+    onScroll: function(event) {
+      if (document.body.scrollTop > Builder.maxScroll) {
+        Builder.maxScroll += 3000;
+        var offset = $("#loadMore").val();
+        $("#loadMore").remove();
+        Builder.search(offset);
+      }
+    },
+
+    onKeyPress: function(event) {
+      if ($("#searchbox:focus").size() > 0 && event.which != 13)
+        return;
+
+      //console.log(event.which);
+
+      switch (event.which) {
+        case 13: Builder.newSearch(); break; // return
+        case 47: Builder.focusSearchbox(event); break; // /
+        case 116: $("#searchText").click(); break; // t
+      }
+    }
+  }
+  $(document).ready(Builder.init);
+</script>
+
+<section id="buildSection">
+  <div id="searchboxDiv">
+    <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
+    <input type="checkbox" id="searchText" />
+    <label for="searchText">Search card text (t)</label>
+  </div>
+  <div id="searchResults">
+  </div>
+</section>
+
