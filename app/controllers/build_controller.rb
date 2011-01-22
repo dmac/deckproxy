@@ -13,12 +13,15 @@ class BuildController < ApplicationController
     else
       conditions = []
       if params[:search_text] == "true"
-        conditions << "(name like ? OR text like ?) AND number is not NULL"
+        conditions << "(name like ? OR name like ? OR text like ? OR text like ?) AND number is not NULL"
         conditions << "%#{query}%"
+        conditions << "%#{query.capitalize}%"
         conditions << "%#{query}%"
+        conditions << "%#{query.capitalize}%"
       else
-        conditions << "(name like ?) AND number is not NULL"
+        conditions << "(name like ? OR name like ?) AND number is not NULL"
         conditions << "%#{query}%"
+        conditions << "%#{query.capitalize}%"
       end
       results = Card.find(:all, :conditions => conditions,
                           :order => :name, :limit => 100,
