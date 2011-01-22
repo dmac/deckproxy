@@ -1,11 +1,11 @@
 <script type="text/javascript">
-  Builder = {
+  Searcher = {
     maxScroll: 3000,
 
     init: function() {
-      $(document).keypress(Builder.onKeyPress);
-      $("#searchbox").focus(Builder.onSearchFocus);
-      $("#searchbox").blur(Builder.onSearchBlur);
+      $(document).keypress(Searcher.onKeyPress);
+      $("#searchbox").focus(Searcher.onSearchFocus);
+      $("#searchbox").blur(Searcher.onSearchBlur);
     },
 
     onHoverOverCard: function(event) {
@@ -33,8 +33,8 @@
 
     newSearch: function() {
       $("#searchResults").html("");
-      Builder.maxScroll = 3000;
-      Builder.search(0);
+      Searcher.maxScroll = 3000;
+      Searcher.search(0);
     },
 
     search: function(offset) {
@@ -44,7 +44,7 @@
       var searchText = $("#searchText:checked").size() > 0;
       $.ajax({
           type: "POST",
-          url: "/build/search",
+          url: "/search/search",
           data: {
             query: query,
             search_text: searchText,
@@ -52,9 +52,9 @@
           },
           success: function(html) {
             $("#searchResults").append(html);
-            $("#searchResults .card").mouseover(Builder.onHoverOverCard);
-            $("#searchResults .card").mouseout(Builder.onHoverOutCard);
-            Builder.attachScrollListener();
+            $("#searchResults .card").mouseover(Searcher.onHoverOverCard);
+            $("#searchResults .card").mouseout(Searcher.onHoverOutCard);
+            Searcher.attachScrollListener();
           }
       });
     },
@@ -76,15 +76,15 @@
       if ($("#loadMore").val() == "none")
         $(document).unbind("scroll");
       else
-        $(document).bind("scroll", Builder.onScroll);
+        $(document).bind("scroll", Searcher.onScroll);
     },
 
     onScroll: function(event) {
-      if (document.body.scrollTop > Builder.maxScroll) {
-        Builder.maxScroll += 3000;
+      if (document.body.scrollTop > Searcher.maxScroll) {
+        Searcher.maxScroll += 3000;
         var offset = $("#loadMore").val();
         $("#loadMore").remove();
-        Builder.search(offset);
+        Searcher.search(offset);
       }
     },
 
@@ -95,13 +95,13 @@
       //console.log(event.which);
 
       switch (event.which) {
-        case 13: Builder.newSearch(); break; // return
-        case 47: Builder.focusSearchbox(event); break; // /
+        case 13: Searcher.newSearch(); break; // return
+        case 47: Searcher.focusSearchbox(event); break; // /
         case 116: $("#searchText").click(); break; // t
       }
     }
   }
-  $(document).ready(Builder.init);
+  $(document).ready(Searcher.init);
 </script>
 
 <section id="buildSection">
