@@ -3,7 +3,7 @@
     maxScroll: 3000,
 
     init: function() {
-      $(document).keypress(Searcher.onKeyPress);
+      $(document).keydown(Searcher.onKeyDown);
       $("#searchbox").focus(Searcher.onSearchFocus);
       $("#searchbox").blur(Searcher.onSearchBlur);
     },
@@ -47,9 +47,14 @@
       });
     },
 
-    focusSearchbox: function(event) {
-      event.preventDefault();
+    focusSearchbox: function(field, event) {
+      if (event)
+        event.preventDefault();
       $("#searchbox").focus();
+      if (field != "")
+        $("#searchbox").val(field + ": ");
+      else
+        $("#searchbox").val("");
     },
 
     newSearch: function() {
@@ -62,11 +67,8 @@
       $("#searchbox").blur();
 
       var query = $("#searchbox").val();
-      var queryField = $("#searchField").val();
 
       var queries = {};
-      queries[queryField] = query;
-
       var breadcrumbs = $("#searchBreadcrumbs input");
       $.each(breadcrumbs, function(index, element) {
         queries[$(element).attr("name")] = $(element).val();
@@ -76,6 +78,7 @@
           type: "POST",
           url: "/search/search",
           data: {
+            query: query,
             queries: queries,
             offset: offset
           },
@@ -118,16 +121,30 @@
       }
     },
 
-    onKeyPress: function(event) {
+    previousBreadcrumb: function(event) {
+      event.preventDefault(); // prevent moving backwards through history
+    },
+
+    searchName: function(event) {
+      Searcher.focusSearchbox("name", event);
+    },
+
+    searchText: function(event) {
+      Searcher.focusSearchbox("text", event);
+    },
+
+    onKeyDown: function(event) {
       if ($("#searchbox:focus").size() > 0 && event.which != 13)
         return;
 
-      //console.log(event.which);
+      console.log("keypress: " + event.which);
 
       switch (event.which) {
         case 13: Searcher.newSearch(); break; // return
-        case 47: Searcher.focusSearchbox(event); break; // /
-        case 116: $("#searchText").click(); break; // t
+        case 191: Searcher.focusSearchbox("", event); break; // /
+        case 8: Searcher.previousBreadcrumb(event); break; // backspace
+        case 78: Searcher.searchName(event); break; // n
+        case 84: Searcher.searchText(event); break; // t
       }
     }
   }
@@ -142,8 +159,9 @@
     <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
   </div>
   <div id="searchInstructions">
-    <p>n: search card name</p>
-    <p>t: search card text</p>
+    <p>/: restart search</p>
+    <p>n: search card name (name:)</p>
+    <p>t: search card text (text:)</p>
   </div>
   <div id="resultsSection">
     <div id="searchResults">
