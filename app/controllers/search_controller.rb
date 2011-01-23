@@ -3,8 +3,7 @@ class SearchController < ApplicationController
   end
 
   def search
-    query_field = params[:query].split(":")[0].strip
-    query_text = params[:query].split(":")[1].strip
+    query_field, query_text = parse_query(params[:query])
     queries = params[:queries].blank? ? {} : params[:queries] # hash of db columns to query text
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
 
@@ -50,5 +49,12 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
+  private
+
+  def parse_query(raw_query)
+    return ["name", raw_query.strip] unless raw_query.include?(":")
+    query_field = raw_query.split(":")[0].strip
+    query_text = raw_query.split(":")[1].strip
+  end
 end
 
