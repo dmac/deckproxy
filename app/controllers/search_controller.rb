@@ -19,6 +19,21 @@ class SearchController < ApplicationController
       when "text"
         break if query.size < 3
         @results = @results.by_text(query)
+      when "mana"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          @results = @results.less_than_or_equal_mana(number)
+        elsif query.include?(">=")
+          @results = @results.greater_than_or_equal_mana(number)
+        elsif query.include?("<")
+          @results = @results.less_than_mana(number)
+        elsif query.include?(">")
+          @results = @results.greater_than_mana(number)
+        else
+          @results = @results.equal_to_mana(number)
+        end
+      when "color"
+        @results = @results.by_color(query)
       end
     end
 
