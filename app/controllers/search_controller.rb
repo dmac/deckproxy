@@ -31,5 +31,15 @@ class SearchController < ApplicationController
     }
   end
 
+  def add_card_to_deck(card_id, deck_id)
+    deck = Deck.find(deck_id)
+    if (!deck)
+      deck = Deck.new
+    end
+    deck.add_card(Card.find(card_id))
+
+    render :partial => "mikes_partial", :locals => { :deck => deck }
+  end
+
 end
 
