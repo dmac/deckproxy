@@ -1,14 +1,12 @@
 <script>
 </script>
+<a href="/"> Home!</a>
 
 <h1>The Decks!</h1>
-<% @decks.each do |deck| -%>
+<% @decks.each do |deck| %>
   <div>
-    <h3> <%=h deck.name %> </h3>
-      <ol>
-        <% deck.cards.each do |card| -%>
-          <li> <%=h card.name %> </li>
-        <% end -%>
-      </ol>
+    <a href=<%= "/deck/view/" + deck.id.to_s %> >
+      <%=h deck.name %>
+    </a>
   </div>
-<% end -%>
+<% end %>
