@@ -38,7 +38,8 @@ class SearchController < ApplicationController
     else
       deck = Deck.find(params[:deck_id])
     end
-    deck.add_card(Card.find(params[:card_id]))
+    if (deck)
+      deck.add_card(Card.find(params[:card_id]))
 
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end

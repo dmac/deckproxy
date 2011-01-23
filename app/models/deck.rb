@@ -11,13 +11,13 @@ class Deck < ActiveRecord::Base
   end
 
   def add_card(card)
-    pack = Pack.find(:all,
-                     :conditions => "deck_id = " + self.id.to_s +
-                                    " AND card_id = " + card.id.to_s).first;
-    logger.debug("deck_id = " + self.id.to_s + " AND card_id = " + card.id.to_s)
+    pack = Pack.find(:first,
+                     :conditions => ["deck_id = ? and card_id = ?",
+                                     self.id,
+                                     card.id])
     if (pack)
-      pack.number = pack.number++
-      pack.save
+      num = pack.number + 1
+      pack.update_attribute(:number, num);
     elsif
       self.cards << card
     end
