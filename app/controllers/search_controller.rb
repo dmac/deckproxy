@@ -10,67 +10,13 @@ class SearchController < ApplicationController
     # Add this query to previous queries
     queries[query_field] = query_text
 
-    @results = Card.with_number
-    queries.each do |field, query|
-      case field
-      when "name"
-        break if query.size < 3
-        @results = @results.by_name(query)
-      when "text"
-        break if query.size < 3
-        @results = @results.by_text(query)
-      when "mana"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
-          @results = @results.less_than_or_equal_mana(number)
-        elsif query.include?(">=")
-          @results = @results.greater_than_or_equal_mana(number)
-        elsif query.include?("<")
-          @results = @results.less_than_mana(number)
-        elsif query.include?(">")
-          @results = @results.greater_than_mana(number)
-        else
-          @results = @results.equal_to_mana(number)
-        end
-      when "color"
-        @results = @results.by_color(query)
-      when "type"
-        @results = @results.by_type(query)
-      when "power"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
-          @results = @results.less_than_or_equal_power(number)
-        elsif query.include?(">=")
-          @results = @results.greater_than_or_equal_power(number)
-        elsif query.include?("<")
-          @results = @results.less_than_power(number)
-        elsif query.include?(">")
-          @results = @results.greater_than_power(number)
-        else
-          @results = @results.equal_to_power(number)
-        end
-      when "toughness"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
-          @results = @results.less_than_or_equal_toughness(number)
-        elsif query.include?(">=")
-          @results = @results.greater_than_or_equal_toughness(number)
-        elsif query.include?("<")
-          @results = @results.less_than_toughness(number)
-        elsif query.include?(">")
-          @results = @results.greater_than_toughness(number)
-        else
-          @results = @results.equal_to_toughness(number)
-        end
-      end
-    end
+    results = perform_queries(queries)
+    results = results.all(:order => :name, :limit => 100, :offset => offset)
 
-    @results = @results.all(:order => :name, :limit => 100, :offset => offset)
-
-    load_more = (@results.size == 100)
+    load_more = (results.size == 100)
 
     render :partial => "search", :locals => {
-      :cards => @results,
+      :cards => results,
       :breadcrumbs => queries,
       :load_more => load_more,
       :offset => offset.to_i + 100
@@ -106,5 +52,62 @@ class SearchController < ApplicationController
     return [query_field, query_text]
   end
 
+  def perform_queries(queries)
+    results = Card.with_number
+    queries.each do |field, query|
+      case field
+      when "name"
+        break if query.size < 3
+        results = results.by_name(query)
+      when "text"
+        break if query.size < 3
+        results = results.by_text(query)
+      when "mana"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          results = results.less_than_or_equal_mana(number)
+        elsif query.include?(">=")
+          results = results.greater_than_or_equal_mana(number)
+        elsif query.include?("<")
+          results = results.less_than_mana(number)
+        elsif query.include?(">")
+          results = results.greater_than_mana(number)
+        else
+          results = results.equal_to_mana(number)
+        end
+      when "color"
+        results = results.by_color(query)
+      when "type"
+        results = results.by_type(query)
+      when "power"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          results = results.less_than_or_equal_power(number)
+        elsif query.include?(">=")
+          results = results.greater_than_or_equal_power(number)
+        elsif query.include?("<")
+          results = results.less_than_power(number)
+        elsif query.include?(">")
+          results = results.greater_than_power(number)
+        else
+          results = results.equal_to_power(number)
+        end
+      when "toughness"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          results = results.less_than_or_equal_toughness(number)
+        elsif query.include?(">=")
+          results = results.greater_than_or_equal_toughness(number)
+        elsif query.include?("<")
+          results = results.less_than_toughness(number)
+        elsif query.include?(">")
+          results = results.greater_than_toughness(number)
+        else
+          results = results.equal_to_toughness(number)
+        end
+      end
+    end
+    results
+  end
 end
 
