@@ -8,6 +8,10 @@ body {
   font-family: Helvetica;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 #main {
   width: 100%;
   margin: auto;
@@ -30,6 +34,20 @@ body {
 
   #searchInstructions {
     margin-top: 10px;
+    .column {
+      display: inline-block;
+    }
+    td {
+      font-size: 0.7em;
+      padding-right: 10px;
+      color: #AAAAAA;
+      .hotkey {
+        font-family: Georgia;
+        color: #000000;
+        font-size: 1.0em;
+        padding-right: 2px;
+      }
+    }
   }
 }
 
