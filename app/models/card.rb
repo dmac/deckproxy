@@ -52,7 +52,6 @@ class Card < ActiveRecord::Base
       str += " cost like '%%W%%' or cost like '%%!%%E%%' or cost like '%%!%%O%%' or cost like '%%!%%P%%' or cost like '%%!%%A%%' or cost like '%%!%%D%%' "
     end
     str += " escape '!'"
-    puts "\n\n\n#{str}\n\n\n"
     { :conditions => [str] }
   }
 
