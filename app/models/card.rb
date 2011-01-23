@@ -14,6 +14,9 @@ class Card < ActiveRecord::Base
   named_scope :by_text, lambda { |query|
     { :conditions => ["text LIKE ? OR text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
+  named_scope :by_type, lambda { |query|
+    { :conditions => ["type LIKE ? OR type LIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
+  }
   named_scope :equal_to_mana, lambda { |query|
     { :conditions => ["mana = ?", "#{query}"] }
   }

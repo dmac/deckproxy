@@ -34,6 +34,8 @@ class SearchController < ApplicationController
         end
       when "color"
         @results = @results.by_color(query)
+      when "type"
+        @results = @results.by_type(query)
       end
     end
 

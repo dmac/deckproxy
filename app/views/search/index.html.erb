@@ -109,22 +109,6 @@
         event.preventDefault(); // prevent moving backwards through history
     },
 
-    searchName: function(event) {
-      Searcher.focusSearchbox("name", event);
-    },
-
-    searchText: function(event) {
-      Searcher.focusSearchbox("text", event);
-    },
-
-    searchMana: function(event) {
-      Searcher.focusSearchbox("mana", event);
-    },
-
-    searchColor: function(event) {
-      Searcher.focusSearchbox("color", event);
-    },
-
     onKeyDown: function(event) {
       if ($("#searchbox:focus").size() > 0 && event.which != 13)
         return;
@@ -133,12 +117,16 @@
 
       switch (event.which) {
         case 13: Searcher.newSearch(); break; // return
-        case 191: Searcher.focusSearchbox("", event); break; // /
         case 8: Searcher.previousBreadcrumb(event); break; // backspace
-        case 78: Searcher.searchName(event); break; // n
-        case 84: Searcher.searchText(event); break; // t
-        case 77: Searcher.searchMana(event); break; // m
-        case 67: Searcher.searchColor(event); break; // c
+        case 191: Searcher.focusSearchbox("", event); break; // /
+        case 78: Searcher.focusSearchbox("name", event); break; // n
+        case 84: Searcher.focusSearchbox("text", event); break; // t
+        case 77: Searcher.focusSearchbox("mana", event); break; // m
+        case 67: Searcher.focusSearchbox("color", event); break; // c
+        case 89: Searcher.focusSearchbox("type", event); break; // y
+        case 83: Searcher.focusSearchbox("set", event); break; // s
+        case 188: Searcher.focusSearchbox("power", event); break; // ,
+        case 190: Searcher.focusSearchbox("toughness", event); break; // .
       }
     }
   }
