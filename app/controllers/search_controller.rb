@@ -45,7 +45,6 @@ class SearchController < ApplicationController
       deck.add_card(Card.find(params[:card_id]))
     end
 
-
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
@@ -55,6 +54,7 @@ class SearchController < ApplicationController
     return ["name", raw_query.strip] unless raw_query.include?(":")
     query_field = raw_query.split(":")[0].strip
     query_text = raw_query.split(":")[1].strip
+    return [query_field, query_text]
   end
 end
 

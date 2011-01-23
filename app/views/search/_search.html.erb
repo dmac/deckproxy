@@ -7,4 +7,6 @@
     <input name="<%= name %>" value="<%= value %>" type="hidden" />
   <% end %>
 </div>
- <%= render :partial => "card_grid", :locals => {:cards => cards, :load_more => load_more} %>
+<%= render :partial => "card_grid", :locals => {
+  :cards => cards, :load_more => load_more, :offset => offset
+} %>
