@@ -14,11 +14,12 @@ class Deck < ActiveRecord::Base
     pack = Pack.find(:all,
                      :conditions => "deck_id = " + self.id.to_s +
                                     " AND card_id = " + card.id.to_s).first;
+    logger.debug("deck_id = " + self.id.to_s + " AND card_id = " + card.id.to_s)
     if (pack)
       pack.number = pack.number++
       pack.save
-    elsif 
-      pack = Pack.create(:card => card, :deck => self);
+    elsif
+      self.cards << card
     end
   end
 
