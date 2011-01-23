@@ -105,7 +105,8 @@
     },
 
     previousBreadcrumb: function(event) {
-      event.preventDefault(); // prevent moving backwards through history
+      if ($("*:focus").size() == 0)
+        event.preventDefault(); // prevent moving backwards through history
     },
 
     searchName: function(event) {
