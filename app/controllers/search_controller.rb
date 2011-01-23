@@ -3,8 +3,7 @@ class SearchController < ApplicationController
   end
 
   def search
-    query_field = params[:query].split(":")[0].strip
-    query_text = params[:query].split(":")[1].strip
+    query_field, query_text = parse_query(params[:query])
     queries = params[:queries].blank? ? {} : params[:queries] # hash of db columns to query text
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
 
@@ -20,6 +19,21 @@ class SearchController < ApplicationController
       when "text"
         break if query.size < 3
         @results = @results.by_text(query)
+      when "mana"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          @results = @results.less_than_or_equal_mana(number)
+        elsif query.include?(">=")
+          @results = @results.greater_than_or_equal_mana(number)
+        elsif query.include?("<")
+          @results = @results.less_than_mana(number)
+        elsif query.include?(">")
+          @results = @results.greater_than_mana(number)
+        else
+          @results = @results.equal_to_mana(number)
+        end
+      when "color"
+        @results = @results.by_color(query)
       end
     end
 
@@ -46,7 +60,6 @@ class SearchController < ApplicationController
       deck.add_card(Card.find(params[:card_id]))
     end
 
-
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
@@ -54,6 +67,15 @@ class SearchController < ApplicationController
     deck = Deck.find(params[:deck_id])
     deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
     render :text => "";
+  end
+
+  private
+
+  def parse_query(raw_query)
+    return ["name", raw_query.strip] unless raw_query.include?(":")
+    query_field = raw_query.split(":")[0].strip
+    query_text = raw_query.split(":")[1].strip
+    return [query_field, query_text]
   end
 
 end
