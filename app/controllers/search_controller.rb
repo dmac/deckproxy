@@ -36,6 +36,32 @@ class SearchController < ApplicationController
         @results = @results.by_color(query)
       when "type"
         @results = @results.by_type(query)
+      when "power"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          @results = @results.less_than_or_equal_power(number)
+        elsif query.include?(">=")
+          @results = @results.greater_than_or_equal_power(number)
+        elsif query.include?("<")
+          @results = @results.less_than_power(number)
+        elsif query.include?(">")
+          @results = @results.greater_than_power(number)
+        else
+          @results = @results.equal_to_power(number)
+        end
+      when "toughness"
+        number = query.match(/\d+/)[0].to_i
+        if query.include?("<=")
+          @results = @results.less_than_or_equal_toughness(number)
+        elsif query.include?(">=")
+          @results = @results.greater_than_or_equal_toughness(number)
+        elsif query.include?("<")
+          @results = @results.less_than_toughness(number)
+        elsif query.include?(">")
+          @results = @results.greater_than_toughness(number)
+        else
+          @results = @results.equal_to_toughness(number)
+        end
       end
     end
 

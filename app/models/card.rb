@@ -32,6 +32,36 @@ class Card < ActiveRecord::Base
   named_scope :greater_than_or_equal_mana, lambda { |query|
     { :conditions => ["mana >= ?", "#{query}"] }
   }
+  named_scope :equal_to_power, lambda { |query|
+    { :conditions => ["power = ?", "#{query}"] }
+  }
+  named_scope :less_than_power, lambda { |query|
+    { :conditions => ["power < ?", "#{query}"] }
+  }
+  named_scope :less_than_or_equal_power, lambda { |query|
+    { :conditions => ["power <= ?", "#{query}"] }
+  }
+  named_scope :greater_than_power, lambda { |query|
+    { :conditions => ["power > ?", "#{query}"] }
+  }
+  named_scope :greater_than_or_equal_power, lambda { |query|
+    { :conditions => ["power >= ?", "#{query}"] }
+  }
+  named_scope :equal_to_toughness, lambda { |query|
+    { :conditions => ["toughness = ?", "#{query}"] }
+  }
+  named_scope :less_than_toughness, lambda { |query|
+    { :conditions => ["toughness < ?", "#{query}"] }
+  }
+  named_scope :less_than_or_equal_toughness, lambda { |query|
+    { :conditions => ["toughness <= ?", "#{query}"] }
+  }
+  named_scope :greater_than_toughness, lambda { |query|
+    { :conditions => ["toughness > ?", "#{query}"] }
+  }
+  named_scope :greater_than_or_equal_toughness, lambda { |query|
+    { :conditions => ["toughness >= ?", "#{query}"] }
+  }
   named_scope :by_color, lambda { |query|
     query = query.upcase
     BLACK = 'B'
