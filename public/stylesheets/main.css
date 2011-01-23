@@ -22,6 +22,8 @@ body {
     margin-bottom: 10px; }
     #buildSection #searchboxDiv #searchbox.grayText {
       color: #D2D2D2; }
+#buildSection #searchInstructions {
+  text-align: center; }
 #buildSection #searchResults {
   margin-top: 30px; }
   #buildSection #searchResults .card {

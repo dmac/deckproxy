@@ -41,13 +41,21 @@
       $("#searchbox").blur();
 
       var query = $("#searchbox").val();
-      var searchText = $("#searchText:checked").size() > 0;
+      var queryField = $("#searchField").val();
+
+      var queries = {};
+      queries[queryField] = query;
+
+      var breadcrumbs = $("#searchBreadcrumbs input");
+      $.each(breadcrumbs, function(index, element) {
+        queries[$(element).attr("name")] = $(element).val();
+      });
+
       $.ajax({
           type: "POST",
           url: "/search/search",
           data: {
-            query: query,
-            search_text: searchText,
+            queries: queries,
             offset: offset
           },
           success: function(html) {
@@ -106,7 +114,10 @@
 
 <section id="buildSection">
   <div id="searchboxDiv">
+    <input id="searchField" type="hidden" value="name" />
     <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
+  </div>
+  <div id="searchInstructions">
     <input type="checkbox" id="searchText" />
     <label for="searchText">Search card text (t)</label>
   </div>

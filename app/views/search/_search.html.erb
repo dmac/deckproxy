@@ -1,6 +1,13 @@
-<% cards.each do |card| %>
-  <div class="card">
-    <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase %>/<%= card.number %>.jpg" />
-  </div>
-<% end %>
+<div id="searchBreadcrumbs">
+  <% breadcrumbs.each do |name, value| %>
+    <input name="<%= name %>" value="<%= value %>" type="hidden" />
+  <% end %>
+</div>
+<div id="resultCards">
+  <% cards.each do |card| %>
+    <div class="card">
+      <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase %>/<%= card.number %>.jpg" />
+    </div>
+  <% end %>
+</div>
 <input type="hidden" id="loadMore" value="<%= load_more ? offset : 'none' %>" />

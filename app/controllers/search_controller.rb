@@ -3,36 +3,33 @@ class SearchController < ApplicationController
   end
 
   def search
-    query = params[:query]
-    offset = params[:offset] ? params[:offset] : 0
+    logger.debug("\n\n\n#{params[:queries]}\n\n\n")
+    queries = params[:queries] # hash of db columns to query text
+    offset = params[:offset] ? params[:offset] : 0 # offset used for paging
 
-    logger.debug("\n\n\n#{params[:offset]}\n\n\n")
-
-    if query.size < 3
-      render :text => "", :status => 400
-    else
-      conditions = []
-      if params[:search_text] == "true"
-        conditions << "(name like ? OR name like ? OR text like ? OR text like ?) AND number is not NULL"
-        conditions << "%#{query}%"
-        conditions << "%#{query.capitalize}%"
-        conditions << "%#{query}%"
-        conditions << "%#{query.capitalize}%"
-      else
-        conditions << "(name like ? OR name like ?) AND number is not NULL"
-        conditions << "%#{query}%"
-        conditions << "%#{query.capitalize}%"
+    @results = Card.with_number
+    queries.each do |field, query|
+      case field
+      when "name"
+        break if query.size < 3
+        @results = @results.by_name(query)
+      when "text"
+        break if query.size < 3
+        @results = @results.by_text(query)
       end
-      results = Card.find(:all, :conditions => conditions,
-                          :order => :name, :limit => 100,
-                          :offset => offset)
-
-      load_more = (results.size == 100)
-
-      render :partial => "search", :locals => { :cards => results,
-                                                :load_more => load_more,
-                                                :offset => offset.to_i + 100
-                                              }
     end
+
+    @results = @results.all(:order => :name, :limit => 100, :offset => offset)
+
+    load_more = (@results.size == 100)
+
+    render :partial => "search", :locals => {
+      :cards => @results,
+      :breadcrumbs => queries,
+      :load_more => load_more,
+      :offset => offset.to_i + 100
+    }
   end
+
 end
+
