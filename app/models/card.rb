@@ -1,4 +1,7 @@
 class Card < ActiveRecord::Base
+  has_many :packs
+  has_many :decks, :through => :packs
+
   # Allows us to have column name "type" in our database.
   self.inheritance_column = "inheritance_type"
 
@@ -11,5 +14,13 @@ class Card < ActiveRecord::Base
   named_scope :by_text, lambda { |query|
     { :conditions => ["text LIKE ? OR text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
+
+  def add_to_deck(deck, num = 1)
+    pack = Pack.new
+    pack.number = num
+    pack.deck = deck
+    pack.card = self
+    pack.save
+  end
 end
 

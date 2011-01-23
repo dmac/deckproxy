@@ -1,0 +1,11 @@
+<script>
+</script>
+<a href="/deck/"> Back to the Decks!</a>
+
+<h1><%= @deck.name %></h1>
+
+<ul>
+  <% @deck.cards.each do |card| %>
+    <li> <%= card.name %> </li>
+  <% end %>
+</ul>

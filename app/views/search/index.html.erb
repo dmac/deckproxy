@@ -109,10 +109,16 @@
       }
     }
   }
+
   $(document).ready(Searcher.init);
+
+  function addCardToDeck(id) {
+   $("<li><input type='text' value='1' />" + id + "</li>").appendTo($("#decklist"));
+  }
+
 </script>
 
-<section id="buildSection">
+<section id="searchSection">
   <div id="searchboxDiv">
     <input id="searchField" type="hidden" value="name" />
     <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
@@ -121,7 +127,10 @@
     <input type="checkbox" id="searchText" />
     <label for="searchText">Search card text (t)</label>
   </div>
-  <div id="searchResults">
-  </div>
 </section>
 
+<section id="resultsSection">
+  <div id="searchResults">
+  </div>
+  <%= render :partial => "deckmetadata" %>
+</section>
