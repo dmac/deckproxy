@@ -1,11 +1,9 @@
-<script>
-</script>
-<a href="/deck/"> Back to the Decks!</a>
-
-<h1><%= @deck.name %></h1>
-
-<ul>
-  <% @deck.cards.each do |card| %>
-    <li> <%= card.name %> </li>
-  <% end %>
-</ul>
+<section id="searchSection">
+<div id="resultsSection">
+  <a href="/deck/"> Back to the Decks!</a>
+  <div id="searchResults">
+    <%= render :partial => "/search/card_grid", :locals => {:cards => @deck.cards, :load_more => 100, :offset => 0}  %>
+  </div>
+  <%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck} %>
+</div>
+</section>

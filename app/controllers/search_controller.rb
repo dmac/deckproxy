@@ -3,9 +3,12 @@ class SearchController < ApplicationController
   end
 
   def search
-    logger.debug("\n\n\n#{params[:queries]}\n\n\n")
-    queries = params[:queries] # hash of db columns to query text
+    query_field, query_text = parse_query(params[:query])
+    queries = params[:queries].blank? ? {} : params[:queries] # hash of db columns to query text
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
+
+    # Add this query to previous queries
+    queries[query_field] = query_text
 
     @results = Card.with_number
     queries.each do |field, query|
@@ -45,5 +48,13 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
+  private
+
+  def parse_query(raw_query)
+    return ["name", raw_query.strip] unless raw_query.include?(":")
+    query_field = raw_query.split(":")[0].strip
+    query_text = raw_query.split(":")[1].strip
+    return [query_field, query_text]
+  end
 end
 

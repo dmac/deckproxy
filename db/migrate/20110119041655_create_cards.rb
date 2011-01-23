@@ -6,6 +6,6 @@ class CreateCards < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :cards
+    #drop_table :cards
   end
 end
