@@ -32,6 +32,8 @@ class SearchController < ApplicationController
         else
           @results = @results.equal_to_mana(number)
         end
+      when "color"
+        @results = @results.by_color(query)
       end
     end
 

@@ -121,6 +121,10 @@
       Searcher.focusSearchbox("mana", event);
     },
 
+    searchColor: function(event) {
+      Searcher.focusSearchbox("color", event);
+    },
+
     onKeyDown: function(event) {
       if ($("#searchbox:focus").size() > 0 && event.which != 13)
         return;
@@ -134,6 +138,7 @@
         case 78: Searcher.searchName(event); break; // n
         case 84: Searcher.searchText(event); break; // t
         case 77: Searcher.searchMana(event); break; // m
+        case 67: Searcher.searchColor(event); break; // c
       }
     }
   }
@@ -152,6 +157,7 @@
     <p>n: search card name (name:)</p>
     <p>t: search card text (text:)</p>
     <p>m: search converted mana cost (mana:)</p>
+    <p>c: search by mana color (color:)</p>
   </div>
   <div id="resultsSection">
     <div id="searchResults">
