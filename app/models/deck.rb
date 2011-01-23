@@ -11,12 +11,14 @@ class Deck < ActiveRecord::Base
   end
 
   def add_card(card, num = 1)
-    pack = Pack.new
-    pack.number = num
+    pack = Pack.find(:all,
+                     :conditions => "deck_id = " + self.id.to_s +
+                                    "AND card_id = " + card.id).first;
+    pack = Pack.new unless pack
+    pack.number = pack.number++
     pack.deck = self
     pack.card = card
     pack.save
-    # this should increment if found
   end
 
   def rename(newName)
