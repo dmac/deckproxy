@@ -26,6 +26,28 @@
       }, 100, function() { card.css("z-index", "0"); });
     },
 
+
+    //I DON'T WORK
+    onClickCard: function(event) {
+      var card = $(event.currentTarget);
+      var cardId = card.attr("cardid");
+      console.log(card);
+      var deckId = $("#decklist").attr("deckid");
+      Metadata.addCardToDeck(card.name);
+  
+      $.ajax({
+          type: "POST",
+          url: "/search/add_card_to_deck",
+          data: {
+            card_id: cardId,
+            deck_id: deckId
+          },
+          success: function(html) {
+            $("#deckmetadata").replaceWith(html);
+          }
+      });
+    },
+
     focusSearchbox: function(event) {
       event.preventDefault();
       $("#searchbox").focus();
@@ -62,6 +84,7 @@
             $("#searchResults").append(html);
             $("#searchResults .card").mouseover(Searcher.onHoverOverCard);
             $("#searchResults .card").mouseout(Searcher.onHoverOutCard);
+            $("#searchResults .card").click(Searcher.onClickCard);
             Searcher.attachScrollListener();
           }
       });
@@ -112,10 +135,6 @@
 
   $(document).ready(Searcher.init);
 
-  function addCardToDeck(id) {
-   $("<li><input type='text' value='1' />" + id + "</li>").appendTo($("#decklist"));
-  }
-
 </script>
 
 <section id="searchSection">
@@ -132,5 +151,5 @@
 <section id="resultsSection">
   <div id="searchResults">
   </div>
-  <%= render :partial => "deckmetadata" %>
+  <%= render :partial => "deckmetadata", :locals => {:deck => nil} %>
 </section>

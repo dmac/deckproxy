@@ -31,14 +31,18 @@ class SearchController < ApplicationController
     }
   end
 
-  def add_card_to_deck(card_id, deck_id)
-    deck = Deck.find(deck_id)
-    if (!deck)
+  def add_card_to_deck
+    if (params[:deck_id].nil?)
       deck = Deck.new
+      deck.save
+    else
+      deck = Deck.find(params[:deck_id])
     end
-    deck.add_card(Card.find(card_id))
+    c = Card.find(params[:card_id])
+    logger.debug("\n\n\n" + c.name + "\n");
+    deck.add_card(Card.find(params[:card_id]))
 
-    render :partial => "mikes_partial", :locals => { :deck => deck }
+    render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
 end

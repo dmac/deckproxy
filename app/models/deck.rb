@@ -10,15 +10,16 @@ class Deck < ActiveRecord::Base
     end
   end
 
-  def add_card(card, num = 1)
+  def add_card(card)
     pack = Pack.find(:all,
                      :conditions => "deck_id = " + self.id.to_s +
-                                    "AND card_id = " + card.id).first;
-    pack = Pack.new unless pack
-    pack.number = pack.number++
-    pack.deck = self
-    pack.card = card
-    pack.save
+                                    " AND card_id = " + card.id.to_s).first;
+    if (pack)
+      pack.number = pack.number++
+      pack.save
+    elsif 
+      pack = Pack.create(:card => card, :deck => self);
+    end
   end
 
   def rename(newName)

@@ -1,7 +1,42 @@
-<div id="deckmetadata" class="ui-widget-header">
+<div id="deckmetadata">
+<script language="javascript">
+  Metadata = {
+    init: function() {
+      $("#deckname").focus(Metadata.onNameFocus);
+      $("#deckname").blur(Metadata.onNameBlur);
+    },
+
+    onNameFocus: function() {
+      $("#deckname").val("");
+      $("#deckname").removeClass("grayText");
+    },
+
+    onNameBlur: function() {
+      if ($("#deckname").val() != "")
+        return;
+      $("#deckname").addClass("grayText");
+      $("#deckname").val("deck name");
+    },
+
+    addCardToDeck: function(name) {
+     $("<li><input type='text' />" + name + "</li>").appendTo($("#decklist"));
+    }
+  }
+
+  $(document).ready(Metadata.init);
+
+</script>
 <form>
-<ul id="decklist">
-</ul>
+<% if !deck.nil? %>
+  <ul id="decklist">
+  <% deck.packs.each do | pack | %>
+    <li><input type='text' value="<%= pack.number %>" /> <%= pack.card.name %> </li>
+  <% end %>
+  </ul>
+  <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
+<% else %>
+    <input type="text" value="deck name" id="deckname" class="grayText" />
+<% end %>
 <input type="button" value="create deck!" />
 </form>
 </div>

@@ -9,10 +9,9 @@
 </div>
 <div id="resultCards">
   <% cards.each do |card| %>
-    <div class="card">
+    <div class="card" cardid="<%= card.id %>">
       <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase
-            %>/<%= card.number %>.jpg"
-       onclick="addCardToDeck('<%= card.name %>')" />
+            %>/<%= card.number %>.jpg" />
     </div>
   <% end %>
 </div>
