@@ -12,8 +12,7 @@
       var card = $(event.currentTarget);
       var cardId = card.attr("cardid");
       var deckId = $("#deckmetadata").attr("deckid");
-      var deckName = $("#deckname").val();
-      Metadata.addCardToDeck(card.name);
+      var deckName = $("#deckmetadata").attr("deckname");
 
       $.ajax({
           type: "POST",
@@ -106,7 +105,8 @@
     },
 
     previousBreadcrumb: function(event) {
-      event.preventDefault(); // prevent moving backwards through history
+      if ($("*:focus").size() == 0)
+        event.preventDefault(); // prevent moving backwards through history
     },
 
     searchName: function(event) {
@@ -129,7 +129,7 @@
       if ($("#searchbox:focus").size() > 0 && event.which != 13)
         return;
 
-      console.log("keypress: " + event.which);
+      //console.log("keypress: " + event.which);
 
       switch (event.which) {
         case 13: Searcher.newSearch(); break; // return

@@ -1,9 +1,10 @@
-<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>">
+<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>" deckname="<%= deck.nil? ? "" : deck.name %>">
 <script language="javascript">
   Metadata = {
     init: function() {
       $("#deckname").focus(Metadata.onNameFocus);
       $("#deckname").blur(Metadata.onNameBlur);
+      $(".cardcount").blur(Metadata.onNumberBlur);
     },
 
     onNameFocus: function() {
@@ -18,8 +19,22 @@
       $("#deckname").val("deck name");
     },
 
-    addCardToDeck: function(name) {
-     $("<li><input type='text' />" + name + "</li>").appendTo($("#decklist"));
+    onNumberBlur: function(event) {
+      cardId = $(event.target).attr("cardid");
+      deckId = $("#deckmetadata").attr("deckid");
+      deck_name = $("#deckmetadata").attr("deckname");
+      quantity = $(event.target).val();
+
+      $.ajax({
+        type: "POST",
+        url: "/search/update_card_quantity",
+        data: {
+          card_id: cardId,
+          deck_id: deckId,
+          deck_name: deck_name,
+          quantity: quantity
+        }
+      });
     }
   }
 
@@ -30,7 +45,7 @@
 <% if !deck.nil? %>
   <ul id="decklist">
   <% deck.packs.each do | pack | %>
-    <li><input type='text' value="<%= pack.number %>" /> <%= pack.card.name %> </li>
+    <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
   <% end %>
   </ul>
   <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />

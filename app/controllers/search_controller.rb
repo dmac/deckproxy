@@ -63,6 +63,12 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
+  def update_card_quantity
+    deck = Deck.find(params[:deck_id])
+    deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
+    render :text => "";
+  end
+
   private
 
   def parse_query(raw_query)
@@ -71,5 +77,6 @@ class SearchController < ApplicationController
     query_text = raw_query.split(":")[1].strip
     return [query_field, query_text]
   end
+
 end
 

@@ -23,6 +23,16 @@ class Deck < ActiveRecord::Base
     end
   end
 
+  def update_pack(card, quantity)
+    pack = Pack.find(:first,
+                     :conditions => ["deck_id = ? and card_id = ?",
+                                     self.id,
+                                     card.id])
+    if (pack)
+      pack.update_attribute(:number, quantity)
+    end
+  end
+
   def rename(newName)
     self.name = newName
     self.save

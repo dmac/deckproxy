@@ -3,5 +3,4 @@ db/schema.rb
 config/database.mysql.yml
 log
 tmp
-Gemfile.lock
 public/stylesheets/*.css

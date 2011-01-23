@@ -75,7 +75,6 @@ class Card < ActiveRecord::Base
     if (query.include?("W") or query.include?("WHITE"))
       str = add_colors_to_conditions(str, WHITES)
     end
-    str += " escape '!'" if str.size > 0
     if (query.include?("C") or query.include?("COLORLESS"))
       cond = ""
       cond = add_colors_to_conditions(cond, ALL);
