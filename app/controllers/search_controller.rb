@@ -50,5 +50,11 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck }
   end
 
+  def update_card_quantity
+    deck = Deck.find(params[:deck_id])
+    deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
+    render :text => "";
+  end
+
 end
 

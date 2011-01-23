@@ -12,8 +12,7 @@
       var card = $(event.currentTarget);
       var cardId = card.attr("cardid");
       var deckId = $("#deckmetadata").attr("deckid");
-      var deckName = $("#deckname").val();
-      Metadata.addCardToDeck(card.name);
+      var deckName = $("#deckmetadata").attr("deckname");
 
       $.ajax({
           type: "POST",
