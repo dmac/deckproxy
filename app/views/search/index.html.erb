@@ -34,7 +34,7 @@
       console.log(card);
       var deckId = $("#decklist").attr("deckid");
       Metadata.addCardToDeck(card.name);
-  
+
       $.ajax({
           type: "POST",
           url: "/search/add_card_to_deck",
@@ -143,13 +143,13 @@
     <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
   </div>
   <div id="searchInstructions">
-    <input type="checkbox" id="searchText" />
-    <label for="searchText">Search card text (t)</label>
+    <p>n: search card name</p>
+    <p>t: search card text</p>
+  </div>
+  <div id="resultsSection">
+    <div id="searchResults">
+    </div>
+    <%= render :partial => "deckmetadata", :locals => {:deck => nil} %>
   </div>
 </section>
 
-<section id="resultsSection">
-  <div id="searchResults">
-  </div>
-  <%= render :partial => "deckmetadata", :locals => {:deck => nil} %>
-</section>
