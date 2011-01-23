@@ -1,8 +1,8 @@
 class AddPacksAssociationTable < ActiveRecord::Migration
   def self.up
-    create_table :packs, :id => false do |t|
-      t.integer :deck_id
-      t.integer :card_id
+    create_table :packs do |t|
+      t.integer :deck_id, :null => false
+      t.integer :card_id, :null => false
       t.integer :number
     end
 

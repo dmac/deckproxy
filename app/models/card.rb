@@ -15,9 +15,8 @@ class Card < ActiveRecord::Base
     { :conditions => ["text LIKE ? OR text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
 
-  def add_to_deck(deck, num = 1)
+  def add_to_deck(deck)
     pack = Pack.new
-    pack.number = num
     pack.deck = deck
     pack.card = self
     pack.save
