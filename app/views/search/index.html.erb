@@ -33,28 +33,32 @@
       if (event)
         event.preventDefault();
       $("#searchbox").focus();
-      if (field != "")
+      if (field != "") {
         $("#searchbox").val(field + ": ");
-      else
+      } else {
         $("#searchbox").val("");
+        $("#searchBreadcrumbs").html("")
+      }
     },
 
     newSearch: function() {
-      $("#searchResults").html("");
       Searcher.maxScroll = 3000;
-      Searcher.search(0);
+      Searcher.search(0, true);
     },
 
-    search: function(offset) {
+    search: function(offset, newSearch) {
       $("#searchbox").blur();
 
       var query = $("#searchbox").val();
 
       var queries = {};
-      var breadcrumbs = $("#searchBreadcrumbs input");
+      var breadcrumbs = $(".breadcrumb input");
       $.each(breadcrumbs, function(index, element) {
         queries[$(element).attr("name")] = $(element).val();
       });
+
+      if (newSearch)
+        $("#searchResults").html("");
 
       $.ajax({
           type: "POST",
@@ -97,7 +101,7 @@
         Searcher.maxScroll += 3000;
         var offset = $("#loadMore").val();
         $("#loadMore").remove();
-        Searcher.search(offset);
+        Searcher.search(offset, false);
       }
     },
 
