@@ -8,24 +8,6 @@
       $("#searchbox").blur(Searcher.onSearchBlur);
     },
 
-    onHoverOverCard: function(event) {
-      $(event.target).css("z-index", "1000");
-      $(event.target).animate({
-          width: 280,
-          top: -50,
-          left: -50
-      }, 100);
-    },
-
-    onHoverOutCard: function(event) {
-      var card = $(event.target);
-      card.animate({
-          width: 155,
-          top: 0,
-          left: 0
-      }, 100, function() { card.css("z-index", "0"); });
-    },
-
     onClickCard: function(event) {
       var card = $(event.currentTarget);
       var cardId = card.attr("cardid");
@@ -81,8 +63,6 @@
           },
           success: function(html) {
             $("#searchResults").append(html);
-            $("#searchResults .card").mouseover(Searcher.onHoverOverCard);
-            $("#searchResults .card").mouseout(Searcher.onHoverOutCard);
             $("#searchResults .card").click(Searcher.onClickCard);
             Searcher.attachScrollListener();
           }
