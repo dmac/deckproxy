@@ -31,30 +31,72 @@ class Card < ActiveRecord::Base
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase
+    BLACK = 'B'
+    BLACK_BLUE = '%%V'
+    BLACK_GREEN = '%%Q'
+    BLACK_RED = '%%K'
+    BLACK_WHITE = '%%O'
+    BLUE = 'U'
+    BLUE_GREEN = '%%S'
+    BLUE_RED = '%%I'
+    BLUE_WHITE = '%%D'
+    GREEN ='G'
+    GREEN_RED = '%%L'
+    GREEN_WHITE = '%%A'
+    RED = 'R'
+    RED_WHITE = '%%P'
+    WHITE = 'W'
+    UNC_BLACK = '%%H'
+    UNC_BLUE = '%%F'
+    UNC_GREEN = '%%M'
+    UNC_RED = '%%J'
+    UNC_WHITE = '%%E'
+
+    BLACKS = [BLACK, BLACK_BLUE, BLACK_GREEN, BLACK_RED, BLACK_WHITE, UNC_BLACK]
+    BLUES = [BLUE, BLACK_BLUE, BLUE_GREEN, BLUE_RED, BLUE_WHITE, UNC_BLUE]
+    GREENS = [GREEN, BLACK_GREEN, BLUE_GREEN, GREEN_RED, GREEN_WHITE, UNC_GREEN]
+    REDS = [RED, BLACK_RED, BLUE_RED, GREEN_RED, RED_WHITE, UNC_RED]
+    WHITES = [WHITE, BLACK_WHITE, BLUE_WHITE, GREEN_WHITE, RED_WHITE, UNC_WHITE]
+    ALL = BLACKS | BLUES | GREENS | REDS | WHITES
+
     str = ""
-    if (query.include?("R"))
-      str += " cost like '%%R%%' or cost like '%%!%%J%%' or cost like '%%!%%K%%' or cost like '%%!%%L%%' or cost like '%%!%%P%%' or cost like '%%!%%I%%' "
+    if (query.include?("R") or query.include?("RED"))
+      str = add_colors_to_conditions(str, REDS)
     end
-    if (query.include?("G"))
-      str += " or " if str.size > 0
-      str += " cost like '%%G%%' or cost like '%%!%%M%%' or cost like '%%!%%S%%' or cost like '%%!%%L%%' or cost like '%%!%%A%%' or cost like '%%!%%Q%%' "
+    if (query.include?("G") or query.include?("GREEN"))
+      str = add_colors_to_conditions(str, GREENS)
     end
-    if (query.include?("U"))
-      str += " or " if str.size > 0
-      str += " cost like '%%U%%' or cost like '%%!%%F%%' or cost like '%%!%%S%%' or cost like '%%!%%I%%' or cost like '%%!%%V%%' or cost like '%%!%%D%%' "
+    if (query.include?("U") or query.include?("BLUE"))
+      str = add_colors_to_conditions(str, BLUES)
     end
-    if (query.include?("B"))
-      str += " or " if str.size > 0
-      str += " cost like '%%B%%' or cost like '%%!%%H%%' or cost like '%%!%%O%%' or cost like '%%!%%K%%' or cost like '%%!%%Q%%' or cost like '%%!%%V%%' "
+    if (query.include?("B") or query.include?("BLACK"))
+      str = add_colors_to_conditions(str, BLACKS)
     end
-    if (query.include?("W"))
-      str += " or " if str.size > 0
-      str += " cost like '%%W%%' or cost like '%%!%%E%%' or cost like '%%!%%O%%' or cost like '%%!%%P%%' or cost like '%%!%%A%%' or cost like '%%!%%D%%' "
+    if (query.include?("W") or query.include?("WHITE"))
+      str = add_colors_to_conditions(str, WHITES)
     end
-    str += " escape '!'"
-    puts "\n\n\n#{str}\n\n\n"
+    str += " escape '!'" if str.size > 0
+    if (query.include?("C") or query.include?("COLORLESS"))
+      cond = ""
+      cond = add_colors_to_conditions(cond, ALL);
+      str += " or " if (str.size > 0)
+      str += " id not in (select id from cards where " + cond + " ) "
+    end
+
     { :conditions => [str] }
   }
+
+  def self.add_colors_to_conditions(str, colorChars)
+    colorChars.each do |c|
+      str += " or " if (str.size > 0)
+      if (c.include?('%'))
+        str += " cost like '%%!" + c + "%%' escape '!' ";
+      else
+        str += " cost like '%%" + c + "%%' ";
+      end
+    end
+    return str
+  end
 
   def add_to_deck(deck)
     pack = Pack.new
