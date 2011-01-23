@@ -9,13 +9,15 @@ body {
 }
 
 #main {
-  width: 800px;
+  width: 100%;
   margin: auto;
 }
 
-#buildSection {
+#searchSection {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   #searchboxDiv {
-    margin-top: 10px;
     text-align: center;
     #searchbox {
       width: 500px;
@@ -28,9 +30,14 @@ body {
       &.grayText { color: #D2D2D2; }
     }
   }
+}
 
+#resultsSection {
   #searchResults {
-    margin-top: 30px;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    width: 787px;
 
     .card {
       display: inline-block;
@@ -45,4 +52,30 @@ body {
       }
     }
   }
+}
+
+#deckmetadata {
+  position: fixed;
+  left: 877px;
+  top: 80px;
+  width: 200px;
+  height: 400px;
+  padding: 5px;
+  background-color: #ddd;
+  
+  #decklist {
+    list-style-type: none;
+
+    li {
+      padding: 2px;
+
+      input {
+        width: 20px;
+     	margin-right: 3px;
+      }
+
+    }
+
+  }  
+
 }

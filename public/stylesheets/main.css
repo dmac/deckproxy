@@ -7,30 +7,53 @@ body {
   font-family: Helvetica; }
 
 #main {
-  width: 800px;
+  width: 100%;
   margin: auto; }
 
-#buildSection #searchboxDiv {
-  margin-top: 10px;
-  text-align: center; }
-  #buildSection #searchboxDiv #searchbox {
-    width: 500px;
-    height: 30px;
-    font-size: 1.4em;
-    display: block;
-    margin: auto;
-    margin-bottom: 10px; }
-    #buildSection #searchboxDiv #searchbox.grayText {
-      color: #D2D2D2; }
-#buildSection #searchResults {
-  margin-top: 30px; }
-  #buildSection #searchResults .card {
+#searchSection {
+  position: absolute;
+  top: 10px;
+  left: 10px; }
+  #searchSection #searchboxDiv {
+    text-align: center; }
+    #searchSection #searchboxDiv #searchbox {
+      width: 500px;
+      height: 30px;
+      font-size: 1.4em;
+      display: block;
+      margin: auto;
+      margin-bottom: 10px; }
+      #searchSection #searchboxDiv #searchbox.grayText {
+        color: #D2D2D2; }
+
+#resultsSection #searchResults {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 787px; }
+  #resultsSection #searchResults .card {
     display: inline-block;
     position: relative;
     width: 155px;
     height: 220px; }
-    #buildSection #searchResults .card img {
+    #resultsSection #searchResults .card img {
       position: absolute;
       width: 155px;
       top: 0px;
       left: 0px; }
+
+#deckmetadata {
+  position: fixed;
+  left: 877px;
+  top: 80px;
+  width: 200px;
+  height: 400px;
+  padding: 5px;
+  background-color: #ddd; }
+  #deckmetadata #decklist {
+    list-style-type: none; }
+    #deckmetadata #decklist li {
+      padding: 2px; }
+      #deckmetadata #decklist li input {
+        width: 20px;
+        margin-right: 3px; }
