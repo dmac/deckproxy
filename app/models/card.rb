@@ -14,17 +14,20 @@ class Card < ActiveRecord::Base
   named_scope :by_text, lambda { |query|
     { :conditions => ["text LIKE ? OR text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
+  named_scope :equal_to_mana, lambda { |query|
+    { :conditions => ["mana = ?", "#{query}"] }
+  }
   named_scope :less_than_mana, lambda { |query|
-    { :conditions => ["mana < ?", "%#{query}%"] }
+    { :conditions => ["mana < ?", "#{query}"] }
   }
   named_scope :less_than_or_equal_mana, lambda { |query|
-    { :conditions => ["mana <= ?", "%#{query}%"] }
+    { :conditions => ["mana <= ?", "#{query}"] }
   }
   named_scope :greater_than_mana, lambda { |query|
-    { :conditions => ["mana > ?", "%#{query}%"] }
+    { :conditions => ["mana > ?", "#{query}"] }
   }
   named_scope :greater_than_or_equal_mana, lambda { |query|
-    { :conditions => ["mana >= ?", "%#{query}%"] }
+    { :conditions => ["mana >= ?", "#{query}"] }
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase

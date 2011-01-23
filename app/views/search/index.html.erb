@@ -117,6 +117,10 @@
       Searcher.focusSearchbox("text", event);
     },
 
+    searchMana: function(event) {
+      Searcher.focusSearchbox("mana", event);
+    },
+
     onKeyDown: function(event) {
       if ($("#searchbox:focus").size() > 0 && event.which != 13)
         return;
@@ -129,6 +133,7 @@
         case 8: Searcher.previousBreadcrumb(event); break; // backspace
         case 78: Searcher.searchName(event); break; // n
         case 84: Searcher.searchText(event); break; // t
+        case 77: Searcher.searchMana(event); break; // m
       }
     }
   }
@@ -146,6 +151,7 @@
     <p>/: restart search</p>
     <p>n: search card name (name:)</p>
     <p>t: search card text (text:)</p>
+    <p>m: search converted mana cost (mana:)</p>
   </div>
   <div id="resultsSection">
     <div id="searchResults">
