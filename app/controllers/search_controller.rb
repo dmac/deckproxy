@@ -32,7 +32,7 @@ class SearchController < ApplicationController
   end
 
   def add_card_to_deck
-    if (params[:deck_id].nil?)
+    if (params[:deck_id] == "")
       deck = Deck.new
       deck.save
     else

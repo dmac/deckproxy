@@ -26,13 +26,11 @@
       }, 100, function() { card.css("z-index", "0"); });
     },
 
-
-    //I DON'T WORK
     onClickCard: function(event) {
       var card = $(event.currentTarget);
       var cardId = card.attr("cardid");
-      console.log(card);
-      var deckId = $("#decklist").attr("deckid");
+      var deckId = $("#deckmetadata").attr("deckid");
+      var deckName = $("#deckname").val();
       Metadata.addCardToDeck(card.name);
   
       $.ajax({
@@ -40,7 +38,8 @@
           url: "/search/add_card_to_deck",
           data: {
             card_id: cardId,
-            deck_id: deckId
+            deck_id: deckId,
+            deck_name: deckName
           },
           success: function(html) {
             $("#deckmetadata").replaceWith(html);
