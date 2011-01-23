@@ -1,5 +1,9 @@
 <div id="searchBreadcrumbs">
   <% breadcrumbs.each do |name, value| %>
+    <div class="breadcrumb">
+      <p><%= name %>: <%= value %></p>
+      <input name="<%= name %>" value="<%= value %>" type="hidden" />
+    </div>
     <input name="<%= name %>" value="<%= value %>" type="hidden" />
   <% end %>
 </div>
@@ -13,3 +17,4 @@
   <% end %>
 </div>
 <input type="hidden" id="loadMore" value="<%= load_more ? offset : 'none' %>" />
+

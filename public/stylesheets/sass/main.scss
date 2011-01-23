@@ -37,6 +37,10 @@ body {
 }
 
 #resultsSection {
+  #searchBreadcrumbs {
+    margin-bottom: 10px;
+  }
+
   #searchResults {
     position: absolute;
     top: 80px;
