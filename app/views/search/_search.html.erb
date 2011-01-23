@@ -1,11 +1,13 @@
-<div id="searchBreadcrumbs">
-  <% breadcrumbs.each do |name, value| %>
-    <div class="breadcrumb">
-      <p><%= name %>: <%= value %></p>
-      <input name="<%= name %>" value="<%= value %>" type="hidden" />
-    </div>
-  <% end %>
-</div>
+<% if offset == 100 %>
+  <div id="searchBreadcrumbs">
+    <% breadcrumbs.each do |name, value| %>
+      <div class="breadcrumb">
+        <p><%= name %>: <%= value %></p>
+        <input name="<%= name %>" value="<%= value %>" type="hidden" />
+      </div>
+    <% end %>
+  </div>
+<% end %>
 <%= render :partial => "card_grid", :locals => {
   :cards => cards, :load_more => load_more, :offset => offset
 } %>
