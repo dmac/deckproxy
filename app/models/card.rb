@@ -26,7 +26,7 @@ class Card < ActiveRecord::Base
   named_scope :greater_than_or_equal_mana, lambda { |query|
     { :conditions => ["mana >= ?", "%#{query}%"] }
   }
-  named_scope :by_color, lamda { |query|
+  named_scope :by_color, lambda { |query|
     query = query.upcase
     str = ""
     if (query.include?("R"))
