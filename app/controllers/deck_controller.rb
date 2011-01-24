@@ -6,4 +6,9 @@ class DeckController < ApplicationController
   def view
     @deck = Deck.find(params[:id])
   end
+
+  def proxy
+    @deck = Deck.find(params[:id])
+  end
+
 end
