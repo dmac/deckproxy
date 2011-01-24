@@ -5,4 +5,9 @@ class CardTest < ActiveSupport::TestCase
   test "the truth" do
     assert true
   end
+
+  test "card images" do
+    puts("*************************\n");
+
+  end
 end
