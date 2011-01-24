@@ -1,5 +1,10 @@
 class SearchController < ApplicationController
   def index
+    if params[:id]
+      @deck = Deck.find_by_deck_hash(params[:id])
+    else
+      @deck = nil
+    end
   end
 
   def search
@@ -39,13 +44,22 @@ class SearchController < ApplicationController
       deck.add_card(Card.find(params[:card_id]))
     end
 
-    render :partial => "deckmetadata", :locals => { :deck => deck }
+    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
   def update_card_quantity
     deck = Deck.find(params[:deck_id])
     deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
     render :text => "";
+  end
+
+  def update_deck_name
+    deck = Deck.find(params[:deck_id])
+    if (params[:deck_name] != "")
+      deck.name = params[:deck_name]
+      deck.save
+    end
+    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
   private

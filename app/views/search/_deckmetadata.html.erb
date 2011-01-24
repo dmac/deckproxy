@@ -8,22 +8,30 @@
     },
 
     onNameFocus: function() {
-      $("#deckname").val("");
-      $("#deckname").removeClass("grayText");
+      if ($("#deckname").val().substr(0,7) == "Unnamed")  {
+        $("#deckname").val("");
+        $("#deckname").removeClass("grayText");
+      }
     },
 
     onNameBlur: function() {
-      if ($("#deckname").val() != "")
-        return;
       $("#deckname").addClass("grayText");
-      $("#deckname").val("deck name");
+      var deckId = $("#deckmetadata").attr("deckid");
+      var deckName = $("#deckname").val();
+      $.ajax({
+        type: "POST",
+        url: "/search/update_deck_name",
+        data: {
+          deck_id: deckId,
+          deck_name: deckName
+        }
+      });
     },
 
     onNumberBlur: function(event) {
-      cardId = $(event.target).attr("cardid");
-      deckId = $("#deckmetadata").attr("deckid");
-      deck_name = $("#deckmetadata").attr("deckname");
-      quantity = $(event.target).val();
+      var cardId = $(event.target).attr("cardid");
+      var deckId = $("#deckmetadata").attr("deckid");
+      var quantity = $(event.target).val();
 
       $.ajax({
         type: "POST",
@@ -31,7 +39,6 @@
         data: {
           card_id: cardId,
           deck_id: deckId,
-          deck_name: deck_name,
           quantity: quantity
         }
       });
@@ -49,9 +56,16 @@
     <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
   <% end %>
   </ul>
-  <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
+  <% if viewing_deck %>
+    <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a>
+  <% else %>
+    <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
+  <% end %>
+  <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
 <% else %>
     <input type="text" value="deck name" id="deckname" class="grayText" />
 <% end %>
 </form>
+<br /><br />
+<a href="/deck/"> View all the decks</a>
 </div>
