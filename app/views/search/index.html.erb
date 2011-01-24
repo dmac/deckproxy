@@ -41,6 +41,8 @@
     },
 
     newSearch: function() {
+      if ($("#searchbox.grayText").size() > 0)
+        return;
       Searcher.maxScroll = 3000;
       Searcher.search(0, true);
     },
