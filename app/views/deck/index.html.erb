@@ -1,12 +1,9 @@
-<script>
-</script>
-<a href="/"> Home!</a>
-
-<h1>The Decks!</h1>
-<% @decks.each do |deck| %>
-  <div>
-    <a href=<%= "/deck/view/" + deck.deck_hash %> >
-      <%=h deck.name %>
-    </a>
-  </div>
-<% end %>
+<section id="allDecksList">
+  <a href="/">Build a Deck</a>
+  <h1>All Decks</h1>
+  <ul>
+    <% @decks.each do |deck| %>
+      <li><a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a></li>
+    <% end %>
+  </ul>
+</section>
