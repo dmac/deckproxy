@@ -1,5 +1,10 @@
 class SearchController < ApplicationController
   def index
+    if params[:id]
+      @deck = Deck.find_by_deck_hash(params[:id])
+    else
+      @deck = nil
+    end
   end
 
   def search
@@ -39,13 +44,26 @@ class SearchController < ApplicationController
       deck.add_card(Card.find(params[:card_id]))
     end
 
-    render :partial => "deckmetadata", :locals => { :deck => deck }
+    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
   def update_card_quantity
     deck = Deck.find(params[:deck_id])
-    deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
-    render :text => "";
+    deleted = deck.update_pack(Card.find(params[:card_id]), params[:quantity].to_i);
+    if (deleted)
+      render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => params[:viewing_deck] }
+    else
+      render :text => "";
+    end
+  end
+
+  def update_deck_name
+    deck = Deck.find(params[:deck_id])
+    if (params[:deck_name] != "")
+      deck.name = params[:deck_name]
+      deck.save
+    end
+    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
   private
@@ -82,8 +100,11 @@ class SearchController < ApplicationController
       when "text"
         results = results.by_text(query)
       when "mana"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_mana(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_mana(number)
@@ -99,8 +120,11 @@ class SearchController < ApplicationController
       when "type"
         results = results.by_type(query)
       when "power"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_power(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_power(number)
@@ -112,8 +136,11 @@ class SearchController < ApplicationController
           results = results.equal_to_power(number)
         end
       when "toughness"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_toughness(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_toughness(number)

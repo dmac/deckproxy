@@ -1,29 +1,48 @@
-<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>" deckname="<%= deck.nil? ? "" : deck.name %>">
+<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>"
+     deckname="<%= deck.nil? ? "" : deck.name %>"
+     viewingdeck="<%= viewing_deck %>">
 <script language="javascript">
   Metadata = {
     init: function() {
       $("#deckname").focus(Metadata.onNameFocus);
       $("#deckname").blur(Metadata.onNameBlur);
       $(".cardcount").blur(Metadata.onNumberBlur);
+      $(".delete").click(Metadata.onCardDeleteClick);
+    },
+
+    onCardDeleteClick: function(event) {
+      event.preventDefault();
+      Metadata.changeCardNumber($(event.target).attr("cardid"), 0);
     },
 
     onNameFocus: function() {
-      $("#deckname").val("");
-      $("#deckname").removeClass("grayText");
+      if ($("#deckname").val().substr(0,7) == "Unnamed")  {
+        $("#deckname").val("");
+        $("#deckname").removeClass("grayText");
+      }
     },
 
     onNameBlur: function() {
-      if ($("#deckname").val() != "")
-        return;
       $("#deckname").addClass("grayText");
-      $("#deckname").val("deck name");
+      var deckId = $("#deckmetadata").attr("deckid");
+      var deckName = $("#deckname").val();
+      $.ajax({
+        type: "POST",
+        url: "/search/update_deck_name",
+        data: {
+          deck_id: deckId,
+          deck_name: deckName
+        }
+      });
     },
 
     onNumberBlur: function(event) {
-      cardId = $(event.target).attr("cardid");
-      deckId = $("#deckmetadata").attr("deckid");
-      deck_name = $("#deckmetadata").attr("deckname");
-      quantity = $(event.target).val();
+      Metadata.changeCardNumber($(event.target).attr("cardid"), $(event.target).val());
+    },
+
+    changeCardNumber: function(cardId, quantity) {
+      var deckId = $("#deckmetadata").attr("deckid");
+      var viewingDeck = $("#deckmetadata").attr("viewingdeck");
 
       $.ajax({
         type: "POST",
@@ -31,12 +50,17 @@
         data: {
           card_id: cardId,
           deck_id: deckId,
-          deck_name: deck_name,
-          quantity: quantity
+          quantity: quantity,
+          viewing_deck: viewingDeck
+        },
+        success: function(html) {
+          if (html != "")
+            $("#deckmetadata").replaceWith(html);
         }
       });
     }
   }
+
 
   $(document).ready(Metadata.init);
 
@@ -46,12 +70,23 @@
   <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
   <ul id="decklist">
   <% deck.packs.each do | pack | %>
-    <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
+    <li>
+      <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
+      <%= pack.card.name %> (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
+    </li>
   <% end %>
   </ul>
-  <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
+  <% if viewing_deck %>
+    <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a> |
+  <% else %>
+    <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
+  <% end %>
+  <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
 <% else %>
-    <input type="text" value="deck name" id="deckname" class="grayText" />
+    <input type="text" value="New Deck" id="deckname" class="grayText" />
 <% end %>
 </form>
+<br /><br />
+<a href="/">Build New Deck</a> |
+<a href="/deck/"> View all the decks</a>
 </div>

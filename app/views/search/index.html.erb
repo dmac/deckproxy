@@ -23,7 +23,8 @@
             deck_name: deckName
           },
           success: function(html) {
-            $("#deckmetadata").replaceWith(html);
+            if (html != "")
+              $("#deckmetadata").replaceWith(html);
           }
       });
     },
@@ -173,7 +174,7 @@
   <div id="resultsSection">
     <div id="searchResults">
     </div>
-    <%= render :partial => "deckmetadata", :locals => {:deck => nil} %>
+    <%= render :partial => "deckmetadata", :locals => {:deck => @deck, :viewing_deck => false} %>
   </div>
 </section>
 
