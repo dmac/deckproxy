@@ -59,7 +59,7 @@ class CrossReferenceDatabaseForImagenumbers < ActiveRecord::Migration
       "mirage" => "MI"
     }
     translation = lackey_to_myr_map[lackeySet]
-    (translation) ? translation : lackeySet
+    (translation) ? translation.upcase : lackeySet.upcase
   end
 
   def self.down
