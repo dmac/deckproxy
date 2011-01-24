@@ -77,15 +77,16 @@
   <% end %>
   </ul>
   <% if viewing_deck %>
-    <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a>
+    <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a> |
   <% else %>
-    <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
+    <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
   <% end %>
   <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
 <% else %>
-    <input type="text" value="deck name" id="deckname" class="grayText" />
+    <input type="text" value="New Deck" id="deckname" class="grayText" />
 <% end %>
 </form>
 <br /><br />
+<a href="/">Build New Deck</a> |
 <a href="/deck/"> View all the decks</a>
 </div>
