@@ -41,19 +41,22 @@
     },
 
     newSearch: function() {
+      if ($("#searchbox.grayText").size() > 0) {
+        console.log("returning");
+        return;
+      }
       Searcher.maxScroll = 3000;
       Searcher.search(0, true);
     },
 
     search: function(offset, newSearch) {
+      var query = $("#searchbox").val();
       $("#searchbox").blur();
 
-      var query = $("#searchbox").val();
-
-      var queries = {};
+      var queries = [];
       var breadcrumbs = $(".breadcrumb input");
       $.each(breadcrumbs, function(index, element) {
-        queries[$(element).attr("name")] = $(element).val();
+        queries.push([$(element).attr("name"), $(element).val()])
       });
 
       if (newSearch)
@@ -105,13 +108,21 @@
     },
 
     previousBreadcrumb: function(event) {
-      if ($("*:focus").size() == 0)
-        event.preventDefault(); // prevent moving backwards through history
+      event.preventDefault(); // prevent moving backwards through browser history
+
+      $(".breadcrumb").last().remove();
+      if ($(".breadcrumb").size() == 0) {
+        $("#searchBreadcrumbs").remove();
+      }
+      $("#searchbox").val("");
+      Searcher.maxScroll = 3000;
+      Searcher.search(0, true);
     },
 
     onKeyDown: function(event) {
-      if ($("#searchbox:focus").size() > 0 && event.which != 13)
+      if ($("*:focus").size() > 0 && event.which != 13)
         return;
+
 
       //console.log("keypress: " + event.which);
 
