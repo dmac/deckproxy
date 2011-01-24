@@ -15,6 +15,7 @@ body {
 #main {
   width: 100%;
   margin: auto;
+  margin-top: 40px;
 }
 
 #searchSection {
@@ -55,6 +56,21 @@ body {
   #searchBreadcrumbs {
     margin-top: 20px;
     margin-bottom: 20px;
+
+    .breadcrumb {
+      display: inline-block;
+      padding-left: 10px;
+
+      .breadcrumb_mark {
+        padding-right: 10px;
+      }
+    }
+
+    .breadcrumb_backspace {
+      color: #AAAAAA;
+      padding-left: 30px;
+      font-size: 0.8em;
+    }
   }
 
   #searchResults {
@@ -78,17 +94,25 @@ body {
 #deckmetadata {
   position: fixed;
   left: 930px;
-  top: 130px;
-  width: 200px;
+  top: 40px;
+  width: 300px;
   height: 400px;
   padding: 5px;
   background-color: #ddd;
 
+  #deckname {
+    width: 100%;
+    height: 25px;
+    font-size: 1.1em;
+    padding-left: 4px;
+  }
+
   #decklist {
     list-style-type: none;
+    margin: 10px 0px;
 
     li {
-      padding: 2px;
+      padding: 2px 2px;
 
       input {
         width: 20px;

@@ -43,15 +43,15 @@
 </script>
 <form>
 <% if !deck.nil? %>
+  <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
   <ul id="decklist">
   <% deck.packs.each do | pack | %>
     <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
   <% end %>
   </ul>
-  <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
+  <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
 <% else %>
     <input type="text" value="deck name" id="deckname" class="grayText" />
 <% end %>
-<input type="button" value="create deck!" />
 </form>
 </div>

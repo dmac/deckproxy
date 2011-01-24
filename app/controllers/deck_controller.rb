@@ -4,6 +4,11 @@ class DeckController < ApplicationController
   end
 
   def view
-    @deck = Deck.find(params[:id])
+    @deck = Deck.find_by_deck_hash(params[:id])
   end
+
+  def proxy
+    @deck = Deck.find_by_deck_hash(params[:id])
+  end
+
 end
