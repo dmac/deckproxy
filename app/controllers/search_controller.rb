@@ -11,8 +11,12 @@ class SearchController < ApplicationController
     # overwriting a previous query on the same field.
     queries = combine_queries(queries, query_field, query_text)
 
-    results = perform_queries(queries)
-    results = results.all(:order => :name, :limit => 100, :offset => offset)
+    if queries.size > 0
+      results = perform_queries(queries)
+      results = results.all(:order => :name, :limit => 100, :offset => offset)
+    else
+      results = []
+    end
 
     load_more = (results.size == 100)
 
@@ -54,6 +58,7 @@ class SearchController < ApplicationController
   end
 
   def combine_queries(queries, query_field, query_text)
+    return queries if query_text == ""
     new_field = true
     new_queries = []
     queries.each do |field, text|
@@ -73,10 +78,8 @@ class SearchController < ApplicationController
     queries.each do |field, query|
       case field
       when "name"
-        break if query.size < 3
         results = results.by_name(query)
       when "text"
-        break if query.size < 3
         results = results.by_text(query)
       when "mana"
         number = query.match(/\d+/)[0].to_i

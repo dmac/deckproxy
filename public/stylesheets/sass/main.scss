@@ -58,8 +58,17 @@ body {
 
     .breadcrumb {
       display: inline-block;
-      padding-right: 10px;
       padding-left: 10px;
+
+      .breadcrumb_mark {
+        padding-right: 10px;
+      }
+    }
+
+    .breadcrumb_backspace {
+      color: #AAAAAA;
+      padding-left: 30px;
+      font-size: 0.8em;
     }
   }
 

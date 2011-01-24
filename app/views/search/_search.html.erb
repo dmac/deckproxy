@@ -1,13 +1,16 @@
 <% if offset == 100 %>
   <div id="searchBreadcrumbs">
     <% breadcrumbs.each do |name, value| %>
-      <% unless name == breadcrumbs.first[0] %>
-        <span class="breadcrumb_mark">&gt;</span>
-      <% end %>
       <div class="breadcrumb">
-        <p><%= name.capitalize %>: <%= value %></p>
+        <% unless name == breadcrumbs.first[0] %>
+          <span class="breadcrumb_mark">&gt;</span>
+        <% end %>
+        <span><%= name.capitalize %>: <%= value %></span>
         <input name="<%= name %>" value="<%= value %>" type="hidden" />
       </div>
+    <% end %>
+    <% if breadcrumbs.size > 0 %>
+      <span class="breadcrumb_backspace">(backspace for previous search)</span>
     <% end %>
   </div>
 <% end %>
