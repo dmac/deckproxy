@@ -1,3 +1,5 @@
+require "digest/sha1"
+
 class Deck < ActiveRecord::Base
   has_many :packs
   has_many :cards, :through => :packs
@@ -6,8 +8,10 @@ class Deck < ActiveRecord::Base
     if !self.name
       name = "Unnamed Deck (" + self.id.to_s + ")"
       self.name =name
-      self.save
     end
+
+    self.deck_hash = Deck.generate_random_hash
+    self.save
   end
 
   def add_card(card)
@@ -40,5 +44,13 @@ class Deck < ActiveRecord::Base
 
   def self.get_all_decks
     find(:all, :order => "name")
+  end
+
+  def self.generate_random_hash
+    begin
+      hash = Digest::SHA1.hexdigest Time.now.to_s
+      hash = hash[0..6]
+    end until Deck.find_by_deck_hash(hash).nil?
+    hash
   end
 end

@@ -49,7 +49,7 @@
     <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
   <% end %>
   </ul>
-  <a href="/deck/view/<%= deck.id %>">View deck</a>
+  <a href="/deck/view/<%= deck.deck_hash %>">View deck</a>
 <% else %>
     <input type="text" value="deck name" id="deckname" class="grayText" />
 <% end %>
