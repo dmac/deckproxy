@@ -1,7 +1,7 @@
 <section id="searchSection">
 <div id="resultsSection">
   <a href="/deck/"> Back to the Decks!</a>
-  <a href="/deck/proxy/<%= @deck.id %>" target="_new">Sac three Myr to print a proxy deck!</a>
+  <a href="/deck/proxy/<%= @deck.deck_hash %>" target="_new">Sac three Myr to print a proxy deck!</a>
   OR <a href="#">Exile your graveyard and save a PDF to print later!</a>
   <div id="searchResults">
     <%= render :partial => "/search/card_grid", :locals => {:cards => @deck.cards, :load_more => 100, :offset => 0}  %>
