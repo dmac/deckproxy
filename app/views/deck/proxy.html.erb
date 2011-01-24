@@ -1,6 +1,8 @@
-<% @deck.packs.each do |pack| %>
-  <% pack.number.times do %>
-      <img class="proxy" src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= pack.card.edition.downcase
-            %>/<%= pack.card.number %>.jpg" />
+<div id="proxydeck">
+  <% @deck.packs.each do |pack| %>
+    <% pack.number.times do %>
+        <img class="proxy" src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= pack.card.edition.downcase
+              %>/<%= pack.card.number %>.jpg" />
+    <% end %>
   <% end %>
-<% end %>
+</div>
