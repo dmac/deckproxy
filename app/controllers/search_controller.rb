@@ -82,8 +82,11 @@ class SearchController < ApplicationController
       when "text"
         results = results.by_text(query)
       when "mana"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_mana(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_mana(number)
@@ -99,8 +102,11 @@ class SearchController < ApplicationController
       when "type"
         results = results.by_type(query)
       when "power"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_power(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_power(number)
@@ -112,8 +118,11 @@ class SearchController < ApplicationController
           results = results.equal_to_power(number)
         end
       when "toughness"
-        number = query.match(/\d+/)[0].to_i
-        if query.include?("<=")
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
           results = results.less_than_or_equal_toughness(number)
         elsif query.include?(">=")
           results = results.greater_than_or_equal_toughness(number)

@@ -5,6 +5,9 @@ class Card < ActiveRecord::Base
   # Allows us to have column name "type" in our database.
   self.inheritance_column = "inheritance_type"
 
+  named_scope :no_match, lambda {
+    { :conditions => ["0"]}
+  }
   named_scope :with_number, lambda {
     { :conditions => ["number IS NOT NULL"] }
   }
