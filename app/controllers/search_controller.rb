@@ -49,8 +49,12 @@ class SearchController < ApplicationController
 
   def update_card_quantity
     deck = Deck.find(params[:deck_id])
-    deck.update_pack(Card.find(params[:card_id]), params[:quantity]);
-    render :text => "";
+    deleted = deck.update_pack(Card.find(params[:card_id]), params[:quantity].to_i);
+    if (deleted)
+      render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => params[:viewing_deck] }
+    else
+      render :text => "";
+    end
   end
 
   def update_deck_name

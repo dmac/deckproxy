@@ -33,8 +33,14 @@ class Deck < ActiveRecord::Base
                                      self.id,
                                      card.id])
     if (pack)
-      pack.update_attribute(:number, quantity)
+      if (quantity <= 0)
+        pack.destroy
+        return true
+      else 
+        pack.update_attribute(:number, quantity)
+      end
     end
+    return false
   end
 
   def rename(newName)

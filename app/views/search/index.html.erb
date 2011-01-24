@@ -23,7 +23,8 @@
             deck_name: deckName
           },
           success: function(html) {
-            $("#deckmetadata").replaceWith(html);
+            if (html != "")
+              $("#deckmetadata").replaceWith(html);
           }
       });
     },

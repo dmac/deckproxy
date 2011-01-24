@@ -1,10 +1,18 @@
-<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>" deckname="<%= deck.nil? ? "" : deck.name %>">
+<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>"
+     deckname="<%= deck.nil? ? "" : deck.name %>"
+     viewingdeck="<%= viewing_deck %>">
 <script language="javascript">
   Metadata = {
     init: function() {
       $("#deckname").focus(Metadata.onNameFocus);
       $("#deckname").blur(Metadata.onNameBlur);
       $(".cardcount").blur(Metadata.onNumberBlur);
+      $(".delete").click(Metadata.onCardDeleteClick);
+    },
+
+    onCardDeleteClick: function(event) {
+      event.preventDefault();
+      Metadata.changeCardNumber($(event.target).attr("cardid"), 0);
     },
 
     onNameFocus: function() {
@@ -29,9 +37,12 @@
     },
 
     onNumberBlur: function(event) {
-      var cardId = $(event.target).attr("cardid");
+      Metadata.changeCardNumber($(event.target).attr("cardid"), $(event.target).val());
+    },
+
+    changeCardNumber: function(cardId, quantity) {
       var deckId = $("#deckmetadata").attr("deckid");
-      var quantity = $(event.target).val();
+      var viewingDeck = $("#deckmetadata").attr("viewingdeck");
 
       $.ajax({
         type: "POST",
@@ -39,11 +50,17 @@
         data: {
           card_id: cardId,
           deck_id: deckId,
-          quantity: quantity
+          quantity: quantity,
+          viewing_deck: viewingDeck
+        },
+        success: function(html) {
+          if (html != "")
+            $("#deckmetadata").replaceWith(html);
         }
       });
     }
   }
+
 
   $(document).ready(Metadata.init);
 
@@ -53,7 +70,10 @@
   <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
   <ul id="decklist">
   <% deck.packs.each do | pack | %>
-    <li><input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" /> <%= pack.card.name %> </li>
+    <li>
+      <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
+      <%= pack.card.name %> (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
+    </li>
   <% end %>
   </ul>
   <% if viewing_deck %>
