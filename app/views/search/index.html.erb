@@ -50,10 +50,10 @@
 
       var query = $("#searchbox").val();
 
-      var queries = {};
+      var queries = [];
       var breadcrumbs = $(".breadcrumb input");
       $.each(breadcrumbs, function(index, element) {
-        queries[$(element).attr("name")] = $(element).val();
+        queries.push([$(element).attr("name"), $(element).val()])
       });
 
       if (newSearch)

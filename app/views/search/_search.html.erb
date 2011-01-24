@@ -1,8 +1,11 @@
 <% if offset == 100 %>
   <div id="searchBreadcrumbs">
     <% breadcrumbs.each do |name, value| %>
+      <% unless name == breadcrumbs.first[0] %>
+        <span class="breadcrumb_mark">&gt;</span>
+      <% end %>
       <div class="breadcrumb">
-        <p><%= name %>: <%= value %></p>
+        <p><%= name.capitalize %>: <%= value %></p>
         <input name="<%= name %>" value="<%= value %>" type="hidden" />
       </div>
     <% end %>

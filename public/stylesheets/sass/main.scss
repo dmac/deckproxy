@@ -55,6 +55,12 @@ body {
   #searchBreadcrumbs {
     margin-top: 20px;
     margin-bottom: 20px;
+
+    .breadcrumb {
+      display: inline-block;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
   }
 
   #searchResults {

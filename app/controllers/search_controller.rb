@@ -4,11 +4,12 @@ class SearchController < ApplicationController
 
   def search
     query_field, query_text = parse_query(params[:query])
-    queries = params[:queries].blank? ? {} : params[:queries] # hash of db columns to query text
+    queries = params[:queries].blank? ? [] : params[:queries].values # array of [[db column, query text], ... ]
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
 
-    # Add this query to previous queries
-    queries[query_field] = query_text
+    # Combine this query with previous queries, with query_field
+    # overwriting a previous query on the same field.
+    queries = combine_queries(queries, query_field, query_text)
 
     results = perform_queries(queries)
     results = results.all(:order => :name, :limit => 100, :offset => offset)
@@ -50,6 +51,21 @@ class SearchController < ApplicationController
     query_field = raw_query.split(":")[0].strip
     query_text = raw_query.split(":")[1].strip
     return [query_field, query_text]
+  end
+
+  def combine_queries(queries, query_field, query_text)
+    new_field = true
+    new_queries = []
+    queries.each do |field, text|
+      if query_field == field
+        new_queries << [query_field, query_text]
+        new_field = false
+      else
+        new_queries << [field, text]
+      end
+    end
+    new_queries << [query_field, query_text] if new_field
+    new_queries
   end
 
   def perform_queries(queries)
