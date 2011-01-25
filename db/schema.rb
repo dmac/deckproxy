@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125073028) do
+ActiveRecord::Schema.define(:version => 20110125081648) do
 
   create_table "cards", :force => true do |t|
     t.string  "name",       :limit => 1024
@@ -46,5 +46,13 @@ ActiveRecord::Schema.define(:version => 20110125073028) do
 
   add_index "packs", ["deck_id", "card_id"], :name => "index_packs_on_deck_id_and_card_id", :unique => true
   add_index "packs", ["deck_id"], :name => "index_packs_on_deck_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
