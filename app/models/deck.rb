@@ -49,6 +49,11 @@ class Deck < ActiveRecord::Base
     self.save
   end
 
+  # Returns all decks with no user (user_id = 0)
+  def self.public_decks
+    find(:all, :conditions => { :user_id => 0 }, :order => "name")
+  end
+
   def self.get_all_decks
     find(:all, :order => "name")
   end

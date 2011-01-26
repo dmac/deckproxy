@@ -40,7 +40,7 @@ $(document).ready(CardGrid.init);
 <div id="resultCards">
   <% cards.each do |card| %>
     <div class="card" cardid="<%= card.id %>">
-      <%= render :partial => "card_skeleton", :locals => {
+      <%= render :partial => "/search/card_skeleton", :locals => {
         :card => card
       } %>
     </div>

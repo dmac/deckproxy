@@ -36,6 +36,7 @@ class SearchController < ApplicationController
   def add_card_to_deck
     if (params[:deck_id] == "")
       deck = Deck.new
+      deck.user = current_user if current_user
       deck.save
     else
       deck = Deck.find(params[:deck_id])

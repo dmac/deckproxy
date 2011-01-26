@@ -1,8 +1,16 @@
 <section id="allDecksList">
   <a href="/">Build a Deck</a>
-  <h1>All Decks</h1>
+  <% if @user %>
+    <h1>My Decks</h1>
+    <ul>
+      <% @decks.each do |deck| %>
+        <li><a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <h1>Public Decks</h1>
   <ul>
-    <% @decks.each do |deck| %>
+    <% @public_decks.each do |deck| %>
       <li><a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a></li>
     <% end %>
   </ul>
