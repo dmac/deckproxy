@@ -7,21 +7,29 @@ CardGrid = {
   },
 
   onHoverOverCard: function(event) {
-    $(event.target).css("z-index", "1000");
-    $(event.target).animate({
-      width: 280,
-      top: -50,
-      left: -50
-    }, 100);
+    var skeleton = event.target;
+    if (!skeleton) return;
+    while (!skeleton.className.match(/card_skeleton/)) {
+      skeleton = skeleton.parentNode
+    }
+    if (skeleton.hasAttribute("filled")) {
+      $(skeleton).children("img").css("z-index", "1000");
+      $(skeleton).children("img").animate({
+        width: 280,
+        top: -50,
+        left: -50
+      }, 100);
+    }
   },
 
   onHoverOutCard: function(event) {
-    var card = $(event.target);
-    card.animate({
+    var img = event.target;
+    if (img.tagName.toLowerCase() != "img") return;
+    $(img).animate({
       width: 155,
       top: 0,
       left: 0
-    }, 100, function() { card.css("z-index", "0"); });
+    }, 100, function() { $(img).css("z-index", "0"); });
   }
 
 }
@@ -32,8 +40,9 @@ $(document).ready(CardGrid.init);
 <div id="resultCards">
   <% cards.each do |card| %>
     <div class="card" cardid="<%= card.id %>">
-      <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase
-            %>/<%= card.number %>.jpg" />
+      <%= render :partial => "card_skeleton", :locals => {
+        :card => card
+      } %>
     </div>
   <% end %>
 </div>
