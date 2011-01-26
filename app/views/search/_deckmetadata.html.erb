@@ -18,12 +18,10 @@
     onNameFocus: function() {
       if ($("#deckname").val().substr(0,7) == "Unnamed")  {
         $("#deckname").val("");
-        $("#deckname").removeClass("grayText");
       }
     },
 
     onNameBlur: function() {
-      $("#deckname").addClass("grayText");
       var deckId = $("#deckmetadata").attr("deckid");
       var deckName = $("#deckname").val();
       $.ajax({
@@ -67,7 +65,7 @@
 </script>
 <form>
 <% if !deck.nil? %>
-  <input type="text" value="<%= deck.name %>" id="deckname" class="grayText" />
+  <input type="text" value="<%= deck.name %>" id="deckname" />
   <ul id="decklist">
   <% deck.packs.each do | pack | %>
     <li>
@@ -83,7 +81,7 @@
   <% end %>
   <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
 <% else %>
-    <input type="text" value="New Deck" id="deckname" class="grayText" />
+    <input type="text" value="New Deck" id="deckname" />
 <% end %>
 </form>
 <br /><br />

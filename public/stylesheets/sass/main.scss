@@ -57,11 +57,42 @@ body {
   right: 0px;
 }
 
+.grayText { color: #AAAAAA; }
+
+
 #main {
   width: 100%;
   margin: auto;
-  margin-top: 40px;
   margin-bottom: 140px;
+  margin-top: 40px;
+}
+
+#login {
+  position: absolute;
+  top: 10px;
+  left: 600px;
+  text-align: right;
+  width: 318px;
+
+  #loginInputs {
+    display: -moz-box;
+    display: -webkit-box;
+    -moz-box-align: end;
+    -webkit-box-align: end;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    margin-top: 5px;
+    input {
+      display: block;
+      visibility: hidden;
+      width: 125px;
+      margin-bottom: 3px;
+    }
+    button {
+      width: 125px;
+      visibility: hidden;
+    }
+  }
 }
 
 #searchSection {

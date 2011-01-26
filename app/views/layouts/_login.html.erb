@@ -1,0 +1,91 @@
+<script type="text/javascript">
+  Login = {
+    init: function() {
+      $("#loginInputs input").focus(this.onLoginInputFocus);
+      $("#loginInputs input").blur(this.onLoginInputBlur);
+      $("#loginLinks a").click(this.onLoginLinkClicked);
+      $("#loginButton").click(this.onLoginButtonClicked);
+    },
+
+    onLoginButtonClicked: function(event) {
+      var action = $("input[name=loginAction]").val();
+      $.ajax({
+        type: "POST",
+        url: "/user/" + action,
+        data: {
+          email: $("input#email").val(),
+          password: $("input#password").val(),
+          confirm_password: $("input#confirm").val()
+        },
+        success: function() {
+          console.log(action + " success!");
+        }
+      });
+    },
+
+    onLoginLinkClicked: function(event) {
+      event.preventDefault();
+      var link = $(event.target);
+      if (link.attr("id") == "loginLink") {
+        $("input[name=loginAction]").val("login");
+        $("input#email").css("visibility", "visible");
+        $("input#password").css("visibility", "visible");
+        $("input#confirm").css("visibility", "hidden");
+        $("#loginButton").css("visibility", "visible");
+      } else if (link.attr("id") == "registerLink") {
+        $("input[name=loginAction]").val("register");
+        $("input#email").css("visibility", "visible");
+        $("input#password").css("visibility", "visible");
+        $("input#confirm").css("visibility", "visible");
+        $("#loginButton").css("visibility", "visible");
+      }
+    },
+
+    onLoginInputFocus: function(event) {
+      var input = $(event.target);
+      if (input.val() == "email") {
+        input.removeClass("grayText");
+        input.val("");
+      }
+      else if (input.val() == "password") {
+        input.removeClass("grayText");
+        input.val("");
+        input[0].type = "password";
+      } else if (input.val() == "confirm password") {
+        input.removeClass("grayText");
+        input.val("");
+        input[0].type = "password";
+      }
+    },
+
+    onLoginInputBlur: function(event) {
+      var input = $(event.target);
+      if (input.attr("id") == "email" && input.val() == "") {
+        input.addClass("grayText");
+        input.val("email");
+      } else if (input.attr("id") == "password" && input.val() == "") {
+        input.addClass("grayText");
+        input.val("password");
+        input[0].type = "text";
+      } else if (input.attr("id") == "confirm" && input.val() == "") {
+        input.addClass("grayText");
+        input.val("confirm password");
+        input[0].type = "text";
+      }
+    }
+  }
+  $(document).ready(function() { Login.init(); })
+</script>
+<div id="login">
+  <div id="loginLinks">
+    <a id="loginLink" href="#">Login</a> |
+    <a id="registerLink" href="#">Register</a>
+  </div>
+  <div id="loginInputs">
+    <input type="hidden" name="loginAction" value="" />
+    <input type="text" id="email" class="grayText" value="email" />
+    <input type="text" id="password" class="grayText" value="password" />
+    <input type="text" id="confirm" class="grayText" value="confirm password" />
+    <button id="loginButton">Go</button>
+  </div>
+</div>
