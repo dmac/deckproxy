@@ -9,6 +9,13 @@
 
     onLoginButtonClicked: function(event) {
       var action = $("input[name=loginAction]").val();
+
+      if (!Login.loginFieldsFilled()) {
+        $("#loginMessage").addClass("failure");
+        $("#loginMessage").html("Please fill in all fields.");
+        return;
+      }
+
       $.ajax({
         type: "POST",
         url: "/user/" + action,
@@ -83,6 +90,13 @@
         input.val("confirm password");
         input[0].type = "text";
       }
+    },
+
+    loginFieldsFilled: function() {
+      return (($("input[name=loginAction]").val() == "login" &&
+               $("#password[type=password]").size() == 1) ||
+              ($("input[name=loginAction]").val() == "register" &&
+               $("input[type=password]").size() == 2));
     }
   }
   $(document).ready(function() { Login.init(); })
