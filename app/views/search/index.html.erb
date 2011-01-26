@@ -9,6 +9,7 @@
     },
 
     onClickCard: function(event) {
+      event.stopPropagation();
       var card = $(event.currentTarget);
       var cardId = card.attr("cardid");
       var deckId = $("#deckmetadata").attr("deckid");
