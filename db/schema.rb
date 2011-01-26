@@ -9,23 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110124020126) do
+ActiveRecord::Schema.define(:version => 20110125073028) do
 
   create_table "cards", :force => true do |t|
-    t.string  "name"
-    t.string  "edition"
-    t.string  "color"
-    t.string  "cost"
-    t.string  "type"
-    t.string  "text"
-    t.string  "power"
-    t.string  "toughness"
-    t.string  "flavor"
-    t.string  "rarity"
-    t.string  "artist"
+    t.string  "name",       :limit => 1024
+    t.string  "edition",    :limit => 1024
+    t.string  "color",      :limit => 1024
+    t.string  "cost",       :limit => 1024
+    t.string  "type",       :limit => 1024
+    t.string  "text",       :limit => 1024
+    t.string  "power",      :limit => 1024
+    t.string  "toughness",  :limit => 1024
+    t.string  "flavor",     :limit => 1024
+    t.string  "rarity",     :limit => 1024
+    t.string  "artist",     :limit => 1024
     t.integer "number"
     t.integer "mana"
-    t.string  "internal"
+    t.string  "internal",   :limit => 1024
     t.integer "type_index"
   end
 
