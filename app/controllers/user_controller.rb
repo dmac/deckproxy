@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-  before_filter :login_required, :only => ["welcome", "change_password", "hidden"]
+  before_filter :login_required, :only => []
 
   def register
     @user = User.new(
@@ -10,7 +10,7 @@ class UserController < ApplicationController
     )
     if request.post?
       if @user.save
-        session[:user] = User.authenticate(@user.email, @user.password)
+        session[:user] = User.authenticate(@user.email, params[:password])
         render :text => "Signup successful, welcome!"
       else
         render :text => @user.errors.first[1], :status => 400
@@ -20,22 +20,21 @@ class UserController < ApplicationController
 
   def login
     if request.post?
-      if session[:user] = User.authenticate(params[:user][:login], params[:user][:password])
-        flash[:message]  = "Login successful"
-        redirect_to_stored
+      if session[:user] = User.authenticate(params[:email], params[:password])
+        render :text => "Login successful, welcome!"
       else
-        flash[:warning] = "Login unsuccessful"
+        render:text => "Login unsuccessful", :status => 400
       end
     end
   end
 
   def logout
     session[:user] = nil
-    flash[:message] = "Logged out"
     redirect_to :controller => "search", :action => "index"
   end
 
   def forgot_password
+    # TODO(dmac): implement this
     #if request.post?
       #user = User.find_by_email(params[:user][:email])
       #if user and user.send_new_password
@@ -48,14 +47,14 @@ class UserController < ApplicationController
   end
 
   def change_password
-    @user=session[:user]
-    if request.post?
-      @user.update_attributes(:password => params[:user][:password],
-                              :password_confirmation => params[:user][:password_confirmation])
-      if @user.save
-        flash[:message]="Password Changed"
-      end
-    end
-
+    # TODO(dmac): implement this
+    #@user=session[:user]
+    #if request.post?
+      #@user.update_attributes(:password => params[:user][:password],
+                              #:password_confirmation => params[:user][:password_confirmation])
+      #if @user.save
+        #flash[:message]="Password Changed"
+      #end
+    #end
   end
 end

@@ -18,11 +18,7 @@
           confirm: $("input#confirm").val()
         },
         success: function(message) {
-          $("#loginLinks").hide();
-          $("#loginInputs").hide();
-          $("#loginMessage").removeClass("failure");
-          $("#loginMessage").addClass("success");
-          $("#loginMessage").html(message);
+          window.location.reload();
         },
         error: function(message) {
           $("#loginMessage").removeClass("success");
@@ -33,8 +29,12 @@
     },
 
     onLoginLinkClicked: function(event) {
-      event.preventDefault();
       var link = $(event.target);
+
+      if (link.attr("id") != "logoutLink") {
+        event.preventDefault();
+      }
+
       if (link.attr("id") == "loginLink") {
         $("input[name=loginAction]").val("login");
         $("input#email").css("visibility", "visible");
@@ -89,8 +89,13 @@
 </script>
 <div id="login">
   <div id="loginLinks">
-    <a id="loginLink" href="#">Login</a> |
-    <a id="registerLink" href="#">Register</a>
+    <% if session[:user] %>
+      <span class="bold"><%= session[:user].email %></span> |
+      <a id="logoutLink" href="/user/logout">Logout</a>
+    <% else %>
+      <a id="loginLink" href="#">Login</a> |
+      <a id="registerLink" href="#">Register</a>
+    <% end %>
   </div>
   <div id="loginInputs">
     <input type="hidden" name="loginAction" value="" />
