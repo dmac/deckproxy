@@ -18,7 +18,13 @@ class DeckController < ApplicationController
   end
 
   def proxy
+    @user = current_user
     @deck = Deck.find_by_deck_hash(params[:id])
+    if @deck.user && @deck.user != @user
+      render :text => "", :status => 403
+    else
+      render "deck/proxy"
+    end
   end
 
 end
