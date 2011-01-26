@@ -5,27 +5,37 @@ Card_Skeleton = {
     var cardDiv = img.parentNode;
     cardDiv.setAttribute("filled", "true");
     img.removeAttribute("hidden");
+    $(img).next().hide();
   },
 
 }
 </script>
 
 <div id="<%= "card" + card.id.to_s %>" class="card_skeleton card" cardid="<%= card.id %>">
-  <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= (card.edition!="SOM") ? card.edition.downcase : "break-me" %>/<%= card.number.to_s %>.jpg"
+  <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase %>/<%= card.number.to_s %>.jpg"
      onLoad="Card_Skeleton.fillCard(this);" hidden="true"/>
-  <div id="title_bar">
-    <label class="name"><%= card.name %></label>
-    <label class="cost"><%= card.cost %></label>
-  </div>
-  <div id="image_box"/>
-  <div id="type_bar">
-    <label class="type"><%= card.type %></label>
-  </div>
-  <div id="text_box">
-    <%=
-    card.text
-     %>
-     <!-- Consider putting everythin btwn # in an italics-span (this is helper text)
-          Also consider line breaking at each # or % -->
+  <div id="container">
+    <div id="title_bar">
+      <label class="name"><%= card.name %></label>
+      <label class="cost"><%= card.cost %></label>
+    </div>
+    <div id="image_box"/>
+    <div id="type_bar">
+      <label class="type"><%= card.type %></label>
+    </div>
+    <div id="text_box">
+      <%= card.text %>
+       <!-- Consider putting everythin btwn # in an italics-span (this is helper text)
+            Also consider line breaking at each # or % -->
+    </div>
+    <label class="power_toughness">
+      <%=
+      if (card.toughness.size > 0)
+        card.power.to_s + "/" + card.toughness.to_s
+      else
+        ""
+      end
+      %>
+    </label>
   </div>
 </div>
