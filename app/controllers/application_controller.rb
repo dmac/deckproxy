@@ -21,13 +21,4 @@ class ApplicationController < ActionController::Base
   def current_user
     session[:user]
   end
-
-  def redirect_to_stored
-  if return_to = session[:return_to]
-    session[:return_to] = nil
-    redirect_to_url(return_to)
-  else
-    redirect_to :controller => "search", :action => "index"
-  end
-  end
 end
