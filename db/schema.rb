@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125081648) do
+ActiveRecord::Schema.define(:version => 20110126102719) do
 
   create_table "cards", :force => true do |t|
     t.string  "name",       :limit => 1024
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20110125081648) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "deck_hash"
+    t.integer  "user_id",                    :default => 0
   end
 
   add_index "decks", ["deck_hash"], :name => "index_decks_on_deck_hash", :unique => true

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   attr_protected :id, :salt
   attr_accessor :password, :password_confirmation
 
+  has_many :decks
+
   def password=(password)
     @password = password
     self.salt = User.random_string(10) if !self.salt?

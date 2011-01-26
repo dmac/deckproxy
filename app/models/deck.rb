@@ -3,6 +3,7 @@ require "digest/sha1"
 class Deck < ActiveRecord::Base
   has_many :packs
   has_many :cards, :through => :packs
+  belongs_to :user
 
   def after_create
     if !self.name
@@ -36,7 +37,7 @@ class Deck < ActiveRecord::Base
       if (quantity <= 0)
         pack.destroy
         return true
-      else 
+      else
         pack.update_attribute(:number, quantity)
       end
     end
