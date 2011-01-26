@@ -1,16 +1,24 @@
 class User < ActiveRecord::Base
-  validates_presence_of :email, :password, :password_confirmation, :salt
-  validates_uniqueness_of :email
-  validates_confirmation_of :password
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
+  validates_presence_of :email, :password, :password_confirmation, :salt, :message => "Missing required field."
+  validates_uniqueness_of :email, :message => "An account with that email is already registered."
+  validates_confirmation_of :password, :message => "Your password and password confirmation do not match."
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Please use a valid email address."
 
   attr_protected :id, :salt
   attr_accessor :password, :password_confirmation
 
-  def set_password(password)
-    @password=password
+  def password=(password)
+    @password = password
     self.salt = User.random_string(10) if !self.salt?
-    self.password = User.encrypt(@password, self.salt)
+    write_attribute(:password, User.encrypt(@password, self.salt))
+  end
+
+  def password()
+    read_attribute(:password)
+  end
+
+  def password_confirmation()
+    User.encrypt(@password_confirmation, self.salt)
   end
 
   def send_new_password

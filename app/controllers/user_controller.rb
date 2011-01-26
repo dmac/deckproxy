@@ -2,15 +2,18 @@ class UserController < ApplicationController
 
   before_filter :login_required, :only => ["welcome", "change_password", "hidden"]
 
-  def signup
-    @user = User.new(@params[:user])
+  def register
+    @user = User.new(
+      :email => params[:email],
+      :password => params[:password],
+      :password_confirmation => params[:confirm]
+    )
     if request.post?
       if @user.save
         session[:user] = User.authenticate(@user.email, @user.password)
-        flash[:message] = "Signup successful"
-        redirect_to :action => "welcome"
+        render :text => "Signup successful, welcome!"
       else
-        flash[:warning] = "Signup unsuccessful"
+        render :text => @user.errors.first[1], :status => 400
       end
     end
   end

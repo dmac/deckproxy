@@ -15,10 +15,19 @@
         data: {
           email: $("input#email").val(),
           password: $("input#password").val(),
-          confirm_password: $("input#confirm").val()
+          confirm: $("input#confirm").val()
         },
-        success: function() {
-          console.log(action + " success!");
+        success: function(message) {
+          $("#loginLinks").hide();
+          $("#loginInputs").hide();
+          $("#loginMessage").removeClass("failure");
+          $("#loginMessage").addClass("success");
+          $("#loginMessage").html(message);
+        },
+        error: function(message) {
+          $("#loginMessage").removeClass("success");
+          $("#loginMessage").addClass("failure");
+          $("#loginMessage").html(message.responseText);
         }
       });
     },
@@ -32,12 +41,14 @@
         $("input#password").css("visibility", "visible");
         $("input#confirm").css("visibility", "hidden");
         $("#loginButton").css("visibility", "visible");
+        $("#loginMessage").html("");
       } else if (link.attr("id") == "registerLink") {
         $("input[name=loginAction]").val("register");
         $("input#email").css("visibility", "visible");
         $("input#password").css("visibility", "visible");
         $("input#confirm").css("visibility", "visible");
         $("#loginButton").css("visibility", "visible");
+        $("#loginMessage").html("");
       }
     },
 
@@ -87,5 +98,7 @@
     <input type="text" id="password" class="grayText" value="password" />
     <input type="text" id="confirm" class="grayText" value="confirm password" />
     <button id="loginButton">Go</button>
+  </div>
+  <div id="loginMessage">
   </div>
 </div>

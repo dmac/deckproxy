@@ -70,9 +70,9 @@ body {
 #login {
   position: absolute;
   top: 10px;
-  left: 600px;
+  left: 620px;
   text-align: right;
-  width: 318px;
+  width: 300px;
 
   #loginInputs {
     display: -moz-box;
@@ -92,6 +92,12 @@ body {
       width: 125px;
       visibility: hidden;
     }
+  }
+
+  #loginMessage {
+    margin-top: 5px;
+    &.success { color: green; }
+    &.failure { color: red; }
   }
 }
 
