@@ -59,7 +59,12 @@ class SearchController < ApplicationController
   end
 
   def update_deck_name
-    deck = Deck.find(params[:deck_id])
+    if (params[:deck_id] == "")
+      deck = Deck.new
+      deck.user = current_user if current_user
+      deck.save
+    end
+    deck ||= Deck.find(params[:deck_id])
     if (params[:deck_name] != "")
       deck.name = params[:deck_name]
       deck.save

@@ -1,6 +1,3 @@
-<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>"
-     deckname="<%= deck.nil? ? "" : deck.name %>"
-     viewingdeck="<%= viewing_deck %>">
 <script language="javascript">
   Metadata = {
     init: function() {
@@ -30,6 +27,10 @@
         data: {
           deck_id: deckId,
           deck_name: deckName
+        },
+        success: function(html) {
+          if (html != "")
+            $("#deckmetadata").replaceWith(html);
         }
       });
     },
@@ -58,33 +59,34 @@
       });
     }
   }
-
-
   $(document).ready(Metadata.init);
-
 </script>
-<form>
-<% if !deck.nil? %>
-  <input type="text" value="<%= deck.name %>" id="deckname" />
-  <ul id="decklist">
-  <% deck.packs.each do | pack | %>
-    <li>
-      <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
-      <%= pack.card.name %> (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
-    </li>
-  <% end %>
-  </ul>
-  <% if viewing_deck %>
-    <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a> |
+
+<div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>"
+     deckname="<%= deck.nil? ? "" : deck.name %>"
+     viewingdeck="<%= viewing_deck %>">
+  <form>
+  <% if !deck.nil? %>
+    <input type="text" value="<%= deck.name %>" id="deckname" />
+    <ul id="decklist">
+    <% deck.packs.each do | pack | %>
+      <li>
+        <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
+        <%= pack.card.name %> (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
+      </li>
+    <% end %>
+    </ul>
+    <% if viewing_deck %>
+      <a href="/search/index/<%= deck.deck_hash %>">Add more cards to deck</a> |
+    <% else %>
+      <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
+    <% end %>
+    <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
   <% else %>
-    <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
+      <input type="text" value="New Deck" id="deckname" />
   <% end %>
-  <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
-<% else %>
-    <input type="text" value="New Deck" id="deckname" />
-<% end %>
-</form>
-<br /><br />
-<a href="/">Build New Deck</a> |
-<a href="/deck/"> View all the decks</a>
+  </form>
+  <br /><br />
+  <a href="/">Build New Deck</a> |
+  <a href="/deck/"> View all the decks</a>
 </div>
