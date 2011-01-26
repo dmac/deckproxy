@@ -24,22 +24,22 @@ a:link, a:visited {
   border: solid 1px black;
 }
 
-.card_skeleton #title_bar > *,
-.card_skeleton #type_bar > * {
+.card_skeleton .title_bar > *,
+.card_skeleton .type_bar > * {
   display: table-cell;
   height: 14px;
   width: 100%;
   padding: 0 2px;
 }
 
-.card_skeleton #type_bar {
+.card_skeleton .type_bar {
   font-size: 10px;
   border-width: 0 0 1px 0;
   border-color: black;
   border-style: solid;
 }
 
-.card_skeleton #image_box {
+.card_skeleton .image_box {
   height: 60px;
   width: 100%;
   border-width: 1px 0 1px 0;
@@ -47,7 +47,7 @@ a:link, a:visited {
   border-style: dashed;
 }
 
-.card_skeleton #text_box {
+.card_skeleton .text_box {
   display: table-cell;
   width: 100%;
   font-size: 9px;
