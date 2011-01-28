@@ -76,6 +76,7 @@
             $("#searchResults").append(html);
             $("#searchResults .card").click(Searcher.onClickCard);
             Searcher.attachScrollListener();
+            Searcher.handleCardMode();
           }
       });
     },
