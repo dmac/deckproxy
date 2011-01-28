@@ -43,6 +43,7 @@
       var deckId = $("#deckmetadata").attr("deckid");
       var viewingDeck = $("#deckmetadata").attr("viewingdeck");
 
+
       $.ajax({
         type: "POST",
         url: "/search/update_card_quantity",
@@ -55,6 +56,8 @@
         success: function(html) {
           if (html != "")
             $("#deckmetadata").replaceWith(html);
+          if (quantity == 0)
+            CardGrid.refresh(deckId);
         }
       });
     }

@@ -1,45 +1,55 @@
-<script language="javascript">
-CardGrid = {
+<div id="resultCards" isCardMode="false">
+  <script language="javascript">
+  CardGrid = {
 
-  init: function() {
-    $("#resultCards .card").mouseover(CardGrid.onHoverOverCard);
-    $("#resultCards .card").mouseout(CardGrid.onHoverOutCard);
-  },
+    init: function() {
+      $("#resultCards .card").mouseover(CardGrid.onHoverOverCard);
+      $("#resultCards .card").mouseout(CardGrid.onHoverOutCard);
+    },
 
-  onHoverOverCard: function(event) {
-    var skeleton = event.target;
-    if (!skeleton) return;
-    while (!skeleton.className ||
-           !skeleton.className.match(/card_skeleton/)) {
-      if(!skeleton) return;
-      skeleton = skeleton.parentNode
+    refresh: function(deckId) {
+      $.ajax({
+        url: "/search/card_grid",
+        data: {deck_id: deckId},
+        success: function(html) {
+          $("#resultCards").replaceWith(html);
+        }
+      });
+    },
+
+    onHoverOverCard: function(event) {
+      var skeleton = event.target;
+      if (!skeleton) return;
+      while (!skeleton.className ||
+             !skeleton.className.match(/card_skeleton/)) {
+        if(!skeleton) return;
+        skeleton = skeleton.parentNode
+      }
+      if (skeleton.hasAttribute("filled")) {
+        $(skeleton).children("img").css("z-index", "1000");
+        $(skeleton).children("img").animate({
+          width: 280,
+          top: -50,
+          left: -50
+        }, 100);
+      }
+    },
+
+    onHoverOutCard: function(event) {
+      var img = event.target;
+      if (img.tagName.toLowerCase() != "img") return;
+      $(img).animate({
+        width: 155,
+        top: 0,
+        left: 0
+      }, 100, function() { $(img).css("z-index", "0"); });
     }
-    if (skeleton.hasAttribute("filled")) {
-      $(skeleton).children("img").css("z-index", "1000");
-      $(skeleton).children("img").animate({
-        width: 280,
-        top: -50,
-        left: -50
-      }, 100);
-    }
-  },
 
-  onHoverOutCard: function(event) {
-    var img = event.target;
-    if (img.tagName.toLowerCase() != "img") return;
-    $(img).animate({
-      width: 155,
-      top: 0,
-      left: 0
-    }, 100, function() { $(img).css("z-index", "0"); });
   }
 
-}
+  $(document).ready(CardGrid.init);
 
-$(document).ready(CardGrid.init);
-
-</script>
-<div id="resultCards" isCardMode="false">
+  </script>
   <% cards.each do |card| %>
     <div class="card" cardid="<%= card.id %>">
       <%= render :partial => "/search/card_skeleton", :locals => {
