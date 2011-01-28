@@ -121,6 +121,96 @@
       Searcher.search(0, true);
     },
 
+    isCardMode: false,
+    toggleCardMode: function() {
+      $.ajax({
+        type: "POST",
+        url: "/search/toggle_card_mode",
+        data: {},
+        success: function(cardMode) {
+          if (cardMode.match(/true/)) {
+            Searcher.activateCardMode();
+          } else {
+            Searcher.deactivateCardMode();
+          }
+        }
+      });
+    },
+
+    activateCardMode: function() {
+      Searcher.isCardMode = true;
+      var cards = $("#searchResults .card_skeleton");
+      $.each(cards, function(index, element) {
+        if (index <= 9) {
+          var child = element.firstChild;
+          while (child.id != "card_selector") {
+            child = child.nextSibling;
+            if (!child) return;
+          }
+          var selectorLabel = child;
+          selectorLabel.innerHTML = ((index + 1) % 10);
+        } else {
+          return;
+        }
+      });
+    },
+
+    deactivateCardMode: function() {
+      Searcher.isCardMode = false;
+      var cards = $("#searchResults .card_skeleton");
+      $.each(cards, function(index, element) {
+        if (index <= 9) {
+          var child = element.firstChild;
+          while (child.id != "card_selector") {
+            child = child.nextSibling;
+            if (!child) return;
+          }
+          var selectorLabel = child;
+          selectorLabel.innerHTML = "";
+        } else {
+          return;
+        }
+      });
+    },
+
+    handleCardMode: function() {
+      $.ajax({
+        type: "POST",
+        url: "/search/check_card_mode",
+        data: {},
+        success: function(cardMode) {
+          if (cardMode.match(/true/)) {
+            Searcher.activateCardMode();
+          } else {
+            Searcher.deactivateCardMode();
+          }
+        }
+      });
+    },
+
+    selectCard: function(selectNum) {
+      if (!this.isCardMode) return;
+
+      var cards = $("#searchResults .card_skeleton");
+      var cardId = $(cards[selectNum -1]).attr("cardid");
+      var deckId = $("#deckmetadata").attr("deckid");
+      var deckName = $("#deckmetadata").attr("deckname");
+
+      $.ajax({
+          type: "POST",
+          url: "/search/add_card_to_deck",
+          data: {
+            card_id: cardId,
+            deck_id: deckId,
+            deck_name: deckName
+          },
+          success: function(html) {
+            if (html != "")
+              $("#deckmetadata").replaceWith(html);
+          }
+      });
+    },
+
     onKeyDown: function(event) {
       if ($("*:focus").size() > 0 && event.which != 13)
         return;
@@ -140,6 +230,17 @@
         //case 83: Searcher.focusSearchbox("set", event); break; // s
         case 188: Searcher.focusSearchbox("power", event); break; // ,
         case 190: Searcher.focusSearchbox("toughness", event); break; // .
+        case 88: Searcher.toggleCardMode(event); break; // x
+        case 49: Searcher.selectCard(1); break; // 1
+        case 50: Searcher.selectCard(2); break; // 2
+        case 51: Searcher.selectCard(3); break; // 3
+        case 52: Searcher.selectCard(4); break; // 4
+        case 53: Searcher.selectCard(5); break; // 5
+        case 54: Searcher.selectCard(6); break; // 6
+        case 55: Searcher.selectCard(7); break; // 7
+        case 56: Searcher.selectCard(8); break; // 8
+        case 57: Searcher.selectCard(9); break; // 9
+        case 48: Searcher.selectCard(10); break; // 0
       }
     }
   }

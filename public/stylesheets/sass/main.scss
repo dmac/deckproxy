@@ -22,6 +22,7 @@ a:link, a:visited {
 
 .card_skeleton {
   border: solid 1px black;
+  height: 100%;
 }
 
 .card_skeleton .title_bar > *,
@@ -59,6 +60,7 @@ a:link, a:visited {
   position: absolute;
   bottom: 0px;
   right: 0px;
+  padding-right: 2px;
 }
 
 .grayText { color: #AAAAAA; }
@@ -178,6 +180,18 @@ a:link, a:visited {
         width: 155px;
         top: 0px;
         left: 0px;
+      }
+      #card_selector {
+        color: red;
+        font-size: 24px;
+        font-weight: bolder;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 10px;
+        z-index: 500;
+        height: 30px;
+        width: 30px;
       }
 
     }

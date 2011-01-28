@@ -72,6 +72,15 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
+  def toggle_card_mode
+    session[:card_mode] = !session[:card_mode]
+    render :text => ((session[:card_mode]) ? "true" : "false")
+  end
+
+  def check_card_mode
+    render :text => ((session[:card_mode]) ? "true" : "false")
+  end
+
   private
 
   def parse_query(raw_query)

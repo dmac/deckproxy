@@ -11,7 +11,8 @@ Card_Skeleton = {
 }
 </script>
 
-<div id="<%= "card" + card.id.to_s %>" class="card_skeleton card" cardid="<%= card.id %>">
+<div id="<%= "card" + card.id.to_s %>" class="card_skeleton" cardid="<%= card.id %>">
+  <label id="card_selector"></label>
   <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase %>/<%= card.number.to_s %>.jpg"
      onLoad="Card_Skeleton.fillCard(this);" hidden="true"/>
   <div class="container">
