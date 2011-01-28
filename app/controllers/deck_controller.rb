@@ -27,4 +27,12 @@ class DeckController < ApplicationController
     end
   end
 
+  def delete_deck
+    if (params[:deck_id])
+      deck = Deck.find(params[:deck_id])
+      deck.destroy
+    end
+    redirect_to :action => "index"
+  end
+
 end
