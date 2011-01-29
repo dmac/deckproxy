@@ -71,14 +71,28 @@
   <form>
   <% if !deck.nil? %>
     <input type="text" value="<%= deck.name %>" id="deckname" />
-    <ul id="decklist">
-    <% deck.packs.each do | pack | %>
-      <li>
-        <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
-        <%= pack.card.name %> (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
-      </li>
-    <% end %>
-    </ul>
+    <div id="decklist">
+      <h4>Cards: <%= deck.packs.map { |pack| pack.number }.sum %></h4>
+      <% [:creatures, :planeswalkers, :enchantments, :sorceries,
+          :instants, :artifacts, :lands].each do |card_type| %>
+        <h4><%= card_type.to_s.capitalize.to_sym %>: <%= deck.send(card_type).map { |pack| pack.number }.sum %></h4>
+        <% deck.send(card_type).each do |pack| %>
+          <li>
+            <input type='text' value="<%= pack.number %>" cardid="<%= pack.card.id %>" class="cardcount" />
+            <%= pack.card.name %> (<%= pack.card.mana %>) (<a href="#" class="delete" cardid="<%= pack.card.id %>">x</a>)
+          </li>
+        <% end %>
+      <% end %>
+      <h4>Mana Curve</h4>
+      <div id="manaCurve">
+        <% deck.mana_curve.each_with_index do |num_cards, cost| %>
+          <div class="curveCost">
+            <p><%= cost %></p>
+            <p><%= num_cards %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <% if viewing_deck %>
       <a href="/deck/edit/<%= deck.deck_hash %>">Add more cards to deck</a> |
     <% else %>

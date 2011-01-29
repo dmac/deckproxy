@@ -206,6 +206,7 @@ a:link, a:visited {
   height: 100%;
   padding: 5px;
   background-color: #ddd;
+  overflow-y: auto;
 
   #deckname {
     width: 100%;
@@ -219,12 +220,26 @@ a:link, a:visited {
     list-style-type: none;
     margin: 10px 0px;
 
+    h4 { padding-top: 10px; }
+
     li {
       padding: 2px 2px;
 
       input {
         width: 20px;
         margin-right: 3px;
+      }
+    }
+
+    #manaCurve {
+      display: -moz-box;
+      display: -webkit-box;
+      margin-top: 3px;
+      margin-bottom: 20px;
+
+      .curveCost {
+        text-align: center;
+        padding: 0px 5px;
       }
     }
   }
