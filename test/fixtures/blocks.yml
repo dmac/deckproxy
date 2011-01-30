@@ -8,11 +8,15 @@
 
 Blockless:
   name: Blockless
-  number: 0
-
-Starters:
-  name: Starters
   number: -1
+
+Starter:
+  name: Starter
+  number: -2
+
+Core:
+  name: Core
+  number: 0
 
 Artifacts/Urza:
   name: Artifacts/Urza

@@ -8,6 +8,7 @@ class CreateCardSets < ActiveRecord::Migration
       t.string :lackey_id, :limit => 1024
       t.string :supported_codes, :limit => 1024
       t.string :block, :limit => 1024
+      t.integer :core_num
       t.integer :block_id
     end
     Fixtures.create_fixtures('test/fixtures', File.basename("card_sets.yml", '.*'))

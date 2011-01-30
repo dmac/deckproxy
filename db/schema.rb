@@ -21,11 +21,10 @@ ActiveRecord::Schema.define(:version => 20110129015132) do
     t.string  "myr_id",          :limit => 1024
     t.string  "lackey_id",       :limit => 1024
     t.string  "supported_codes", :limit => 1024
-    t.string  "block",           :limit => 1024
+    t.integer "core_num"
     t.integer "block_id"
   end
 
-  add_index "card_sets", ["block"], :name => "index_card_sets_on_block"
   add_index "card_sets", ["myr_id"], :name => "index_card_sets_on_myr_id", :unique => true
   add_index "card_sets", ["name"], :name => "index_card_sets_on_name", :unique => true
 

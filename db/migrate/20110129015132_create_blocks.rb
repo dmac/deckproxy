@@ -9,6 +9,7 @@ class CreateBlocks < ActiveRecord::Migration
 
     Fixtures.create_fixtures('test/fixtures', File.basename("blocks.yml", '.*'))
 
+    remove_column(:card_sets, :block);
   end
 
   def self.down

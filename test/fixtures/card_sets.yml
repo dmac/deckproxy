@@ -11,83 +11,109 @@ Alpha:
   myr_id: A
   lackey_id: alpha
   supported_codes: LEA
+  block: Core
+  core_num: 1
 
 Beta:
   name: Beta
   myr_id: B
   lackey_id: beta
   supported_codes: LEB
-
-Revised:
-  name: Revised
-  myr_id: R
-  lackey_id: revised
-  supported_codes: 3ED
+  block: Core
+  core_num: 2
 
 Unlimited:
   name: Unlimited
   myr_id: U
   lackey_id: unlimited
   supported_codes: 2ED
+  block: Core
+  core_num: 3
+
+Revised:
+  name: Revised
+  myr_id: R
+  lackey_id: revised
+  supported_codes: 3ED
+  block: Core
+  core_num: 4
 
 4th:
   name: Fourth Edition
-  myr_id: 4E #?
-  lackey_id: #?
+  myr_id: 4E
+  lackey_id: 4e
   supported_codes: 4ED
+  block: Core
+  core_num: 5
 
 5th:
   name: Fifth Edition
   myr_id: 5E
-  lackey_id: #?
+  lackey_id: 5e
   supported_codes: 5ED
+  block: Core
+  core_num: 6
 
 6th:
   name: Sixth Edition
   myr_id: 6E
-  lackey_id: #?
+  lackey_id: 6e
   supported_codes: 6ED-Classic
+  block: Core
+  core_num: 7
 
 7th:
   name: Seventh Edition
   myr_id: 7E
-  lackey_id: #?
+  lackey_id: 7e
   supported_codes: 7ED
+  block: Core
+  core_num: 8
 
 8th:
   name: Eighth Edition
   myr_id: 8E
-  lackey_id: #?
+  lackey_id: 8e
   supported_codes: 8ED
+  block: Core
+  core_num: 9
 
 9th:
   name: Ninth Edition
   myr_id: 9E
-  lackey_id: #?
+  lackey_id: 9e
   supported_codes: 9ED
+  block: Core
+  core_num: 10
 
 10th:
   name: Tenth Edition
   myr_id: 10E
-  lackey_id: #?
-  supported_codes: 10ED-M10
+  lackey_id: 10e
+  supported_codes: 10ED
+  block: Core
+  core_num: 11
 
 Magic 2010:
   name: Magic 2010
   myr_id: M10
-  lackey_id: #?
-  supported_codes: M10
+  lackey_id: 2010
+  supported_codes:
+  block: Core
+  core_num: 12
 
 Magic 2011:
   name: Magic 2011
   myr_id: M11
-  lackey_id: #?
-  supported_codes: M11
+  lackey_id: 2011
+  supported_codes:
+  block: Core
+  core_num: 13
 
 Arabian Nights:
   name: Arabian Nights
   myr_id: AN
-  lackey_id: #?
+  lackey_id: an
   supported_codes: ARN
   block: Blockless
 
@@ -458,7 +484,7 @@ Rise of the Eldrazi:
 Scars of Mirrodin:
   name: Scars of Mirrodin
   myr_id: SOM
-  lackey_id: #?
+  lackey_id: som
   supported_codes:
   block: Scars of Mirrodin
 
