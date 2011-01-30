@@ -1,0 +1,506 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+
+Alpha:
+  name: Alpha
+  myr_id: A
+  lackey_id: alpha
+  supported_codes: LEA
+
+Beta:
+  name: Beta
+  myr_id: B
+  lackey_id: beta
+  supported_codes: LEB
+
+Revised:
+  name: Revised
+  myr_id: R
+  lackey_id: revised
+  supported_codes: 3ED
+
+Unlimited:
+  name: Unlimited
+  myr_id: U
+  lackey_id: unlimited
+  supported_codes: 2ED
+
+4th:
+  name: Fourth Edition
+  myr_id: 4E #?
+  lackey_id: #?
+  supported_codes: 4ED
+
+5th:
+  name: Fifth Edition
+  myr_id: 5E
+  lackey_id: #?
+  supported_codes: 5ED
+
+6th:
+  name: Sixth Edition
+  myr_id: 6E
+  lackey_id: #?
+  supported_codes: 6ED-Classic
+
+7th:
+  name: Seventh Edition
+  myr_id: 7E
+  lackey_id: #?
+  supported_codes: 7ED
+
+8th:
+  name: Eighth Edition
+  myr_id: 8E
+  lackey_id: #?
+  supported_codes: 8ED
+
+9th:
+  name: Ninth Edition
+  myr_id: 9E
+  lackey_id: #?
+  supported_codes: 9ED
+
+10th:
+  name: Tenth Edition
+  myr_id: 10E
+  lackey_id: #?
+  supported_codes: 10ED-M10
+
+Magic 2010:
+  name: Magic 2010
+  myr_id: M10
+  lackey_id: #?
+  supported_codes: M10
+
+Magic 2011:
+  name: Magic 2011
+  myr_id: M11
+  lackey_id: #?
+  supported_codes: M11
+
+Arabian Nights:
+  name: Arabian Nights
+  myr_id: AN
+  lackey_id: #?
+  supported_codes: ARN
+  block: Blockless
+
+Antiquities:
+  name: Antiquities
+  myr_id: AQ
+  lackey_id: antiquities
+  supported_codes: ATQ
+  block: Blockless
+
+Legends:
+  name: Legends
+  myr_id: LG
+  lackey_id: legends
+  supported_codes: LEG
+  block: Blockless
+
+The Dark:
+  name: The Dark
+  myr_id: DK
+  lackey_id: dark
+  supported_codes: DRK
+  block: Blockless
+
+Fallen Empires:
+  name: Fallen Empires
+  myr_id: FE
+  lackey_id: fe
+  supported_codes: FEM
+  block: Blockless
+
+Homelands:
+  name: Homelands
+  myr_id: HL
+  lackey_id: homelands
+  supported_codes: HML
+  block: Blockless
+
+Ice Age:
+  name: Ice Age
+  myr_id: IA
+  lackey_id: ia
+  supported_codes: ICE
+  block: Ice Age
+
+Alliances:
+  name: Alliances
+  myr_id: AL
+  lackey_id: alliances
+  supported_codes: ALL
+  block: Ice Age
+
+Coldsnap:
+  name: Coldsnap
+  myr_id: CS
+  lackey_id: coldsnap
+  supported_codes: CSP
+  block: Ice Age
+
+Mirage:
+  name: Mirage
+  myr_id: MI
+  lackey_id: mirage
+  supported_codes: MIR
+  block: Mirage
+
+Visions:
+  name: Visions
+  myr_id: VI
+  lackey_id: visions
+  supported_codes: VIS
+  block: Mirage
+
+Weatherlight:
+  name: Weatherlight
+  myr_id: WL
+  lackey_id: weatherlight
+  supported_codes: WTH
+  block: Mirage
+
+Tempest:
+  name: Tempest
+  myr_id: TE
+  lackey_id: tempest
+  supported_codes: TMP
+  block: Rath/Tempest
+
+Stronghold:
+  name: Stronghold
+  myr_id: SH
+  lackey_id: stronghold
+  supported_codes: STH
+  block: Rath/Tempest
+
+Exodus:
+  name: Exodus
+  myr_id: EX
+  lackey_id: exodus
+  supported_codes: EXO
+  block: Rath/Tempest
+
+Urza Saga:
+  name: Urza's Saga
+  myr_id: US
+  lackey_id: uz
+  supported_codes: USG
+  block: Artifacts/Urza
+
+Urza Legacy:
+  name: Urza's Legacy
+  myr_id: UL
+  lackey_id: ul
+  supported_codes: ULG
+  block: Artifacts/Urza
+
+Urza Destiny:
+  name: Urza's Destiny
+  myr_id: UD
+  lackey_id: ud
+  supported_codes: UDS
+  block: Artifacts/Urza
+
+Mercadian Masques:
+  name: Mercadian Masques
+  myr_id: MM
+  lackey_id: mm
+  supported_codes: MMQ
+  block: Masquerade/Masques
+
+Nemesis:
+  name: Nemesis
+  myr_id: NE
+  lackey_id: nemesis
+  supported_codes: NMS
+  block: Masquerade/Masques
+
+Prophecy:
+  name: Prophecy
+  myr_id: PY
+  lackey_id: prophecy
+  supported_codes: PCY
+  block: Masquerade/Masques
+
+Invasion:
+  name: Invasion
+  myr_id: IN
+  lackey_id: invasion
+  supported_codes: INV
+  block: Invasion
+
+Planeshift:
+  name: Planeshift
+  myr_id: PS
+  lackey_id: planeshift
+  supported_codes: PLS
+  block: Invasion
+
+Apocalypse:
+  name: Apocalypse
+  myr_id: AP
+  lackey_id: apocalypse
+  supported_codes: APC
+  block: Invasion
+
+Odyssey:
+  name: Odyssey
+  myr_id: OD
+  lackey_id: odyssey
+  supported_codes: ODY
+  block: Odyssey
+
+Torment:
+  name: Torment
+  myr_id: TO
+  lackey_id: torment
+  supported_codes: TOR
+  block: Odyssey
+
+Judgment:
+  name: Judgment
+  myr_id: JU
+  lackey_id: judgment
+  supported_codes: JUD-Judgement
+  block: Odyssey
+
+Onslaught:
+  name: Onslaught
+  myr_id: ON
+  lackey_id: onslaught
+  supported_codes: ONS
+  block: Onslaught
+
+Legions:
+  name: Legions
+  myr_id: LE
+  lackey_id: legions
+  supported_codes: LGN
+  block: Onslaught
+
+Scourge:
+  name: Scourge
+  myr_id: SC
+  lackey_id: scourge
+  supported_codes: SCG
+  block: Onslaught
+
+Mirrodin:
+  name: Mirrodin
+  myr_id: MR
+  lackey_id: mirrodin
+  supported_codes: MRD
+  block: Mirrodin
+
+Darksteel:
+  name: Darksteel
+  myr_id: DS
+  lackey_id: darksteel
+  supported_codes: DST
+  block: Mirrodin
+
+Fifth Dawn:
+  name: Fifth Dawn
+  myr_id: FD
+  lackey_id: fd
+  supported_codes: 5th Dawn-5DN
+  block: Mirrodin
+
+Champions of Kamigawa:
+  name: Champions of Kamigawa
+  myr_id: CHK
+  lackey_id: chk
+  supported_codes:
+  block: Kamigawa
+
+Betrayers of Kamigawa:
+  name: Betrayers of Kamigawa
+  myr_id: BOK
+  lackey_id: bok
+  supported_codes:
+  block: Kamigawa
+
+Saviors of Kamigawa:
+  name: Saviors of Kamigawa
+  myr_id: SOK
+  lackey_id: sok
+  supported_codes:
+  block: Kamigawa
+
+Ravnica:
+  name: Ravnica City of Guilds
+  myr_id: RAV
+  lackey_id: ravnica
+  supported_codes: RAV
+  block: Ravnica
+
+Guildpact:
+  name: Guildpact
+  myr_id: GP
+  lackey_id: guildpact
+  supported_codes: GPT
+  block: Ravnica
+
+Dissension:
+  name: Dissension
+  myr_id: DIS
+  lackey_id: dissension
+  supported_codes: DIS
+  block: Ravnica
+
+Time Spiral:
+  name: Time Spiral
+  myr_id: TSB
+  lackey_id: tsts-ts
+  supported_codes:
+  block: Time Spiral
+
+Planar Chaos:
+  name: Planar Chaos
+  myr_id: PLC
+  lackey_id: plc
+  supported_codes:
+  block: Time Spiral
+
+Future Sight:
+  name: Future Sight
+  myr_id: FUT
+  lackey_id: fs
+  supported_codes:
+  block: Time Spiral
+
+Time Shifted:
+  name: Time Shifted
+  myr_id: #no myr_id as these cards are in the other Time Spiral sets (only important to lackey)
+  lackey_id: tsts
+  supported_codes:
+  block: Time Spiral
+
+Lorwyn:
+  name: Lorwyn
+  myr_id: LRW
+  lackey_id: lorwyn
+  supported_codes:
+  block: Lorwyn
+
+Morningtide:
+  name: Morningtide
+  myr_id: MOR
+  lackey_id: morningtide
+  supported_codes:
+  block: Lorwyn
+
+Shadowmoor:
+  name: Shadowmoor
+  myr_id: SHM
+  lackey_id: shadowmoor
+  supported_codes:
+  block: Shadowmoor
+
+Eventide:
+  name: Eventide
+  myr_id: EVE
+  lackey_id: eventide
+  supported_codes:
+  block: Shadowmoor
+
+Shards of Alara:
+  name: Shards of Alara
+  myr_id: ALA
+  lackey_id: soa
+  supported_codes:
+  block: Shards of Alara
+
+Conflux:
+  name: Conflux
+  myr_id: CFX
+  lackey_id: cfx
+  supported_codes: CON
+  block: Shards of Alara
+
+Alara Reborn:
+  name: Alara Reborn
+  myr_id: ARB
+  lackey_id: arb
+  supported_codes:
+  block: Shards of Alara
+
+Zendikar:
+  name: Zendikar
+  myr_id: ZEN
+  lackey_id: zendikar
+  supported_codes:
+  block: Zendikar
+
+Worldwake:
+  name: Worldwake
+  myr_id: WWK
+  lackey_id: worldwake
+  supported_codes:
+  block: Zendikar
+
+Rise of the Eldrazi:
+  name: Rise of the Eldrazi
+  myr_id: ROE
+  lackey_id: roe
+  supported_codes:
+  block: Zendikar
+
+Scars of Mirrodin:
+  name: Scars of Mirrodin
+  myr_id: SOM
+  lackey_id: #?
+  supported_codes:
+  block: Scars of Mirrodin
+
+Mirrodin Besieged:
+  name: Mirrodin Besieged
+  myr_id: #?
+  lackey_id: #?
+  supported_codes: MBS
+  block: Scars of Mirrodin
+
+
+Portal:
+  name: Portal
+  myr_id: PT
+  lackey_id: portal
+  block: Starter
+
+Portal2:
+  name: Portal2
+  myr_id: P2
+  lackey_id: portal2
+  block: Starter
+
+Starter:
+  name: Starter Deck
+  myr_id: S00
+  lackey_id: starter
+  block: Starter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 class Card < ActiveRecord::Base
+  belongs_to :set
   has_many :packs
   has_many :decks, :through => :packs
 
@@ -9,61 +10,61 @@ class Card < ActiveRecord::Base
     { :conditions => ["0"]}
   }
   named_scope :with_number, lambda {
-    { :conditions => ["number IS NOT NULL"] }
+    { :conditions => ["cards.number IS NOT NULL"] }
   }
   named_scope :by_name, lambda { |query|
-    { :conditions => ["name LIKE ? OR name LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
+    { :conditions => ["cards.name LIKE ? OR cards.name LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
   named_scope :by_text, lambda { |query|
-    { :conditions => ["text LIKE ? OR text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
+    { :conditions => ["cards.text LIKE ? OR cards.text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
   named_scope :by_type, lambda { |query|
-    { :conditions => ["type LIKE ? OR type LIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
+    { :conditions => ["cards.type LIKE ? OR cards.type LIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
   }
   named_scope :equal_to_mana, lambda { |query|
-    { :conditions => ["mana = ?", "#{query}"] }
+    { :conditions => ["cards.mana = ?", "#{query}"] }
   }
   named_scope :less_than_mana, lambda { |query|
-    { :conditions => ["mana < ?", "#{query}"] }
+    { :conditions => ["cards.mana < ?", "#{query}"] }
   }
   named_scope :less_than_or_equal_mana, lambda { |query|
-    { :conditions => ["mana <= ?", "#{query}"] }
+    { :conditions => ["cards.mana <= ?", "#{query}"] }
   }
   named_scope :greater_than_mana, lambda { |query|
-    { :conditions => ["mana > ?", "#{query}"] }
+    { :conditions => ["cards.mana > ?", "#{query}"] }
   }
   named_scope :greater_than_or_equal_mana, lambda { |query|
-    { :conditions => ["mana >= ?", "#{query}"] }
+    { :conditions => ["cards.mana >= ?", "#{query}"] }
   }
   named_scope :equal_to_power, lambda { |query|
-    { :conditions => ["power = ?", "#{query}"] }
+    { :conditions => ["cards.power = ?", "#{query}"] }
   }
   named_scope :less_than_power, lambda { |query|
-    { :conditions => ["power < ?", "#{query}"] }
+    { :conditions => ["cards.power < ?", "#{query}"] }
   }
   named_scope :less_than_or_equal_power, lambda { |query|
-    { :conditions => ["power <= ?", "#{query}"] }
+    { :conditions => ["cards.power <= ?", "#{query}"] }
   }
   named_scope :greater_than_power, lambda { |query|
-    { :conditions => ["power > ?", "#{query}"] }
+    { :conditions => ["cards.power > ?", "#{query}"] }
   }
   named_scope :greater_than_or_equal_power, lambda { |query|
-    { :conditions => ["power >= ?", "#{query}"] }
+    { :conditions => ["cards.power >= ?", "#{query}"] }
   }
   named_scope :equal_to_toughness, lambda { |query|
-    { :conditions => ["toughness = ?", "#{query}"] }
+    { :conditions => ["cards.toughness = ?", "#{query}"] }
   }
   named_scope :less_than_toughness, lambda { |query|
-    { :conditions => ["toughness < ?", "#{query}"] }
+    { :conditions => ["cards.toughness < ?", "#{query}"] }
   }
   named_scope :less_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["toughness <= ?", "#{query}"] }
+    { :conditions => ["cards.toughness <= ?", "#{query}"] }
   }
   named_scope :greater_than_toughness, lambda { |query|
-    { :conditions => ["toughness > ?", "#{query}"] }
+    { :conditions => ["cards.toughness > ?", "#{query}"] }
   }
   named_scope :greater_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["toughness >= ?", "#{query}"] }
+    { :conditions => ["cards.toughness >= ?", "#{query}"] }
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase
@@ -120,14 +121,24 @@ class Card < ActiveRecord::Base
 
     { :conditions => [str] }
   }
+  named_scope :by_set,
+    lambda { |query|
+      {
+        :select => "cards.*",
+        :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
+        :conditions=>["card_sets.name like ?
+                       or card_sets.supported_codes like ?
+                       or card_sets.myr_id like ?", "#{query}", "#{query}", "#{query}"] }
+      }
+
 
   def self.add_colors_to_conditions(str, colorChars)
     colorChars.each do |c|
       str += " or " if (str.size > 0)
       if (c.include?('%'))
-        str += " cost like '%%!" + c + "%%' escape '!' ";
+        str += " cards.cost like '%%!" + c + "%%' escape '!' ";
       else
-        str += " cost like '%%" + c + "%%' ";
+        str += " cards.cost like '%%" + c + "%%' ";
       end
     end
     return str

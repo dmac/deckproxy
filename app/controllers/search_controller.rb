@@ -134,6 +134,8 @@ class SearchController < ApplicationController
         results = results.by_color(query)
       when "type"
         results = results.by_type(query)
+      when "set"
+        results = results.by_set(query)
       when "power"
         number_match = query.match(/\d+/)
         number = number_match ? number_match[0].to_i : nil

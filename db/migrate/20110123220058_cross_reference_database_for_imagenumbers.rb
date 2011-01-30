@@ -39,6 +39,7 @@ class CrossReferenceDatabaseForImagenumbers < ActiveRecord::Migration
   end
 
   def self.translate_set(lackeySet)
+    # jhawk this could be modified to use the Block model
     lackey_to_myr_map = {
       "alpha" => "A",
       "beta" => "B",

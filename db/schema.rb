@@ -9,7 +9,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110126102719) do
+ActiveRecord::Schema.define(:version => 20110129015132) do
+
+  create_table "blocks", :force => true do |t|
+    t.string  "name",   :limit => 1024
+    t.integer "number"
+  end
+
+  create_table "card_sets", :force => true do |t|
+    t.string  "name",            :limit => 1024
+    t.string  "myr_id",          :limit => 1024
+    t.string  "lackey_id",       :limit => 1024
+    t.string  "supported_codes", :limit => 1024
+    t.string  "block",           :limit => 1024
+    t.integer "block_id"
+  end
+
+  add_index "card_sets", ["block"], :name => "index_card_sets_on_block"
+  add_index "card_sets", ["myr_id"], :name => "index_card_sets_on_myr_id", :unique => true
+  add_index "card_sets", ["name"], :name => "index_card_sets_on_name", :unique => true
 
   create_table "cards", :force => true do |t|
     t.string  "name",       :limit => 1024

@@ -1,0 +1,84 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+
+Blockless:
+  name: Blockless
+  number: 0
+
+Starters:
+  name: Starters
+  number: -1
+
+Artifacts/Urza:
+  name: Artifacts/Urza
+  number: 4
+
+Ice Age:
+  name: Ice Age
+  number: 1
+
+Invasion:
+  name: Invasion
+  number: 6
+
+Kamigawa:
+  name: Kamigawa
+  number: 10
+
+Lorwyn:
+  name: Lorwyn
+  number: 13
+
+Masquerade/Masques:
+  name: Masquerade/Masques
+  number: 5
+
+Mirage:
+  name: Mirage
+  number: 2
+
+Mirrodin:
+  name: Mirrodin
+  number: 9
+
+Odyssey:
+  name: Odyssey
+  number: 7
+
+Onslaught:
+  name: Onslaught
+  number: 8
+
+Rath/Tempest:
+  name: Rath/Tempest
+  number: 3
+
+Ravnica:
+  name: Ravnica
+  number: 11
+
+Scars of Mirrodin:
+  name: Scars of Mirrodin
+  number: 17
+
+Shadowmoor:
+  name: Shadowmoor
+  number: 14
+
+Shards of Alara:
+  name: Shards of Alara
+  number: 15
+
+Time Spiral:
+  name: Time Spiral
+  number: 12
+
+Zendikar:
+  name: Zendikar
+  number: 16
+
