@@ -73,6 +73,17 @@ class SearchController < ApplicationController
     render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
   end
 
+  def card_grid
+    if (params[:deck_id] != "")
+      deck = Deck.find(params[:deck_id])
+      cards = deck.cards
+    else
+      cards = []
+    end
+    render :partial => "card_grid",
+           :locals => { :cards => cards, :load_more => 100, :offset => 0 }
+  end
+
   def toggle_card_mode
     session[:card_mode] = !session[:card_mode]
     render :text => ((session[:card_mode]) ? "true" : "false")

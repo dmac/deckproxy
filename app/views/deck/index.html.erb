@@ -1,17 +1,44 @@
 <section id="allDecksList">
+  <script type="text/javascript">
+    DeckList = {
+      init: function() {
+        $(".deleteDeck").click(DeckList.deleteDeck);
+      },
+
+      deleteDeck: function(event) {
+        event.preventDefault();
+        var deckId = $(event.target).attr("deckid");
+        $.ajax({
+          url: "/deck/delete_deck",
+          data: { deck_id: deckId },
+          success: function(html) {
+            $("#allDecksList").replaceWith(html);
+          }
+        });
+      }
+    }
+    $(document).ready(DeckList.init);
+  </script>
+
   <a href="/">Build a Deck</a>
   <% if @user %>
     <h1>My Decks</h1>
     <ul>
       <% @decks.each do |deck| %>
-        <li><a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a></li>
+        <li>
+          <a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a>
+          (<a href="#" class="deleteDeck" deckId=<%= deck.id %>>x</a>)
+        </li>
       <% end %>
     </ul>
   <% end %>
   <h1>Public Decks</h1>
   <ul>
     <% @public_decks.each do |deck| %>
-      <li><a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a></li>
+      <li>
+        <a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a>
+        (<a href="#" class="deleteDeck" deckId=<%= deck.id %>>x</a>)
+      </li>
     <% end %>
   </ul>
 </section>

@@ -15,6 +15,52 @@ class Deck < ActiveRecord::Base
     self.save
   end
 
+  # Returns an array of integers, where index is the converted mana cost
+  # and value is the number of cards in the deck with that CMC.
+  def mana_curve
+    curve = []
+    num_cards = packs.map { |pack| pack.number }.sum
+    cost = 0
+    while curve.sum != num_cards
+      packs = packs_with_cmc(cost)
+      curve[cost] = packs.map { |pack| pack.number }.sum
+      cost += 1
+    end
+    curve
+  end
+
+  def packs_with_cmc(cost)
+    packs.select { |pack| pack.card.mana == cost }
+  end
+
+  def creatures
+    packs.select { |pack| pack.card["type"].match(/creature/i) }
+  end
+
+  def planeswalkers
+    packs.select { |pack| pack.card["type"].match(/planeswalker/i) }
+  end
+
+  def enchantments
+    packs.select { |pack| pack.card["type"].match(/enchantment/i) }
+  end
+
+  def sorceries
+    packs.select { |pack| pack.card["type"].match(/sorcery/i) }
+  end
+
+  def artifacts
+    packs.select { |pack| pack.card["type"].match(/artifact/i) }
+  end
+
+  def instants
+    packs.select { |pack| pack.card["type"].match(/instant/i) }
+  end
+
+  def lands
+    packs.select { |pack| pack.card["type"].match(/land/i) }
+  end
+
   def add_card(card)
     pack = Pack.find(:first,
                      :conditions => ["deck_id = ? and card_id = ?",
