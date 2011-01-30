@@ -8,6 +8,7 @@ class SearchController < ApplicationController
   end
 
   def search
+    puts 'searching'
     query_field, query_text = parse_query(params[:query])
     queries = params[:queries].blank? ? [] : params[:queries].values # array of [[db column, query text], ... ]
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
@@ -77,8 +78,29 @@ class SearchController < ApplicationController
     render :text => ((session[:card_mode]) ? "true" : "false")
   end
 
-  def check_card_mode
+  def set_format
+    session[:format] = params[:format]
+    render :text => ""
+  end
+
+  def get_card_mode
     render :text => ((session[:card_mode]) ? "true" : "false")
+  end
+
+  def radio_click_all
+    puts 'got radio click all'
+  end
+
+  def radio_click_extended
+    puts 'got radio click extended'
+  end
+
+  def radio_click_standard
+    puts 'got radio click standard'
+  end
+
+  def radio_click_block
+    puts 'got radio click block'
   end
 
   private
@@ -93,7 +115,16 @@ class SearchController < ApplicationController
   def combine_queries(queries, query_field, query_text)
     return queries if query_text == ""
     new_field = true
-    new_queries = []
+
+    if queries.size == 0
+      new_queries = [['format', (session[:format] ? session[:format] : 'all')]]
+    elsif queries[0][1] != session[:format]
+      puts '0:' + queries[0][0] + " 1:"+ queries[0][1]
+      queries[0] = ['format', (session[:format] ? session[:format] : 'all')]
+      new_queries = []
+    else
+      new_queries = []
+    end
     queries.each do |field, text|
       if query_field == field
         new_queries << [query_field, query_text]
@@ -110,6 +141,8 @@ class SearchController < ApplicationController
     results = Card.with_number
     queries.each do |field, query|
       case field
+      when "format"
+        results = results.by_format(query) unless query == 'all'
       when "name"
         results = results.by_name(query)
       when "text"

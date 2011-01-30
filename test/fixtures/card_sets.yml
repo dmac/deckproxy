@@ -514,6 +514,20 @@ Starter:
   lackey_id: starter
   block: Starter
 
+Unhinged:
+  name: Unhinged
+  myr_id: UNH
+  lackey_id: unhinged
+  supported_codes: UN
+  block: Unsets
+
+Unglued:
+  name: Unglued
+  myr_id: UG
+  lackey_id: unglued
+  supported_codes: UN
+  block: Unsets
+
 
 
 

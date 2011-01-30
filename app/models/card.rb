@@ -116,21 +116,35 @@ class Card < ActiveRecord::Base
       cond = ""
       cond = add_colors_to_conditions(cond, ALL);
       str += " or " if (str.size > 0)
-      str += " id not in (select id from cards where " + cond + " ) "
+      str += " cards.id not in (select id from cards where " + cond + " ) "
     end
 
     { :conditions => [str] }
   }
-  named_scope :by_set,
-    lambda { |query|
-      {
-        :select => "cards.*",
-        :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
-        :conditions=>["card_sets.name like ?
-                       or card_sets.supported_codes like ?
-                       or card_sets.myr_id like ?", "#{query}", "#{query}", "#{query}"] }
-      }
-
+  named_scope :by_set, lambda { |query|
+    {
+      :select => "cards.*",
+      :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
+      :conditions=>["card_sets.name like ?
+                     or card_sets.supported_codes like ?
+                     or card_sets.myr_id like ?", "#{query}", "#{query}", "#{query}"]
+    }
+  }
+  named_scope :by_format, lambda { |query|
+    condition_str = ""
+    ids = Block.send("get_" + query + "_format_card_set_ids")
+    puts "IDS:" + ids.to_s
+    #query is the format ['standard', 'extended' or 'block]
+    ids.each do |id|
+      condition_str += " OR " if condition_str.size > 0
+      condition_str += " card_sets.id = " + id + " "
+    end
+    {
+      :select => "cards.*",
+      :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
+      :conditions=>[condition_str]
+    }
+  }
 
   def self.add_colors_to_conditions(str, colorChars)
     colorChars.each do |c|

@@ -1,6 +1,7 @@
 <script type="text/javascript">
   Searcher = {
     maxScroll: 3000,
+    currFormat: null,
 
     init: function() {
       $(document).keydown(Searcher.onKeyDown);
@@ -51,8 +52,12 @@
       Searcher.search(0, true);
     },
 
-    search: function(offset, newSearch) {
-      var query = $("#searchbox").val();
+    search: function(offset, newSearch, queryString) {
+      query = $("#searchbox").val(); ;
+      if (queryString) {
+        query = queryString
+      }
+
       $("#searchbox").blur();
 
       var queries = [];
@@ -137,6 +142,20 @@
       });
     },
 
+    setFormat: function(format) {
+      $.ajax({
+        type: "POST",
+        url: "/search/set_format",
+        data: {
+          format: format
+        },
+        success: function() {
+          var offset = $("#loadMore").val();
+          Searcher.search(0, true, "");
+        }
+      });
+    },
+
     activateCardMode: function() {
       Searcher.isCardMode = true;
       var cards = $("#searchResults .card_skeleton");
@@ -176,7 +195,7 @@
     handleCardMode: function() {
       $.ajax({
         type: "POST",
-        url: "/search/check_card_mode",
+        url: "/search/get_card_mode",
         data: {},
         success: function(cardMode) {
           if (cardMode.match(/true/)) {
@@ -256,6 +275,18 @@
   </div>
   <div id="searchInstructions">
     <table>
+      <tr>
+        <div class="format_row">
+          <%
+          @format = ((session[:format]) ? session[:format] : 'all')
+          [ 'all', 'extended', 'standard', 'block'].each do |format| %>
+            <%= radio_button_tag 'format', format, @format == format, {
+              :onclick => "Searcher.setFormat('" + format + "');"
+              } %>
+            <%= label_tag "format_#{format}", format.humanize %>
+          <% end %>
+        </div>
+      </tr>
       <tr>
         <td><span class="hotkey">/</span>: restart search</td>
         <td><span class="hotkey">n</span>: search card name (name:)</td>

@@ -14,6 +14,10 @@ Starter:
   name: Starter
   number: -2
 
+Unsets:
+  name: Unsets
+  number: -3
+
 Core:
   name: Core
   number: 0
@@ -34,6 +38,8 @@ Kamigawa:
   name: Kamigawa
   number: 10
 
+# Lorwyn and Shadowmoor share a 'number' because they are
+# competitively treated as one block, there is no block.number = 14
 Lorwyn:
   name: Lorwyn
   number: 13
@@ -70,9 +76,11 @@ Scars of Mirrodin:
   name: Scars of Mirrodin
   number: 17
 
+# Lorwyn and Shadowmoor share a 'number' because they are
+# competitively treated as one block, there is no block.number = 14
 Shadowmoor:
   name: Shadowmoor
-  number: 14
+  number: 13
 
 Shards of Alara:
   name: Shards of Alara
