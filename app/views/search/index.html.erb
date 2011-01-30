@@ -276,7 +276,7 @@
   <div id="searchInstructions">
     <table>
       <tr>
-        <div class="format_row">
+        <div id="formatRow">
           <%
           @format = ((session[:format]) ? session[:format] : 'all')
           [ 'all', 'extended', 'standard', 'block'].each do |format| %>

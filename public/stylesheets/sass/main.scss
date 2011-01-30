@@ -126,6 +126,11 @@ a:link, a:visited {
     }
   }
 
+  #formatRow > *{
+    padding-right: 20px;
+    color: #666666;
+  }
+
   #searchInstructions {
     margin-top: 10px;
     .column {
