@@ -133,7 +133,7 @@ class Card < ActiveRecord::Base
   named_scope :by_format, lambda { |query|
     condition_str = ""
     ids = Block.send("get_" + query + "_format_card_set_ids")
-    puts "IDS:" + ids.to_s
+
     #query is the format ['standard', 'extended' or 'block]
     ids.each do |id|
       condition_str += " OR " if condition_str.size > 0
