@@ -22,49 +22,49 @@ class Card < ActiveRecord::Base
     { :conditions => ["cards.type LIKE ? OR cards.type LIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
   }
   named_scope :equal_to_mana, lambda { |query|
-    { :conditions => ["cards.mana = ?", "#{query}"] }
+    { :conditions => ["cards.mana = ?", query] }
   }
   named_scope :less_than_mana, lambda { |query|
-    { :conditions => ["cards.mana < ?", "#{query}"] }
+    { :conditions => ["cards.mana < ?", query] }
   }
   named_scope :less_than_or_equal_mana, lambda { |query|
-    { :conditions => ["cards.mana <= ?", "#{query}"] }
+    { :conditions => ["cards.mana <= ?", query] }
   }
   named_scope :greater_than_mana, lambda { |query|
-    { :conditions => ["cards.mana > ?", "#{query}"] }
+    { :conditions => ["cards.mana > ?", query] }
   }
   named_scope :greater_than_or_equal_mana, lambda { |query|
-    { :conditions => ["cards.mana >= ?", "#{query}"] }
+    { :conditions => ["cards.mana >= ?", query] }
   }
   named_scope :equal_to_power, lambda { |query|
-    { :conditions => ["cards.power = ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
   }
   named_scope :less_than_power, lambda { |query|
-    { :conditions => ["cards.power < ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
   }
   named_scope :less_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.power <= ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
   }
   named_scope :greater_than_power, lambda { |query|
-    { :conditions => ["cards.power > ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
   }
   named_scope :greater_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.power >= ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
   }
   named_scope :equal_to_toughness, lambda { |query|
-    { :conditions => ["cards.toughness = ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
   }
   named_scope :less_than_toughness, lambda { |query|
-    { :conditions => ["cards.toughness < ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
   }
   named_scope :less_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.toughness <= ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
   }
   named_scope :greater_than_toughness, lambda { |query|
-    { :conditions => ["cards.toughness > ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
   }
   named_scope :greater_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.toughness >= ?", "#{query}"] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase
@@ -164,5 +164,6 @@ class Card < ActiveRecord::Base
     pack.card = self
     pack.save
   end
+
 end
 
