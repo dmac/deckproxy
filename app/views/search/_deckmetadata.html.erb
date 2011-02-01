@@ -69,7 +69,6 @@
      deckname="<%= deck.nil? ? "" : deck.name %>"
      viewingdeck="<%= viewing_deck %>">
   <form>
-  <%= viewing_deck %>
   <% if !deck.nil? %>
     <input type="text" value="<%= deck.name %>" id="deckname" />
     <div id="decklist">
