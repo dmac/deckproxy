@@ -37,34 +37,54 @@ class Card < ActiveRecord::Base
     { :conditions => ["cards.mana >= ?", query] }
   }
   named_scope :equal_to_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.power, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.power as integer) = ?", query] }
   }
   named_scope :less_than_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.power, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.power as integer) < ?", query] }
   }
   named_scope :less_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.power, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.power as integer) <= ?", query] }
   }
   named_scope :greater_than_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.power, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.power as integer) > ?", query] }
   }
   named_scope :greater_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.power, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.power as integer) >= ?", query] }
   }
   named_scope :equal_to_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.toughness, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.toughness as integer) = ?", query] }
   }
   named_scope :less_than_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.toughness, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.toughness as integer) < ?", query] }
   }
   named_scope :less_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.toughness, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.toughness as integer) <= ?", query] }
   }
   named_scope :greater_than_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.toughness, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.toughness as integer) > ?", query] }
   }
   named_scope :greater_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%'" +
+      " AND SUBSTR(cards.toughness, 0, 2) in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')" +
+      " AND cast(cards.toughness as integer) >= ?", query] }
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase
