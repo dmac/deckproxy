@@ -86,26 +86,37 @@
       <h4>Mana Curve</h4>
       <div id="manaCurve">
         <% deck.mana_curve.each_with_index do |num_cards, cost| %>
-          <div class="curveCost">
+          <div class="curveCount">
             <p><%= cost %></p>
             <p><%= num_cards %></p>
           </div>
         <% end %>
       </div>
+      <h4>Color Spread</h4>
+      <div id="colorSpread">
+        <% deck.color_spread.each do |color, count| %>
+          <div class="curveCount">
+            <p><%= color %></p>
+            <p><%= count %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <% if viewing_deck %>
-      <a href="/deck/edit/<%= deck.deck_hash %>">Add more cards to deck</a> |
-    <% else %>
-      <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
-    <% end %>
-    <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
+    <div id="deckLinks">
+      <% if viewing_deck %>
+        <a href="/deck/edit/<%= deck.deck_hash %>">Add more cards to deck</a> |
+      <% else %>
+        <a href="/deck/view/<%= deck.deck_hash %>">View deck</a> |
+      <% end %>
+      <a href="/deck/proxy/<%= deck.deck_hash %>" target="_blank">Print a proxy</a>
+    </div>
   <% end %>
   </form>
-  <br /><br />
+  <br/>
   <a href="/">Build New Deck</a> |
   <a href="/deck/"> View All Decks</a>
   <% if viewing_deck %>
-    <br/><br/><br/>
+    <br/><br/>
     <a href="/deck/delete_deck?deck_id=<%= deck.id %>">Delete Deck</a>
   <% end %>
 </div>

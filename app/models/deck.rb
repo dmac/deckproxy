@@ -29,6 +29,20 @@ class Deck < ActiveRecord::Base
     curve
   end
 
+  # Returns an array of [ [color, count], ... }
+  def color_spread
+    spread = [["W", 0], ["U", 0], ["B", 0], ["R", 0], ["G", 0], ["A", 0]]
+    packs.each do |pack|
+      spread[0][1] += pack.number if pack.card.cost.match(/W/)
+      spread[1][1] += pack.number if pack.card.cost.match(/U/)
+      spread[2][1] += pack.number if pack.card.cost.match(/B/)
+      spread[3][1] += pack.number if pack.card.cost.match(/R/)
+      spread[4][1] += pack.number if pack.card.cost.match(/G/)
+      spread[5][1] += pack.number if pack.card.type.match(/artifact/i)
+    end
+    spread
+  end
+
   def packs_with_cmc(cost)
     packs.select { |pack| pack.card.mana == cost }
   end
