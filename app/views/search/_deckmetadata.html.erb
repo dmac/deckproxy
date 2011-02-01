@@ -41,7 +41,7 @@
 
     changeCardNumber: function(cardId, quantity) {
       var deckId = $("#deckmetadata").attr("deckid");
-      var viewingDeck = $("#deckmetadata").attr("viewingdeck");
+      var viewingDeck = ($("#deckmetadata").attr("viewingdeck") == "true");
 
 
       $.ajax({
@@ -56,7 +56,7 @@
         success: function(html) {
           if (html != "")
             $("#deckmetadata").replaceWith(html);
-          if (quantity == 0)
+          if (quantity == 0 && viewingDeck)
             CardGrid.refresh(deckId);
         }
       });
@@ -69,6 +69,7 @@
      deckname="<%= deck.nil? ? "" : deck.name %>"
      viewingdeck="<%= viewing_deck %>">
   <form>
+  <%= viewing_deck %>
   <% if !deck.nil? %>
     <input type="text" value="<%= deck.name %>" id="deckname" />
     <div id="decklist">

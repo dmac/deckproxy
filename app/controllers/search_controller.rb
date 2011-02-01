@@ -53,7 +53,8 @@ class SearchController < ApplicationController
     deck = Deck.find(params[:deck_id])
     deleted = deck.update_pack(Card.find(params[:card_id]), params[:quantity].to_i);
     if (deleted)
-      render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => params[:viewing_deck] }
+      viewing_deck = (params[:viewing_deck] == "true")
+      render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => viewing_deck }
     else
       render :text => "";
     end
