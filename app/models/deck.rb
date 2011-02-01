@@ -50,7 +50,8 @@ class Deck < ActiveRecord::Base
   end
 
   def artifacts
-    packs.select { |pack| pack.card["type"].match(/artifact/i) }
+    packs.select { |pack| pack.card["type"].match(/artifact/i) &&
+                          pack.card["type"].match(/creature/i) == nil }
   end
 
   def instants
