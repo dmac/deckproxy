@@ -68,7 +68,7 @@ set_url_name = set_name_map.include?(set_name_lower) ?
                set_name_map[set_name_lower] : set_name_lower
 URL_PREFIX = "http://magiccards.info/scans/en/#{set_url_name}"
 
-system("ln -s ../master.db master.db")
+system("ln -s ../db/development.sqlite3 master.db")
 DB = Sequel.connect("sqlite://master.db")
 num_cards_in_set = DB[:cards].filter(:edition => set_name_upper).count
 puts "#{num_cards_in_set} cards in #{set_name_upper}"

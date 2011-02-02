@@ -8,7 +8,6 @@ class SearchController < ApplicationController
   end
 
   def search
-    puts 'searching'
     query_field, query_text = parse_query(params[:query])
     queries = params[:queries].blank? ? [] : params[:queries].values # array of [[db column, query text], ... ]
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging

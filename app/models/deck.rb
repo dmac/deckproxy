@@ -44,7 +44,7 @@ class Deck < ActiveRecord::Base
   end
 
   def packs_with_cmc(cost)
-    packs.select { |pack| pack.card.mana == cost }
+    packs.select { |pack| pack.card.mana.to_i == cost }
   end
 
   def creatures
