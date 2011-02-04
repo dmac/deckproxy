@@ -32,7 +32,7 @@ Card_Skeleton = {
     <label class="power_toughness">
       <%=
       if (card.toughness.size > 0)
-        card.power.to_s + "/" + card.toughness.to_s
+        card.power_text.to_s + "/" + card.toughness_text.to_s
       else
         ""
       end

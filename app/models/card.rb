@@ -37,34 +37,34 @@ class Card < ActiveRecord::Base
     { :conditions => ["cards.mana >= ?", query] }
   }
   named_scope :equal_to_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.power_text = ?", query] }
   }
   named_scope :less_than_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.power_int < ?", query] }
   }
   named_scope :less_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.power_int <= ?", query] }
   }
   named_scope :greater_than_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.power_int > ?", query] }
   }
   named_scope :greater_than_or_equal_power, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.power_int >= ?", query] }
   }
   named_scope :equal_to_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) = ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.toughness_text = ?", query] }
   }
   named_scope :less_than_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) < ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.toughness_int < ?", query] }
   }
   named_scope :less_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) <= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.toughness_int <= ?", query] }
   }
   named_scope :greater_than_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) > ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.toughness_int > ?", query] }
   }
   named_scope :greater_than_or_equal_toughness, lambda { |query|
-    { :conditions => ["cards.type LIKE '%Creature%' and cast(cards.power as integer) >= ?", query] }
+    { :conditions => ["cards.type LIKE '%Creature%' and cards.toughness_int >= ?", query] }
   }
   named_scope :by_color, lambda { |query|
     query = query.upcase
@@ -127,7 +127,7 @@ class Card < ActiveRecord::Base
       :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
       :conditions=>["card_sets.name like ?
                      or card_sets.supported_codes like ?
-                     or card_sets.myr_id like ?", "#{query}", "#{query}", "#{query}"]
+                     or card_sets.myr_id like ?", "%#{query}%", "%#{query}%", "#{query}"]
     }
   }
   named_scope :by_format, lambda { |query|
