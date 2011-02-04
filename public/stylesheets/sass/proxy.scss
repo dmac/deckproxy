@@ -1,6 +1,9 @@
 .proxy {
+  display: block;
+  float: left;
   width: 210px;
-  margin: 10px 0px 0px 10px;
+  margin: 0px;
+  padding: 0px;
 }
 
 #proxydeck {
@@ -9,4 +12,8 @@
 
 #main {
   margin: auto;
+}
+
+#login {
+  visibility: hidden;
 }

@@ -8,7 +8,6 @@ class SearchController < ApplicationController
   end
 
   def search
-    puts 'searching'
     query_field, query_text = parse_query(params[:query])
     queries = params[:queries].blank? ? [] : params[:queries].values # array of [[db column, query text], ... ]
     offset = params[:offset] ? params[:offset] : 0 # offset used for paging
@@ -52,11 +51,8 @@ class SearchController < ApplicationController
   def update_card_quantity
     deck = Deck.find(params[:deck_id])
     deleted = deck.update_pack(Card.find(params[:card_id]), params[:quantity].to_i);
-    if (deleted)
-      render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => params[:viewing_deck] }
-    else
-      render :text => "";
-    end
+    viewing_deck = (params[:viewing_deck] == "true")
+    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => viewing_deck }
   end
 
   def update_deck_name
@@ -181,37 +177,9 @@ class SearchController < ApplicationController
       when "set"
         results = results.by_set(query)
       when "power"
-        number_match = query.match(/\d+/)
-        number = number_match ? number_match[0].to_i : nil
-        if number.nil?
-          results = results.no_match
-        elsif query.include?("<=")
-          results = results.less_than_or_equal_power(number)
-        elsif query.include?(">=")
-          results = results.greater_than_or_equal_power(number)
-        elsif query.include?("<")
-          results = results.less_than_power(number)
-        elsif query.include?(">")
-          results = results.greater_than_power(number)
-        else
-          results = results.equal_to_power(number)
-        end
+        results = results.equal_to_power(query)
       when "toughness"
-        number_match = query.match(/\d+/)
-        number = number_match ? number_match[0].to_i : nil
-        if number.nil?
-          results = results.no_match
-        elsif query.include?("<=")
-          results = results.less_than_or_equal_toughness(number)
-        elsif query.include?(">=")
-          results = results.greater_than_or_equal_toughness(number)
-        elsif query.include?("<")
-          results = results.less_than_toughness(number)
-        elsif query.include?(">")
-          results = results.greater_than_toughness(number)
-        else
-          results = results.equal_to_toughness(number)
-        end
+        results = results.equal_to_toughness(query)
       end
     end
     results

@@ -236,17 +236,20 @@ a:link, a:visited {
       }
     }
 
-    #manaCurve {
+    #manaCurve, #colorSpread {
       display: -moz-box;
       display: -webkit-box;
       margin-top: 3px;
-      margin-bottom: 20px;
 
-      .curveCost {
+      .curveCount {
         text-align: center;
         padding: 0px 5px;
       }
     }
+  }
+
+  #deckLinks {
+    margin-top: 30px;
   }
 }
 
