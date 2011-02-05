@@ -13,7 +13,8 @@ class Card < ActiveRecord::Base
     { :conditions => ["cards.number IS NOT NULL"] }
   }
   named_scope :by_name, lambda { |query|
-    { :conditions => ["cards.name LIKE ? OR cards.name LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
+    { :conditions => ["cards.name LIKE ? OR cards.name LIKE ?", "%#{query}%",
+        "%#{query.split(/\s+/).map { |word| word.capitalize }.join(" ")}%"] }
   }
   named_scope :by_text, lambda { |query|
     { :conditions => ["cards.text LIKE ? OR cards.text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
