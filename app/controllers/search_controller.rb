@@ -177,9 +177,37 @@ class SearchController < ApplicationController
       when "set"
         results = results.by_set(query)
       when "power"
-        results = results.equal_to_power(query)
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
+          results = results.less_than_or_equal_power(number)
+        elsif query.include?(">=")
+          results = results.greater_than_or_equal_power(number)
+        elsif query.include?("<")
+          results = results.less_than_power(number)
+        elsif query.include?(">")
+          results = results.greater_than_power(number)
+        else
+          results = results.equal_to_power(number)
+        end
       when "toughness"
-        results = results.equal_to_toughness(query)
+        number_match = query.match(/\d+/)
+        number = number_match ? number_match[0].to_i : nil
+        if number.nil?
+          results = results.no_match
+        elsif query.include?("<=")
+          results = results.less_than_or_equal_toughness(number)
+        elsif query.include?(">=")
+          results = results.greater_than_or_equal_toughness(number)
+        elsif query.include?("<")
+          results = results.less_than_toughness(number)
+        elsif query.include?(">")
+          results = results.greater_than_toughness(number)
+        else
+          results = results.equal_to_toughness(number)
+        end
       end
     end
     results
