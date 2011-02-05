@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202064207) do
+ActiveRecord::Schema.define(:version => 20110205072110) do
 
   create_table "blocks", :force => true do |t|
     t.string  "name",   :limit => 1024
@@ -29,21 +29,25 @@ ActiveRecord::Schema.define(:version => 20110202064207) do
   add_index "card_sets", ["name"], :name => "index_card_sets_on_name", :unique => true
 
   create_table "cards", :force => true do |t|
-    t.string  "name",       :limit => 1024
-    t.string  "edition",    :limit => 1024
-    t.string  "color",      :limit => 1024
-    t.string  "cost",       :limit => 1024
-    t.string  "type",       :limit => 1024
-    t.string  "text",       :limit => 1024
-    t.string  "power",      :limit => 1024
-    t.string  "toughness",  :limit => 1024
-    t.string  "flavor",     :limit => 1024
-    t.string  "rarity",     :limit => 1024
-    t.string  "artist",     :limit => 1024
+    t.string  "name",           :limit => 1024
+    t.string  "edition",        :limit => 1024
+    t.string  "color",          :limit => 1024
+    t.string  "cost",           :limit => 1024
+    t.string  "type",           :limit => 1024
+    t.string  "text",           :limit => 1024
+    t.string  "power",          :limit => 1024
+    t.string  "toughness",      :limit => 1024
+    t.string  "flavor",         :limit => 1024
+    t.string  "rarity",         :limit => 1024
+    t.string  "artist",         :limit => 1024
     t.integer "number"
     t.integer "mana"
-    t.string  "internal",   :limit => 1024
+    t.string  "internal",       :limit => 1024
     t.integer "type_index"
+    t.integer "power_int"
+    t.integer "toughness_int"
+    t.string  "power_text"
+    t.string  "toughness_text"
   end
 
   create_table "decks", :force => true do |t|
