@@ -3,8 +3,15 @@
     init: function() {
       $("#loginInputs input").focus(this.onLoginInputFocus);
       $("#loginInputs input").blur(this.onLoginInputBlur);
+      $("#loginInputs input").keypress(this.onLoginInputKeypress);
       $("#loginLinks a").click(this.onLoginLinkClicked);
       $("#loginButton").click(this.onLoginButtonClicked);
+    },
+
+    onLoginInputKeypress: function(event) {
+      if (event.which == 13) {
+        $("#loginButton").click();
+      }
     },
 
     onLoginButtonClicked: function(event) {
