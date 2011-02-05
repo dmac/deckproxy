@@ -1,17 +1,17 @@
 class FixMbsImages < ActiveRecord::Migration
   def self.up
-		id_to_correct_num = {
-	 		18741 => 72,
-			18780 => 114,
-			18781 => 113,
-			18794 => 128,
-			18739 => 73,
-			18795 => 127,
-			18740 => 74
+		name_to_correct_num = {
+	 		"Red Sun's Zenith" => 74,
+			'Magnetic Mine' => 114,
+			'Mirrorworks' => 113,
+			'Razorfield Rhino' => 128,
+			'Ogre Resister' => 72,
+			'Rusted Slasher' => 127,
+			'Rally the Forces' => 73
 		}
 
-		id_to_correct_num.each do |id, correct_num|
-			c = Card.find(id)
+		name_to_correct_num.each do |name, correct_num|
+			c = Card.find_by_name(name)
 			c.update_attribute("number", correct_num)
 		end
 
