@@ -1,5 +1,8 @@
 class AddMbsToScarsBlock < ActiveRecord::Migration
   def self.up
+    mbs = CardSet.find_by_name('Mirrodin Besieged')
+    mbs.destroy
+
     scars_block = Block.find_by_name("Scars of Mirrodin")
     mbs = CardSet.create(
       :name => "Mirrodin Besieged",

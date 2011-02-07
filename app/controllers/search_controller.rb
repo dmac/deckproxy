@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+
+  VALID_QUERIES = ["name", "text", "mana", "color", "type", "set", "power", "toughness", "format"]
+
   def index
     if params[:id]
       @deck = Deck.find_by_deck_hash(params[:id])
@@ -121,6 +124,7 @@ class SearchController < ApplicationController
 
   def combine_queries(queries, query_field, query_text)
     return queries if query_text == ""
+    return queries unless VALID_QUERIES.include? query_field
     new_field = true
 
     if queries.size == 0
