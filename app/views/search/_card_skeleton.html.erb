@@ -4,6 +4,7 @@ Card_Skeleton = {
   fillCard: function(img) {
     var cardDiv = img.parentNode;
     cardDiv.setAttribute("filled", "true");
+    $(cardDiv).css("border", "0");
     img.removeAttribute("hidden");
     $(img).next().hide();
   },
