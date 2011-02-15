@@ -28,6 +28,13 @@ class SearchController < ApplicationController
 
     load_more = (results.size == 100)
 
+    puts 'queries before: ' + queries.to_s
+    if queries[0][0] == "format"
+      puts 'format found'
+      queries.shift
+    end
+    puts 'queries after: ' + queries.to_s
+
     render :partial => "search", :locals => {
       :cards => results,
       :breadcrumbs => queries,
@@ -131,7 +138,7 @@ class SearchController < ApplicationController
       new_queries = [['format', (session[:format] ? session[:format] : 'all')]]
     elsif queries[0][1] != session[:format]
       puts '0:' + queries[0][0] + " 1:"+ queries[0][1]
-      queries[0] = ['format', (session[:format] ? session[:format] : 'all')]
+      queries.unshift(['format', (session[:format] ? session[:format] : 'all')])
       new_queries = []
     else
       new_queries = []
