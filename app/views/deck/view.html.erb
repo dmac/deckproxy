@@ -1,34 +1,10 @@
 <script>
   window.onresize = function(event) {
-    repositionDeckMetadata = function(minLeft, maxLeft) {
-      var width = parseInt($("#deckmetadata").css("width"));
-      if (window.innerWidth > maxLeft + width) {
-        $("#deckmetadata").css("left", maxLeft);
-      }
-      else if (window.innerWidth > (minLeft + width)) {
-        $("#deckmetadata").css("left", (window.innerWidth - width));
-      }
-      else {
-        $("#deckmetadata").css("left", (minLeft));
-      }
-    };
-    repositionDeckMetadata(680, 880);
+    Utils.repositionDeckMetadata(680, 880);
   }
 
   window.onload = function(event) {
-    repositionDeckMetadata = function(minLeft, maxLeft) {
-      var width = parseInt($("#deckmetadata").css("width"));
-      if (window.innerWidth > maxLeft + width) {
-        $("#deckmetadata").css("left", maxLeft);
-      }
-      else if (window.innerWidth > (minLeft + width)) {
-        $("#deckmetadata").css("left", (window.innerWidth - width));
-      }
-      else {
-        $("#deckmetadata").css("left", (minLeft));
-      }
-    };
-    repositionDeckMetadata(680, 880);
+    Utils.repositionDeckMetadata(680, 880);
   }
 
 </script>

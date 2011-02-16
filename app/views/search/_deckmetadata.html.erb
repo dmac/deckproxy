@@ -67,7 +67,9 @@
 
 <div id="deckmetadata" deckid="<%= deck.nil? ? "" : deck.id %>"
      deckname="<%= deck.nil? ? "" : deck.name %>"
-     viewingdeck="<%= viewing_deck %>">
+     viewingdeck="<%= viewing_deck %>"
+     setLeft="<%= ((defined? left_pos) ? left_pos : 680) %>"
+     style="left: <%= ((defined? left_pos) ? left_pos : 680) %>">
   <form>
   <% if !deck.nil? %>
     <input type="text" value="<%= deck.name %>" id="deckname" />
@@ -120,3 +122,8 @@
     <a href="/deck/delete_deck?deck_id=<%= deck.id %>">Delete Deck</a>
   <% end %>
 </div>
+
+<script>
+  Utils.repositionDeckMetadata(680,880);
+</script>
+

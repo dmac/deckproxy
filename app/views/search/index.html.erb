@@ -28,7 +28,6 @@
             if (html != "")
             {
               $("#deckmetadata").replaceWith(html);
-              Searcher.repositionDeckMetadata();
             }
           }
       });
@@ -232,7 +231,6 @@
             if (html != "")
             {
               $("#deckmetadata").replaceWith(html);
-              Searcher.repositionDeckMetadata();
             }
           }
       });
@@ -271,28 +269,17 @@
       }
     },
 
-    repositionDeckMetadata: function(minLeft, maxLeft) {
-      var width = parseInt($("#deckmetadata").css("width"));
-      if (window.innerWidth > maxLeft + width) {
-        $("#deckmetadata").css("left", maxLeft);
-      }
-      else if (window.innerWidth > (minLeft + width)) {
-        $("#deckmetadata").css("left", (window.innerWidth - width));
-      }
-      else {
-        $("#deckmetadata").css("left", (minLeft));
-      }
-    }
+
   }
 
   $(document).ready(Searcher.init);
 
   window.onresize = function(event) {
-    Searcher.repositionDeckMetadata(680, 880);
+    Utils.repositionDeckMetadata(680, 880);
   }
 
   window.onload = function(event) {
-    Searcher.repositionDeckMetadata(680, 880);
+    Utils.repositionDeckMetadata(680, 880);
   }
 
 </script>

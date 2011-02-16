@@ -28,19 +28,19 @@ class SearchController < ApplicationController
 
     load_more = (results.size == 100)
 
-    puts 'queries before: ' + queries.to_s
-    if queries[0][0] == "format"
-      puts 'format found'
-      queries.shift
-    end
-    puts 'queries after: ' + queries.to_s
 
-    render :partial => "search", :locals => {
-      :cards => results,
-      :breadcrumbs => queries,
-      :load_more => load_more,
-      :offset => offset.to_i + 100
-    }
+    queries.shift if queries[0][0] == "format"
+
+    unless results.size == 0
+      render :partial => "search", :locals => {
+        :cards => results,
+        :breadcrumbs => queries,
+        :load_more => load_more,
+        :offset => offset.to_i + 100
+      }
+    else
+      "noresults"
+    end
   end
 
   def add_card_to_deck
@@ -55,14 +55,20 @@ class SearchController < ApplicationController
       deck.add_card(Card.find(params[:card_id]))
     end
 
-    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
+    render :partial => "deckmetadata",
+           :locals => { :deck => deck,
+                        :viewing_deck => false,
+                        :left_pos => session[:metadata_left] }
   end
 
   def update_card_quantity
     deck = Deck.find(params[:deck_id])
     deleted = deck.update_pack(Card.find(params[:card_id]), params[:quantity].to_i);
     viewing_deck = (params[:viewing_deck] == "true")
-    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => viewing_deck }
+    render :partial => "deckmetadata",
+           :locals => { :deck => deck,
+                        :viewing_deck => viewing_deck,
+                        :left_pos => session[:metadata_left]  }
   end
 
   def update_deck_name
@@ -76,7 +82,10 @@ class SearchController < ApplicationController
       deck.name = params[:deck_name]
       deck.save
     end
-    render :partial => "deckmetadata", :locals => { :deck => deck, :viewing_deck => false }
+    render :partial => "deckmetadata",
+           :locals => { :deck => deck,
+                        :viewing_deck => false,
+                        :left_pos => session[:metadata_left] }
   end
 
   def card_grid
@@ -97,6 +106,11 @@ class SearchController < ApplicationController
 
   def set_format
     session[:format] = params[:format]
+    render :text => ""
+  end
+
+  def set_metadata_location
+    session[:metadata_left] = params[:location]
     render :text => ""
   end
 
