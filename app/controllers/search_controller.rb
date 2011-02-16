@@ -31,16 +31,12 @@ class SearchController < ApplicationController
 
     queries.shift if queries[0][0] == "format"
 
-    unless results.size == 0
-      render :partial => "search", :locals => {
-        :cards => results,
-        :breadcrumbs => queries,
-        :load_more => load_more,
-        :offset => offset.to_i + 100
-      }
-    else
-      "noresults"
-    end
+    render :partial => "search", :locals => {
+      :cards => results,
+      :breadcrumbs => queries,
+      :load_more => load_more,
+      :offset => offset.to_i + 100
+    }
   end
 
   def add_card_to_deck

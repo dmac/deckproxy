@@ -51,12 +51,19 @@
   $(document).ready(CardGrid.init);
 
   </script>
-  <% cards.each do |card| %>
-    <div class="card" cardid="<%= card.id %>">
-      <%= render :partial => "/search/card_skeleton", :locals => {
-        :card => card
-      } %>
-    </div>
+  <% if cards.size > 0 %>
+    <% cards.each do |card| %>
+      <div class="card" cardid="<%= card.id %>">
+        <%= render :partial => "/search/card_skeleton", :locals => {
+          :card => card
+        } %>
+      </div>
+    <% end %>
+  <% else %> <!-- if there aren't any cards to display -->
+    <%= render :partial => "/search/card_skeleton", :locals => {
+      :card => Card.no_results_card,
+      :is_no_result_card => true
+    } %>
   <% end %>
 </div>
 <input type="hidden" id="loadMore" value="<%= load_more ? offset : 'none' %>" />

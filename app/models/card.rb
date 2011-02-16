@@ -166,5 +166,9 @@ class Card < ActiveRecord::Base
     pack.save
   end
 
+  def self.no_results_card
+    Card.find(:first, :conditions => ['edition = ? AND name like ?', 'UNH', 'AWOL'])
+  end
+
 end
 

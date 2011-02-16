@@ -159,6 +159,10 @@ a:link, a:visited {
   }
 }
 
+.card_skeleton[noResult] {
+  margin-left: 100px;
+}
+
 #resultsSection {
   #searchBreadcrumbs {
     margin-top: 20px;
