@@ -53,7 +53,7 @@ class CorrectImageNumbersForMpr < ActiveRecord::Migration
 
 		name_to_correct_num.each do |name, correct_num|
 			c = Card.find(:first,
-                    :conditions => ['edition = "MPR" and name = ?',
+                    :conditions => ["edition = 'MPR' and name = ?",
                                     name])
 			c.update_attribute("number", correct_num) if c
       puts "Couldn't find card with name " + name unless c

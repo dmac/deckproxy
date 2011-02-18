@@ -33,7 +33,7 @@ class CorrectImageNumbersFor6e < ActiveRecord::Migration
 
     name_to_correct_num.each do |name, correct_num|
       c = Card.find(:first,
-                    :conditions => ['edition = "6E" and name = ?',
+                    :conditions => ["edition = '6E' and name = ?",
                                     name])
       if c
           c.update_attribute("number", correct_num)

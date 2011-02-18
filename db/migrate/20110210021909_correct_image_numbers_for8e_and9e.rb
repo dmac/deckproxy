@@ -39,7 +39,7 @@ class CorrectImageNumbersFor8eAnd9e < ActiveRecord::Migration
 
     name_to_correct_num_8e.each do |name, correct_num|
       c = Card.find(:first,
-                    :conditions => ['edition = "8E" and name = ?',
+                    :conditions => ["edition = '8E' and name = ?",
                                     name])
       if c
           c.update_attribute("number", correct_num)
@@ -49,7 +49,7 @@ class CorrectImageNumbersFor8eAnd9e < ActiveRecord::Migration
     end
     name_to_correct_num_9e.each do |name, correct_num|
       c = Card.find(:first,
-                    :conditions => ['edition = "9E" and name = ?',
+                    :conditions => ["edition = '9E' and name = ?",
                                     name])
       c.update_attribute("number", correct_num) if c
       puts "Couldn't find card with name " + name unless c
