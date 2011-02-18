@@ -172,26 +172,27 @@ class Card < ActiveRecord::Base
   end
 
   def to_s
-    '{ :id => ' + id.to_s + ', ' +
-      ':name => "' + name.gsub(/"/, "'") + '", ' +
-      ':edition => "' + edition + '", ' +
-      ':color => "' + color + '", ' +
-      ':cost => "' + cost + '", ' +
-      ':type => "' + type + '", ' +
-      ':text => "' + (text ? text.gsub(/"/, "'") : '') + '", ' +
-      ':power => "' + power + '", ' +
-      ':toughness => "' + toughness + '", ' +
-      ':flavor => "' + (flavor ? flavor.gsub(/"/, "'") : '') + '", ' +
-      ':rarity => "' + rarity + '", ' +
-      ':artist => "' + artist + '", ' +
-      ':number => ' + number.to_s + ', ' +
-      ':mana => ' + mana.to_s + ', ' +
-      ':type_index => ' + type_index.to_s + ', ' +
-      ':power_int => ' + power_int.to_s + ', ' +
-      ':toughness_int => ' + toughness_int.to_s + ', ' +
-      ':power_text => "' + (power_text ? power_text : '') + '", ' +
-      ':toughness_text => "' + (toughness_text ? toughness_text : '') + '" ' +
-    '}'
+    str = '{ :id => ' + id.to_s + ', '
+    str = str + ':name => "' + name.gsub(/"/, "'") + '", '
+    str = str + ':edition => "' + edition + '", '
+    str = str + ':color => "' + color + '", '
+    str = str + ':cost => "' + cost + '", '
+    str = str + ':type => "' + type + '", '
+    str = str + ':text => "' + text.gsub(/"/, "'") + '", ' if text and text.size > 0
+    str = str + ':power => "' + power + '", ' if power
+    str = str + ':toughness => "' + toughness + '", ' if toughness
+    str = str + ':flavor => "' + flavor.gsub(/"/, "'") + '", ' if flavor and flavor.size > 0
+    str = str + ':rarity => "' + rarity + '", '
+    str = str + ':artist => "' + artist + '", '
+    str = str + ':number => ' + number.to_s + ', ' if number
+    str = str + ':mana => ' + mana.to_s + ', ' if mana
+    str = str + ':type_index => ' + type_index.to_s + ', ' if type_index
+    str = str + ':power_int => ' + power_int.to_s + ', ' if power_int
+    str = str + ':toughness_int => ' + toughness_int.to_s + ', ' if toughness_int
+    str = str + ':power_text => "' + power_text + '", ' if power_text and power_text.size > 0
+    str = str + ':toughness_text => "' + toughness_text + '" ' if toughness_text and toughness_text.size > 0
+    str = str + '}'
+		str
   end
 
 

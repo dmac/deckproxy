@@ -47,4 +47,12 @@ class Block < ActiveRecord::Base
     end
     card_sets
   end
+
+  def to_s
+    str = '{ :id => ' + id.to_s + ', '
+    str = str + ':name => "' + name.gsub(/"/, "'") + '", '
+    str = str + ':number => ' + number.to_s + ' ' 
+    str = str + '}'
+		str
+  end
 end
