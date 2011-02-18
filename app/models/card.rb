@@ -13,14 +13,14 @@ class Card < ActiveRecord::Base
     { :conditions => ["cards.number IS NOT NULL"] }
   }
   named_scope :by_name, lambda { |query|
-    { :conditions => ["cards.name LIKE ? OR cards.name LIKE ?", "%#{query}%",
+    { :conditions => ["cards.name ILIKE ? OR cards.name ILIKE ?", "%#{query}%",
         "%#{query.split(/\s+/).map { |word| word.capitalize }.join(" ")}%"] }
   }
   named_scope :by_text, lambda { |query|
-    { :conditions => ["cards.text LIKE ? OR cards.text LIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
+    { :conditions => ["cards.text ILIKE ? OR cards.text ILIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
   named_scope :by_type, lambda { |query|
-    { :conditions => ["cards.type LIKE ? OR cards.type LIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
+    { :conditions => ["cards.type ILIKE ? OR cards.type ILIKE ?", "%#{query}%", "%#{query.capitalize}%"]}
   }
   named_scope :equal_to_mana, lambda { |query|
     { :conditions => ["cards.mana = ?", query] }
@@ -126,9 +126,9 @@ class Card < ActiveRecord::Base
     {
       :select => "cards.*",
       :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
-      :conditions=>["card_sets.name like ?
-                     or card_sets.supported_codes like ?
-                     or card_sets.myr_id like ?", "%#{query}%", "%#{query}%", "#{query}"]
+      :conditions=>["card_sets.name ILIKE ?
+                     or card_sets.supported_codes ILIKE ?
+                     or card_sets.myr_id ILIKE ?", "%#{query}%", "%#{query}%", "#{query}"]
     }
   }
   named_scope :by_format, lambda { |query|
@@ -140,6 +140,7 @@ class Card < ActiveRecord::Base
       condition_str += " OR " if condition_str.size > 0
       condition_str += " card_sets.id = " + id + " "
     end
+
     {
       :select => "cards.*",
       :joins => "INNER JOIN card_sets ON card_sets.myr_id = cards.edition",
@@ -151,9 +152,9 @@ class Card < ActiveRecord::Base
     colorChars.each do |c|
       str += " or " if (str.size > 0)
       if (c.include?('%'))
-        str += " cards.cost like '%%!" + c + "%%' escape '!' ";
+        str += " cards.cost ILIKE '%%!" + c + "%%' escape '!' ";
       else
-        str += " cards.cost like '%%" + c + "%%' ";
+        str += " cards.cost ILIKE '%%" + c + "%%' ";
       end
     end
     return str
@@ -169,6 +170,30 @@ class Card < ActiveRecord::Base
   def self.no_results_card
     Card.find(:first, :conditions => ['edition = ? AND name like ?', 'UNH', 'AWOL'])
   end
+
+  def to_s
+    '{ :id => ' + id.to_s + ', ' +
+      ':name => "' + name.gsub(/"/, "'") + '", ' +
+      ':edition => "' + edition + '", ' +
+      ':color => "' + color + '", ' +
+      ':cost => "' + cost + '", ' +
+      ':type => "' + type + '", ' +
+      ':text => "' + (text ? text.gsub(/"/, "'") : '') + '", ' +
+      ':power => "' + power + '", ' +
+      ':toughness => "' + toughness + '", ' +
+      ':flavor => "' + (flavor ? flavor.gsub(/"/, "'") : '') + '", ' +
+      ':rarity => "' + rarity + '", ' +
+      ':artist => "' + artist + '", ' +
+      ':number => ' + number.to_s + ', ' +
+      ':mana => ' + mana.to_s + ', ' +
+      ':type_index => ' + type_index.to_s + ', ' +
+      ':power_int => ' + power_int.to_s + ', ' +
+      ':toughness_int => ' + toughness_int.to_s + ', ' +
+      ':power_text => "' + (power_text ? power_text : '') + '", ' +
+      ':toughness_text => "' + (toughness_text ? toughness_text : '') + '" ' +
+    '}'
+  end
+
 
 end
 
