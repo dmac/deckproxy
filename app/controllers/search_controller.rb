@@ -2,6 +2,7 @@ class SearchController < ApplicationController
 
   VALID_QUERIES = ["name", "text", "mana", "color", "type", "set", "power", "toughness", "format"]
 
+
   def index
     if params[:id]
       @deck = Deck.find_by_deck_hash(params[:id])
@@ -21,13 +22,33 @@ class SearchController < ApplicationController
 
     if queries.size > 0
       results = perform_queries(queries)
-      results = results.all(:order => :name, :limit => 100, :offset => offset)
+      # default to name sort
+      session[:sort] = 'name' unless session[:sort]
+
+      if session[:sort] == 'name' or
+         session[:sort] == 'mana' or
+         session[:sort] == 'type'
+        results = results.all(:order => session[:sort],
+                              :limit => 100,
+                              :offset => offset)
+      elsif session[:sort] == 'power' or session[:sort] == 'toughness'
+        results = results.all(:order => (session[:sort] + '_int'),
+                              :limit => 100,
+                              :offset => offset)
+      elsif session[:sort] == 'color'
+        results = results.all(:order => 'sort_color',
+                              :limit => 100,
+                              :offset => offset)
+      elsif session[:sort] == 'set'
+        results = results.all(:order => 'sort_set desc',
+                              :limit => 100,
+                              :offset => offset)
+      end
     else
       results = []
     end
 
     load_more = (results.size == 100)
-
 
     queries.shift if queries[0][0] == "format"
 
@@ -95,6 +116,12 @@ class SearchController < ApplicationController
            :locals => { :cards => cards, :load_more => 100, :offset => 0 }
   end
 
+  def set_sort
+    session[:sort] = (params[:sort] ? params[:sort] : "name")
+    session[:sort] = session[:sort].split.first.downcase
+    render :text => ""
+  end
+
   def toggle_card_mode
     session[:card_mode] = !session[:card_mode]
     render :text => ((session[:card_mode]) ? "true" : "false")
@@ -147,7 +174,6 @@ class SearchController < ApplicationController
     if queries.size == 0
       new_queries = [['format', (session[:format] ? session[:format] : 'all')]]
     elsif queries[0][1] != session[:format]
-      puts '0:' + queries[0][0] + " 1:"+ queries[0][1]
       queries.unshift(['format', (session[:format] ? session[:format] : 'all')])
       new_queries = []
     else

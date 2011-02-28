@@ -19,27 +19,32 @@ task :generate_seedsrb => :environment do
     end
 		puts "Cards done!"
 
-    # CardSets
-    total_num = cardsets.size
-    cardsets.each_index do |index|
-      if index % 10 == 0
-        puts 'CardSets ' + index.to_s + '/' + total_num.to_s + ' handled' if index % 10 == 0
-        f.write('puts "CardSets ' + index.to_s + '/' + total_num.to_s + ' handled" ') if index % 10 == 0
-        f.write("\n")
-      end
-      f.write("CardSet.create(" + cardsets[index].to_s + ")\n")
-    end
-		puts "CardSets done!"
-
-    # Blocks
-    total_num = blocks.size
-    blocks.each_index do |index|
-      puts 'Blocks ' + index.to_s + '/' + total_num.to_s + ' handled'
-      f.write('puts "Blocks ' + index.to_s + '/' + total_num.to_s + ' handled" ') 
-			f.write("\n")
-      f.write("Block.create(" + blocks[index].to_s + ")\n")
-    end
-		puts "Blocks done!"
+#     This portion is unnecessary if you load CardSets and Blocks during
+#     their migrations where they will be loaded from fixtures
+#     Note: If you do use these, be careful to ensure the
+#     CardSets map to the correct block in their block_id column
+#
+#    # CardSets
+#    total_num = cardsets.size
+#    cardsets.each_index do |index|
+#      if index % 10 == 0
+#        puts 'CardSets ' + index.to_s + '/' + total_num.to_s + ' handled' if index % 10 == 0
+#        f.write('puts "CardSets ' + index.to_s + '/' + total_num.to_s + ' handled" ') if index % 10 == 0
+#        f.write("\n")
+#      end
+#      f.write("CardSet.create(" + cardsets[index].to_s + ")\n")
+#    end
+#    puts "CardSets done!"
+#
+#    # Blocks
+#    total_num = blocks.size
+#    blocks.each_index do |index|
+#      puts 'Blocks ' + index.to_s + '/' + total_num.to_s + ' handled'
+#      f.write('puts "Blocks ' + index.to_s + '/' + total_num.to_s + ' handled" ')
+#      f.write("\n")
+#      f.write("Block.create(" + blocks[index].to_s + ")\n")
+#    end
+#    puts "Blocks done!"
 
   ensure
     f.close()

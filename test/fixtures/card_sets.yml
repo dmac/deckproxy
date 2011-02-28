@@ -13,6 +13,7 @@ Alpha:
   supported_codes: LEA
   block: Core
   core_num: 1
+  date: 1993-08
 
 Beta:
   name: Beta
@@ -21,6 +22,7 @@ Beta:
   supported_codes: LEB
   block: Core
   core_num: 2
+  date: 1993-10
 
 Unlimited:
   name: Unlimited
@@ -29,6 +31,7 @@ Unlimited:
   supported_codes: 2ED
   block: Core
   core_num: 3
+  date: 1993-12
 
 Revised:
   name: Revised
@@ -37,6 +40,7 @@ Revised:
   supported_codes: 3ED
   block: Core
   core_num: 4
+  date: 1994-04
 
 4th:
   name: Fourth Edition
@@ -45,6 +49,7 @@ Revised:
   supported_codes: 4ED
   block: Core
   core_num: 5
+  date: 1995-04
 
 5th:
   name: Fifth Edition
@@ -53,6 +58,7 @@ Revised:
   supported_codes: 5ED
   block: Core
   core_num: 6
+  date: 1997-03
 
 6th:
   name: Sixth Edition
@@ -61,6 +67,7 @@ Revised:
   supported_codes: 6ED-Classic
   block: Core
   core_num: 7
+  date: 1999-04
 
 7th:
   name: Seventh Edition
@@ -69,6 +76,7 @@ Revised:
   supported_codes: 7ED
   block: Core
   core_num: 8
+  date: 2001-04
 
 8th:
   name: Eighth Edition
@@ -77,6 +85,7 @@ Revised:
   supported_codes: 8ED
   block: Core
   core_num: 9
+  date: 2003-07
 
 9th:
   name: Ninth Edition
@@ -85,6 +94,7 @@ Revised:
   supported_codes: 9ED
   block: Core
   core_num: 10
+  date: 2005-07
 
 10th:
   name: Tenth Edition
@@ -93,6 +103,7 @@ Revised:
   supported_codes: 10ED
   block: Core
   core_num: 11
+  date: 2007-07
 
 Magic 2010:
   name: Magic 2010
@@ -101,6 +112,7 @@ Magic 2010:
   supported_codes:
   block: Core
   core_num: 12
+  date: 2009-07
 
 Magic 2011:
   name: Magic 2011
@@ -109,6 +121,7 @@ Magic 2011:
   supported_codes:
   block: Core
   core_num: 13
+  date: 2010-07
 
 Arabian Nights:
   name: Arabian Nights
@@ -116,6 +129,7 @@ Arabian Nights:
   lackey_id: an
   supported_codes: ARN
   block: Blockless
+  date: 1993-12
 
 Antiquities:
   name: Antiquities
@@ -123,6 +137,7 @@ Antiquities:
   lackey_id: antiquities
   supported_codes: ATQ
   block: Blockless
+  date: 1994-03
 
 Legends:
   name: Legends
@@ -130,6 +145,7 @@ Legends:
   lackey_id: legends
   supported_codes: LEG
   block: Blockless
+  date: 1994-06
 
 The Dark:
   name: The Dark
@@ -137,6 +153,7 @@ The Dark:
   lackey_id: dark
   supported_codes: DRK
   block: Blockless
+  date: 1994-08
 
 Fallen Empires:
   name: Fallen Empires
@@ -144,6 +161,7 @@ Fallen Empires:
   lackey_id: fe
   supported_codes: FEM
   block: Blockless
+  date: 1994-11
 
 Homelands:
   name: Homelands
@@ -151,6 +169,7 @@ Homelands:
   lackey_id: homelands
   supported_codes: HML
   block: Blockless
+  date: 1995-10
 
 Ice Age:
   name: Ice Age
@@ -158,6 +177,7 @@ Ice Age:
   lackey_id: ia
   supported_codes: ICE
   block: Ice Age
+  date: 1995-06
 
 Alliances:
   name: Alliances
@@ -165,6 +185,7 @@ Alliances:
   lackey_id: alliances
   supported_codes: ALL
   block: Ice Age
+  date: 1996-06
 
 Coldsnap:
   name: Coldsnap
@@ -172,6 +193,7 @@ Coldsnap:
   lackey_id: coldsnap
   supported_codes: CSP
   block: Ice Age
+  date: 2006-07
 
 Mirage:
   name: Mirage
@@ -179,6 +201,7 @@ Mirage:
   lackey_id: mirage
   supported_codes: MIR
   block: Mirage
+  date: 1996-10
 
 Visions:
   name: Visions
@@ -186,6 +209,7 @@ Visions:
   lackey_id: visions
   supported_codes: VIS
   block: Mirage
+  date: 1997-02
 
 Weatherlight:
   name: Weatherlight
@@ -193,6 +217,7 @@ Weatherlight:
   lackey_id: weatherlight
   supported_codes: WTH
   block: Mirage
+  date: 1997-06
 
 Tempest:
   name: Tempest
@@ -200,6 +225,7 @@ Tempest:
   lackey_id: tempest
   supported_codes: TMP
   block: Rath/Tempest
+  date: 1997-10
 
 Stronghold:
   name: Stronghold
@@ -207,6 +233,7 @@ Stronghold:
   lackey_id: stronghold
   supported_codes: STH
   block: Rath/Tempest
+  date: 1998-03
 
 Exodus:
   name: Exodus
@@ -214,6 +241,7 @@ Exodus:
   lackey_id: exodus
   supported_codes: EXO
   block: Rath/Tempest
+  date: 1998-06
 
 Urza Saga:
   name: Urza's Saga
@@ -221,6 +249,7 @@ Urza Saga:
   lackey_id: uz
   supported_codes: USG
   block: Artifacts/Urza
+  date: 1998-10
 
 Urza Legacy:
   name: Urza's Legacy
@@ -228,6 +257,7 @@ Urza Legacy:
   lackey_id: ul
   supported_codes: ULG
   block: Artifacts/Urza
+  date: 1999-02
 
 Urza Destiny:
   name: Urza's Destiny
@@ -235,6 +265,7 @@ Urza Destiny:
   lackey_id: ud
   supported_codes: UDS
   block: Artifacts/Urza
+  date: 1999-07
 
 Mercadian Masques:
   name: Mercadian Masques
@@ -242,6 +273,7 @@ Mercadian Masques:
   lackey_id: mm
   supported_codes: MMQ
   block: Masquerade/Masques
+  date: 1999-10
 
 Nemesis:
   name: Nemesis
@@ -249,6 +281,7 @@ Nemesis:
   lackey_id: nemesis
   supported_codes: NMS
   block: Masquerade/Masques
+  date: 2000-02
 
 Prophecy:
   name: Prophecy
@@ -256,6 +289,7 @@ Prophecy:
   lackey_id: prophecy
   supported_codes: PCY
   block: Masquerade/Masques
+  date: 2000-06
 
 Invasion:
   name: Invasion
@@ -263,6 +297,7 @@ Invasion:
   lackey_id: invasion
   supported_codes: INV
   block: Invasion
+  date: 2000-10
 
 Planeshift:
   name: Planeshift
@@ -270,6 +305,7 @@ Planeshift:
   lackey_id: planeshift
   supported_codes: PLS
   block: Invasion
+  date: 2001-02
 
 Apocalypse:
   name: Apocalypse
@@ -277,6 +313,7 @@ Apocalypse:
   lackey_id: apocalypse
   supported_codes: APC
   block: Invasion
+  date: 2001-06
 
 Odyssey:
   name: Odyssey
@@ -284,6 +321,7 @@ Odyssey:
   lackey_id: odyssey
   supported_codes: ODY
   block: Odyssey
+  date: 2001-10
 
 Torment:
   name: Torment
@@ -291,6 +329,7 @@ Torment:
   lackey_id: torment
   supported_codes: TOR
   block: Odyssey
+  date: 2002-02
 
 Judgment:
   name: Judgment
@@ -298,6 +337,7 @@ Judgment:
   lackey_id: judgment
   supported_codes: JUD-Judgement
   block: Odyssey
+  date: 2002-05
 
 Onslaught:
   name: Onslaught
@@ -305,6 +345,7 @@ Onslaught:
   lackey_id: onslaught
   supported_codes: ONS
   block: Onslaught
+  date: 2002-10
 
 Legions:
   name: Legions
@@ -312,6 +353,7 @@ Legions:
   lackey_id: legions
   supported_codes: LGN
   block: Onslaught
+  date: 2003-02
 
 Scourge:
   name: Scourge
@@ -319,6 +361,7 @@ Scourge:
   lackey_id: scourge
   supported_codes: SCG
   block: Onslaught
+  date: 2003-05
 
 Mirrodin:
   name: Mirrodin
@@ -326,6 +369,7 @@ Mirrodin:
   lackey_id: mirrodin
   supported_codes: MRD
   block: Mirrodin
+  date: 2003-10
 
 Darksteel:
   name: Darksteel
@@ -333,6 +377,7 @@ Darksteel:
   lackey_id: darksteel
   supported_codes: DST
   block: Mirrodin
+  date: 2004-02
 
 Fifth Dawn:
   name: Fifth Dawn
@@ -340,6 +385,7 @@ Fifth Dawn:
   lackey_id: fd
   supported_codes: 5th Dawn-5DN
   block: Mirrodin
+  date: 2004-06
 
 Champions of Kamigawa:
   name: Champions of Kamigawa
@@ -347,6 +393,7 @@ Champions of Kamigawa:
   lackey_id: chk
   supported_codes:
   block: Kamigawa
+  date: 2004-10
 
 Betrayers of Kamigawa:
   name: Betrayers of Kamigawa
@@ -354,6 +401,7 @@ Betrayers of Kamigawa:
   lackey_id: bok
   supported_codes:
   block: Kamigawa
+  date: 2005-02
 
 Saviors of Kamigawa:
   name: Saviors of Kamigawa
@@ -361,6 +409,7 @@ Saviors of Kamigawa:
   lackey_id: sok
   supported_codes:
   block: Kamigawa
+  date: 2005-06
 
 Ravnica:
   name: Ravnica City of Guilds
@@ -368,6 +417,7 @@ Ravnica:
   lackey_id: ravnica
   supported_codes: RAV
   block: Ravnica
+  date: 2005-10
 
 Guildpact:
   name: Guildpact
@@ -375,6 +425,7 @@ Guildpact:
   lackey_id: guildpact
   supported_codes: GPT
   block: Ravnica
+  date: 2006-02
 
 Dissension:
   name: Dissension
@@ -382,6 +433,7 @@ Dissension:
   lackey_id: dissension
   supported_codes: DIS
   block: Ravnica
+  date: 2006-05
 
 Time Spiral:
   name: Time Spiral
@@ -389,6 +441,7 @@ Time Spiral:
   lackey_id: tsts-ts
   supported_codes:
   block: Time Spiral
+  date: 2006-10
 
 Planar Chaos:
   name: Planar Chaos
@@ -396,6 +449,7 @@ Planar Chaos:
   lackey_id: plc
   supported_codes:
   block: Time Spiral
+  date: 2007-02
 
 Future Sight:
   name: Future Sight
@@ -403,6 +457,7 @@ Future Sight:
   lackey_id: fs
   supported_codes:
   block: Time Spiral
+  date: 2007-05
 
 Time Shifted:
   name: Time Shifted
@@ -410,6 +465,7 @@ Time Shifted:
   lackey_id: tsts
   supported_codes:
   block: Time Spiral
+  date: 2006-10
 
 Lorwyn:
   name: Lorwyn
@@ -417,6 +473,7 @@ Lorwyn:
   lackey_id: lorwyn
   supported_codes:
   block: Lorwyn
+  date: 2007-10
 
 Morningtide:
   name: Morningtide
@@ -424,6 +481,7 @@ Morningtide:
   lackey_id: morningtide
   supported_codes:
   block: Lorwyn
+  date: 2008-02
 
 Shadowmoor:
   name: Shadowmoor
@@ -431,6 +489,7 @@ Shadowmoor:
   lackey_id: shadowmoor
   supported_codes:
   block: Shadowmoor
+  date: 2008-05
 
 Eventide:
   name: Eventide
@@ -438,6 +497,7 @@ Eventide:
   lackey_id: eventide
   supported_codes:
   block: Shadowmoor
+  date: 2008-07
 
 Shards of Alara:
   name: Shards of Alara
@@ -445,6 +505,7 @@ Shards of Alara:
   lackey_id: soa
   supported_codes:
   block: Shards of Alara
+  date: 2008-10
 
 Conflux:
   name: Conflux
@@ -452,6 +513,7 @@ Conflux:
   lackey_id: cfx
   supported_codes: CON
   block: Shards of Alara
+  date: 2009-02
 
 Alara Reborn:
   name: Alara Reborn
@@ -459,6 +521,7 @@ Alara Reborn:
   lackey_id: arb
   supported_codes:
   block: Shards of Alara
+  date: 2009-04
 
 Zendikar:
   name: Zendikar
@@ -466,6 +529,7 @@ Zendikar:
   lackey_id: zendikar
   supported_codes:
   block: Zendikar
+  date: 2009-10
 
 Worldwake:
   name: Worldwake
@@ -473,6 +537,7 @@ Worldwake:
   lackey_id: worldwake
   supported_codes:
   block: Zendikar
+  date: 2010-02
 
 Rise of the Eldrazi:
   name: Rise of the Eldrazi
@@ -480,6 +545,7 @@ Rise of the Eldrazi:
   lackey_id: roe
   supported_codes:
   block: Zendikar
+  date: 2010-04
 
 Scars of Mirrodin:
   name: Scars of Mirrodin
@@ -487,32 +553,38 @@ Scars of Mirrodin:
   lackey_id: som
   supported_codes:
   block: Scars of Mirrodin
+  date: 2010-10
 
 Mirrodin Besieged:
   name: Mirrodin Besieged
-  myr_id: #?
+  myr_id: MBS
   lackey_id: #?
   supported_codes: MBS
   block: Scars of Mirrodin
+  date: 2011-02
 
 
+# 0000-X dates are so these sets appear last on set sort
 Portal:
   name: Portal
   myr_id: PT
   lackey_id: portal
   block: Starter
+  date: 0000-01
 
 Portal2:
   name: Portal2
   myr_id: P2
   lackey_id: portal2
   block: Starter
+  date: 0000-02
 
 Starter:
   name: Starter Deck
   myr_id: S00
   lackey_id: starter
   block: Starter
+  date: 0000-03
 
 Unhinged:
   name: Unhinged
@@ -520,6 +592,7 @@ Unhinged:
   lackey_id: unhinged
   supported_codes: UN
   block: Unsets
+  date: 0000-50
 
 Unglued:
   name: Unglued
@@ -527,6 +600,7 @@ Unglued:
   lackey_id: unglued
   supported_codes: UN
   block: Unsets
+  date: 0000-49
 
 
 

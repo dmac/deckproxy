@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  belongs_to :set
+  belongs_to :card_set
   has_many :packs
   has_many :decks, :through => :packs
 
@@ -186,13 +186,14 @@ class Card < ActiveRecord::Base
     str = str + ':artist => "' + artist + '", '
     str = str + ':number => ' + number.to_s + ', ' if number
     str = str + ':mana => ' + mana.to_s + ', ' if mana
-    str = str + ':type_index => ' + type_index.to_s + ', ' if type_index
     str = str + ':power_int => ' + power_int.to_s + ', ' if power_int
     str = str + ':toughness_int => ' + toughness_int.to_s + ', ' if toughness_int
     str = str + ':power_text => "' + power_text + '", ' if power_text and power_text.size > 0
-    str = str + ':toughness_text => "' + toughness_text + '" ' if toughness_text and toughness_text.size > 0
+    str = str + ':toughness_text => "' + toughness_text + '", ' if toughness_text and toughness_text.size > 0
+    str = str + ':sort_color => "' + sort_color + '", ' if sort_color and sort_color.size > 0
+    str = str + ':sort_set => "' + sort_set + '" ' if sort_set and sort_set.size > 0
     str = str + '}'
-		str
+    str
   end
 
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110210162855) do
+ActiveRecord::Schema.define(:version => 20110129015132) do
 
   create_table "blocks", :force => true do |t|
     t.string  "name",   :limit => 1024
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110210162855) do
     t.string  "supported_codes", :limit => 1024
     t.integer "core_num"
     t.integer "block_id"
+    t.string  "date"
   end
 
   add_index "card_sets", ["myr_id"], :name => "index_card_sets_on_myr_id", :unique => true
@@ -42,12 +43,12 @@ ActiveRecord::Schema.define(:version => 20110210162855) do
     t.string  "artist",         :limit => 1024
     t.integer "number"
     t.integer "mana"
-    t.string  "internal",       :limit => 1024
-    t.integer "type_index"
     t.integer "power_int"
     t.integer "toughness_int"
-    t.string  "power_text"
-    t.string  "toughness_text"
+    t.string  "power_text",     :limit => 1024
+    t.string  "toughness_text", :limit => 1024
+    t.string  "sort_color",     :limit => 1024
+    t.string  "sort_set",       :limit => 1024
   end
 
   create_table "decks", :force => true do |t|

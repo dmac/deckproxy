@@ -20,9 +20,11 @@ class Block < ActiveRecord::Base
       formatCardSetIDs << card_set.id.to_s
     end
 
-    #add core card_set.id
-    core = CardSet.find(:first, :order => "core_num DESC")
-    formatCardSetIDs << core.id.to_s
+    #add two core card_set.ids
+    get_core_x_blocks_back(1).each do |core|
+      formatCardSetIDs << core.id.to_s
+    end
+    formatCardSetIDs
   end
 
   def self.get_extended_format_card_set_ids
@@ -33,9 +35,10 @@ class Block < ActiveRecord::Base
     end
 
     #add two core card_set.ids
-    core = CardSet.find(:all, :order => "core_num DESC")
-    formatCardSetIDs << core[0].id.to_s
-    formatCardSetIDs << core[1].id.to_s
+    get_core_x_blocks_back(2).each do |core|
+      formatCardSetIDs << core.id.to_s
+    end
+    formatCardSetIDs
   end
 
   def self.get_card_sets_from_x_blocks_back(x)
@@ -48,10 +51,22 @@ class Block < ActiveRecord::Base
     card_sets
   end
 
+  def self.get_core_x_blocks_back(x)
+    card_sets = []
+
+    cores = CardSet.find(:all,
+                         :conditions => ["core_num is not null"],
+                         :order => "core_num DESC")
+    x.times do |i|
+      card_sets << cores[i]
+    end
+    card_sets
+  end
+
   def to_s
     str = '{ :id => ' + id.to_s + ', '
     str = str + ':name => "' + name.gsub(/"/, "'") + '", '
-    str = str + ':number => ' + number.to_s + ' ' 
+    str = str + ':number => ' + number.to_s + ' '
     str = str + '}'
 		str
   end

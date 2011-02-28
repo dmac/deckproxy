@@ -10,8 +10,15 @@ class CreateCardSets < ActiveRecord::Migration
       t.string :block, :limit => 1024
       t.integer :core_num
       t.integer :block_id
+      t.string :date # yeah, date's actually a string, sorry Zhi (jhawk)
     end
     Fixtures.create_fixtures('test/fixtures', File.basename("card_sets.yml", '.*'))
+
+    # for some reason this one screws up, so fix it
+    onslaught = CardSet.find_by_name('Onslaught')
+    onslaught.myr_id = 'ON'
+    onslaught.date = '2002-10'
+    onslaught.save!
 
     add_index(:card_sets, :myr_id, :unique => true)
     add_index(:card_sets, :name, :unique => true)

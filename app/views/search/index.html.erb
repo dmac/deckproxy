@@ -160,6 +160,19 @@
       });
     },
 
+    sortGrid: function(sortOn) {
+      $.ajax({
+        type: "POST",
+        url: "/search/set_sort",
+        data: {
+          sort: sortOn
+        },
+        success: function() {
+          Searcher.search(0, true, "");
+        }
+      });
+    },
+
     activateCardMode: function() {
       Searcher.isCardMode = true;
       var cards = $("#searchResults .card_skeleton");
@@ -302,6 +315,24 @@
                 } %>
               <%= label_tag "format_#{format}", format.humanize %>
             <% end %>
+            <div id='sortByBox'>
+              <label>Sort By:  </label>
+              <%=
+              option_string = ""
+              sort_options = ['Name', 'Color', 'Mana Cost', 'Type',
+                              'Set', 'Power', 'Toughness']
+              sort_options.each do |option|
+                option_string = option_string + "<option" +
+                  ((session[:sort] == option.split.first.downcase) ? " selected='selected'>" : ">")
+                option_string = option_string + option + "</option>"
+              end
+              select_tag 'sort',
+                option_string,
+                {:onchange => "Searcher.sortGrid(" +
+                              "this.options[this.selectedIndex].value" +
+                              ");"}
+              %>
+            <div>
           </div>
         </tr>
         <tr>
