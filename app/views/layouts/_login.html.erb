@@ -49,20 +49,36 @@
         event.preventDefault();
       }
 
+      var target;
+      if (link.attr("id") == "shortcutsLink") {
+        target = $("#shortcuts");
+        $("#login").toggle(false);
+      } else {
+        $("#shortcuts").toggle(false);
+        target = $("#login")
+      }
+      target.css("left", $("#loginLinks").position().left + "px");
+      target.css("width", $("#loginLinks").width() + "px");
+
       if (link.attr("id") == "loginLink") {
+        if ($("#confirm").is(":visible")) {
+          $("#confirm").toggle();
+        } else {
+          $("#login").toggle();
+          $("#confirm").toggle(false);
+        }
         $("input[name=loginAction]").val("login");
-        $("input#email").css("visibility", "visible");
-        $("input#password").css("visibility", "visible");
-        $("input#confirm").css("visibility", "hidden");
-        $("#loginButton").css("visibility", "visible");
-        $("#loginMessage").html("");
       } else if (link.attr("id") == "registerLink") {
+        if($("#login").is(":visible") &&
+            !$("#confirm").is(":visible")) {
+          $("#confirm").toggle();
+        } else {
+          $("#login").toggle();
+          $("#confirm").toggle(true);
+        }
         $("input[name=loginAction]").val("register");
-        $("input#email").css("visibility", "visible");
-        $("input#password").css("visibility", "visible");
-        $("input#confirm").css("visibility", "visible");
-        $("#loginButton").css("visibility", "visible");
-        $("#loginMessage").html("");
+      } else if (link.attr("id") == "shortcutsLink") {
+        $("#shortcuts").toggle();
       }
     },
 
@@ -108,17 +124,17 @@
   }
   $(document).ready(function() { Login.init(); })
 </script>
-<!--
+<span id="loginLinks">
+<% if session[:user] %>
+  <span class="bold"><%= session[:user].email %></span> |
+  <a id="logoutLink" href="/user/logout">Logout</a> |
+<% else %>
+  <a id="loginLink" href="#">Login</a> |
+  <a id="registerLink" href="#">Register</a> |
+<% end %>
+<a id="shortcutsLink" href="#">Keyboard Shortcuts</a>
+</span>
 <div id="login">
-  <div id="loginLinks">
-    <% if session[:user] %>
-      <span class="bold"><%= session[:user].email %></span> |
-      <a id="logoutLink" href="/user/logout">Logout</a>
-    <% else %>
-      <a id="loginLink" href="#">Login</a> |
-      <a id="registerLink" href="#">Register</a>
-    <% end %>
-  </div>
   <div id="loginInputs">
     <input type="hidden" name="loginAction" value="" />
     <input type="text" id="email" class="grayText" value="email" />
@@ -129,4 +145,15 @@
   <div id="loginMessage">
   </div>
 </div>
--->
+<div id="shortcuts">
+<div><span class="hotkey bold">/</span>: restart search</div>
+<div><span class="hotkey bold">n</span>: search card name</div>
+<div><span class="hotkey bold">t</span>: search card text</div>
+<div><span class="hotkey bold">m</span>: search converted mana cost</div>
+<div><span class="hotkey bold">c</span>: search by mana color</div>
+<div><span class="hotkey bold">y</span>: search by card type</div>
+<div><span class="hotkey bold">s</span>: search by set</div>
+<div><span class="hotkey bold">,</span>: search by power</div>
+<div><span class="hotkey bold">.</span>: search by toughness</div>
+<div><span class="hotkey bold">x</span>: toggle keyboard card selection</div>
+</div>

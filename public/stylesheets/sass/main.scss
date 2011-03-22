@@ -26,10 +26,11 @@ body {
   font-size: 12px;
   font-family: Helvetica;
   color: #444;
+  overflow-x: hidden;
 }
 
 a:link, a:visited {
-  color: #0000CD;
+  color: #6f76ba;
 }
 
 .bold {
@@ -89,12 +90,32 @@ a:link, a:visited {
   margin-top: 0px;
 }
 
-#login {
+#login, #shortcuts {
   position: absolute;
-  top: 10px;
-  left: 360px;
-  text-align: right;
-  width: 300px;
+  display: none;
+  z-index: 1000000;
+  top: 40px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-top: 0px;
+}
+
+#shortcuts {
+  text-align: left;
+
+  .hotkey {
+    float: left;
+    width: 20px;
+  }
+
+  div {
+    margin: 3px;
+  }
+}
+
+#login {
+  text-align: center;
+  display: none;
 
   #loginInputs {
     display: -moz-box;
@@ -103,16 +124,24 @@ a:link, a:visited {
     -webkit-box-align: end;
     -moz-box-orient: vertical;
     -webkit-box-orient: vertical;
-    margin-top: 5px;
+    
     input {
-      display: block;
-      visibility: hidden;
-      width: 125px;
+      width: 95%;
+      height: 1.5em;
+      margin: 5px 0px 5px 0px;
       margin-bottom: 3px;
+      border: 0px;
     }
+    
+    #confirm {
+      display: none;
+    }
+
     button {
+      margin: 5px 0px 5px 0px;
       width: 125px;
-      visibility: hidden;
+      background-color: #ddd;
+      border: 1px solid #bbb;
     }
   }
 
@@ -151,6 +180,9 @@ a:link, a:visited {
     @include gradient(#ccc, #eee);
     -moz-border-radius-bottomright: 10px;
     border-bottom-right-radius: 10px;
+    text-align: right;
+    padding-right: 10px;
+
     #searchboxDiv {
       float: left;
       margin-left: 10px;
@@ -166,6 +198,11 @@ a:link, a:visited {
         &.grayText { color: #D2D2D2; }
       }
     }
+
+    #nav {
+      padding-top: 18px;
+    }
+    
   }
 
   #formatRow > *{
@@ -173,23 +210,6 @@ a:link, a:visited {
     color: #666666;
   }
 
-  #searchInstructions {
-    margin-top: 10px;
-    .column {
-      display: inline-block;
-    }
-    td {
-      font-size: 0.7em;
-      padding-right: 10px;
-      color: #AAAAAA;
-      .hotkey {
-        font-family: Georgia;
-        color: #000000;
-        font-size: 1.0em;
-        padding-right: 2px;
-      }
-    }
-  }
 }
 
 .card_skeleton[noResult] {
