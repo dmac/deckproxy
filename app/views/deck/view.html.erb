@@ -1,16 +1,5 @@
-<script>
-  window.onresize = function(event) {
-    Utils.repositionDeckMetadata(680, 880);
-  }
-
-  window.onload = function(event) {
-    Utils.repositionDeckMetadata(680, 880);
-  }
-
-</script>
     <div id="resultsSection">
       <div id="searchResults">
         <%= render :partial => "/search/card_grid", :locals => {:cards => @deck.cards, :load_more => 100, :offset => 0}  %>
       </div>
     </div>
-<%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck, :viewing_deck => true} %>

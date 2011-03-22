@@ -25,6 +25,7 @@
 body {
   font-size: 12px;
   font-family: Helvetica;
+  color: #444;
 }
 
 a:link, a:visited {
@@ -83,8 +84,8 @@ a:link, a:visited {
 
 #main {
   width: 100%;
+  height: 100%;
   margin: auto;
-  margin-bottom: 140px;
   margin-top: 0px;
 }
 
@@ -123,32 +124,36 @@ a:link, a:visited {
 }
 
 #pageBox {
-  max-width: 1300px;
-  min-width: 930px;
+  width: 95%;
+  margin: auto;
+  height: 100%;
 }
 
 #searchSection {
   margin-top: 0px;
-  margin-left: 60px;
-  margin-right: 240px;
-  min-width: 600px;
-  max-width: 819px;
+  margin-left: 231px;
+  /*min-width: 600px;*/
+  /*max-width: 819px;*/
+  height: 100%;
+
+  display: -moz-box;
+  display: -webkit-box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
 
   #deckView {
     margin-top: 70px;
   }
 
   #header {
-    width: 100%;
     height: 40px;
+    min-width: 510px;
     @include gradient(#ccc, #eee);
-    -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px;
-    #logo {
-      margin: 10px 0px 0px 10px;
-    }
+    -moz-border-radius-bottomright: 10px;
+    border-bottom-right-radius: 10px;
     #searchboxDiv {
-      float: right;
+      float: left;
+      margin-left: 10px;
       #searchbox {
         margin: 8px 10px 0px 0px;
 	padding-left: 3px;
@@ -192,9 +197,16 @@ a:link, a:visited {
 }
 
 #resultsSection {
+  position: relative;
+  padding: 10px 10px 10px 9px;
+  max-height: 100%;
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  min-width: 500px;
   #searchBreadcrumbs {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
+    margin-left: 0px;
 
     .breadcrumb {
       display: inline-block;
@@ -213,7 +225,6 @@ a:link, a:visited {
   }
 
   #searchResults {
-    max-width: 800px;
 
     .card {
       display: inline;
@@ -248,7 +259,6 @@ a:link, a:visited {
 
 #deckmetadata {
   position: fixed;
-  left: 680px;
   top: 0px;
   width: 230px;
   height: 100%;
@@ -260,6 +270,7 @@ a:link, a:visited {
   -webkit-box-orient: vertical;
   
   #deckcontent {
+    padding: 0px 10px 0px 10px;
     max-height: 100%;
     overflow-y: auto;
     -moz-box-flex: 1;
@@ -270,19 +281,24 @@ a:link, a:visited {
     width: 100%;
     height: 40px;
     @include gradient(#ccc, #eee);
+
+    #logo {
+      margin: 10px 0px 0px 10px;
+    }
   }
 
   #deckname {
     width: 100%;
+    border: 0px;
     height: 25px;
     font-size: 1.1em;
     padding-left: 4px;
-    margin-top: 35;
+    margin-top: 10px;
   }
 
   #decklist {
     list-style-type: none;
-    margin: 10px 0px;
+    margin: 0px 4px 0px 4px;
 
     h4 { padding-top: 10px; }
 

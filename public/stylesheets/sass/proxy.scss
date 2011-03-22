@@ -22,7 +22,16 @@
   margin: 0px;
 }
 
-#header{
+#header {
   visibility: hidden;
   position: absolute;
+}
+
+#pageBox {
+  width: 100%;
+  margin: 0px;
+}
+
+#deckmetadata {
+  visibility: hidden;
 }

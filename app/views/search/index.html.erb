@@ -212,19 +212,13 @@
 
   $(document).ready(CardDisplay.init);
 
-  window.onresize = function(event) {
-    Utils.repositionDeckMetadata(680, 880);
-  }
-
-  window.onload = function(event) {
-    Utils.repositionDeckMetadata(680, 880);
-  }
 
 </script>
 
 <div id="resultsSection" search="<%= params[:search] %>">
       <div id="searchResults">
+<br />
+<br /><br /><br /><br /><br /><br /><br /><br />
+
       </div>
 </div>
-
-  <%= render :partial => "deckmetadata", :locals => {:deck => @deck, :viewing_deck => false} %>
