@@ -1,3 +1,18 @@
+@mixin gradient($bottom, $top) {
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, $bottom),
+    color-stop(1, $top)
+   );
+   background-image: -moz-linear-gradient(
+     center bottom,
+     $bottom 0%,
+     $top 100%
+   );
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -70,7 +85,7 @@ a:link, a:visited {
   width: 100%;
   margin: auto;
   margin-bottom: 140px;
-  margin-top: 40px;
+  margin-top: 0px;
 }
 
 #login {
@@ -110,28 +125,41 @@ a:link, a:visited {
 #pageBox {
   max-width: 1300px;
   min-width: 930px;
-  height: 100%;
 }
 
 #searchSection {
-  margin-top: 10px;
+  margin-top: 0px;
   margin-left: 60px;
   margin-right: 240px;
   min-width: 600px;
-  max-width: 800px;
+  max-width: 819px;
 
   #deckView {
     margin-top: 70px;
   }
 
-  #searchboxDiv {
-    #searchbox {
-      width: 450px;
-      height: 30px;
-      font-size: 1.4em;
-      display: block;
+  #header {
+    width: 100%;
+    height: 40px;
+    @include gradient(#ccc, #eee);
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-left-radius: 10px;
+    #logo {
+      margin: 10px 0px 0px 10px;
+    }
+    #searchboxDiv {
+      float: right;
+      #searchbox {
+        margin: 8px 10px 0px 0px;
+	padding-left: 3px;
+	border: 0px;
+        width: 300px;
+        height: 24px;
+        font-size: 1.4em;
+        display: block;
 
-      &.grayText { color: #D2D2D2; }
+        &.grayText { color: #D2D2D2; }
+      }
     }
   }
 
@@ -224,9 +252,25 @@ a:link, a:visited {
   top: 0px;
   width: 230px;
   height: 100%;
-  padding: 5px;
-  background-color: #ddd;
-  overflow-y: auto;
+  padding: 0;
+  background-color: #eee;
+  display: -moz-box;
+  display: -webkit-box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  
+  #deckcontent {
+    max-height: 100%;
+    overflow-y: auto;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+  }
+
+  #deckheader {
+    width: 100%;
+    height: 40px;
+    @include gradient(#ccc, #eee);
+  }
 
   #deckname {
     width: 100%;

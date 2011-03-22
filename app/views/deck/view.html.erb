@@ -8,12 +8,9 @@
   }
 
 </script>
-
-<div id="searchSection">
     <div id="resultsSection">
       <div id="searchResults">
         <%= render :partial => "/search/card_grid", :locals => {:cards => @deck.cards, :load_more => 100, :offset => 0}  %>
       </div>
     </div>
-</div>
 <%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck, :viewing_deck => true} %>

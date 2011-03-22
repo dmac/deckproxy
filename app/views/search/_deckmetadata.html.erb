@@ -69,7 +69,11 @@
      deckname="<%= deck.nil? ? "" : deck.name %>"
      viewingdeck="<%= viewing_deck %>"
      setLeft="<%= ((defined? left_pos) ? left_pos : 680) %>"
-     style="left: <%= ((defined? left_pos) ? left_pos : 680) %>">
+     style="left: <%= ((defined? left_pos) ? left_pos : 680) %>"
+     deckhash="<%= deck.nil? ? "" : deck.deck_hash %>" >
+  <div id ="deckheader">
+  </div>
+  <div id="deckcontent">
   <form>
   <% if !deck.nil? %>
     <input type="text" value="<%= deck.name %>" id="deckname" />
@@ -121,6 +125,7 @@
     <br/><br/>
     <a href="/deck/delete_deck?deck_id=<%= deck.id %>">Delete Deck</a>
   <% end %>
+  </div>
 </div>
 
 <script>
