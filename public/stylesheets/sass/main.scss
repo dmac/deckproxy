@@ -124,7 +124,7 @@ a:link, a:visited {
     -webkit-box-align: end;
     -moz-box-orient: vertical;
     -webkit-box-orient: vertical;
-    
+
     input {
       width: 95%;
       height: 1.5em;
@@ -132,7 +132,7 @@ a:link, a:visited {
       margin-bottom: 3px;
       border: 0px;
     }
-    
+
     #confirm {
       display: none;
     }
@@ -202,7 +202,7 @@ a:link, a:visited {
     #nav {
       padding-top: 18px;
     }
-    
+
   }
 
   #formatRow > *{
@@ -223,6 +223,7 @@ a:link, a:visited {
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
   min-width: 500px;
+  max-width: 850px;
   #searchBreadcrumbs {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -288,7 +289,7 @@ a:link, a:visited {
   display: -webkit-box;
   -moz-box-orient: vertical;
   -webkit-box-orient: vertical;
-  
+
   #deckcontent {
     padding: 0px 10px 0px 10px;
     max-height: 100%;

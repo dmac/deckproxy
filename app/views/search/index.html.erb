@@ -1,6 +1,5 @@
 <script type="text/javascript">
   CardDisplay = {
-    maxScroll: 3000,
     currFormat: null,
 
     init: function() {
@@ -45,8 +44,8 @@
     },
 
     onScroll: function(event) {
-      if (document.body.scrollTop > CardDisplay.maxScroll) {
-        CardDisplay.maxScroll += 3000;
+      if (document.body.scrollTop > Searcher.maxScroll) {
+        Searcher.maxScroll += 3000;
         var offset = $("#loadMore").val();
         $("#loadMore").remove();
         Searcher.search(offset, false);
@@ -61,7 +60,6 @@
         $("#searchBreadcrumbs").remove();
       }
       $("#searchbox").val("");
-      CardDisplay.maxScroll = 3000;
       Searcher.search(0, true);
     },
 

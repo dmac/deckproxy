@@ -72,8 +72,9 @@
                 queries: queries,
                 offset: offset
               },
-              success: function(html) {
-                $("#searchResults").html(html);
+              success: function(returnedHTML) {
+                var prevResultsHTML = $("#searchResults").html();
+                $("#searchResults").html(prevResultsHTML + returnedHTML);
                 $("#searchResults .card").click(CardDisplay.onClickCard);
                 CardDisplay.attachScrollListener();
                 CardDisplay.handleCardMode();
@@ -125,7 +126,7 @@
       <div id="pageBox">
   <div id="searchSection">
     <div id="header">
-      <div id="searchboxDiv"> 
+      <div id="searchboxDiv">
 	<input id="searchField" type="hidden" value="name" />
 	<input id="searchbox" class="grayText" value='type "/" to search' type="text" />
       </div>
@@ -185,7 +186,7 @@
     </div>
       -->
       <%= yield %>
-    
+
     </div>
     <%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck,
       :viewing_deck => false} %>
