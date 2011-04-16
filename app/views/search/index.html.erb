@@ -79,33 +79,6 @@
       });
     },
 
-    setFormat: function(format) {
-      $.ajax({
-        type: "POST",
-        url: "/search/set_format",
-        data: {
-          format: format
-        },
-        success: function() {
-          var offset = $("#loadMore").val();
-          Searcher.search(0, true, "");
-        }
-      });
-    },
-
-    sortGrid: function(sortOn) {
-      $.ajax({
-        type: "POST",
-        url: "/search/set_sort",
-        data: {
-          sort: sortOn
-        },
-        success: function() {
-          Searcher.search(0, true, "");
-        }
-      });
-    },
-
     activateCardMode: function() {
       CardDisplay.isCardMode = true;
       var cards = $("#searchResults .card_skeleton");

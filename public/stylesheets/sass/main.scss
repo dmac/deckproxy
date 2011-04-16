@@ -19,7 +19,11 @@
 }
 
 *[hidden=true] {
-  display: none;
+  display: none !important;
+}
+
+*[invisible=true] {
+  visibility: hidden !important;
 }
 
 body {
@@ -185,15 +189,14 @@ a:link, a:visited {
 
     #searchboxDiv {
       float: left;
-      margin-left: 10px;
+      width: 350px;
       #searchbox {
         margin: 8px 10px 0px 0px;
-	padding-left: 3px;
-	border: 0px;
+        border: 0px;
         width: 300px;
         height: 24px;
         font-size: 1.4em;
-        display: block;
+        display: inline-block;
 
         &.grayText { color: #D2D2D2; }
       }
@@ -203,6 +206,20 @@ a:link, a:visited {
       padding-top: 18px;
     }
 
+  }
+
+  #advancedSearchTray {
+    display: table;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    width: 350px;
+    height: 20px;
+
+    * {
+      float: left;
+      display: table-cell;
+    }
   }
 
   #formatRow > *{
@@ -218,7 +235,7 @@ a:link, a:visited {
 
 #resultsSection {
   position: relative;
-  padding: 10px 10px 10px 9px;
+  padding: 1px 10px 10px 9px;
   max-height: 100%;
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
@@ -273,7 +290,6 @@ a:link, a:visited {
         height: 30px;
         width: 30px;
       }
-
     }
   }
 }
