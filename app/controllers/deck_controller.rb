@@ -74,12 +74,9 @@ class DeckController < ApplicationController
                          LABEL_HEIGHT);
             pdf.fill_color = "FFFFFF"
             pdf.fill();
-            pdf.image open("#{RAILS_ROOT}/public/images/scans/" +
-                            pack.card.edition.downcase + "/" +
-                            pack.card.number.to_s + ".jpg"),
-  #          pdf.image open("https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/" +
-  #                         pack.card.edition.downcase + "/" +
-  #                         pack.card.number.to_s + ".jpg"),
+            pdf.image open("https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/" +
+                           pack.card.edition.downcase + "/" +
+                           pack.card.number.to_s + ".jpg"),
                       :at => [BOUND_BOX_PADDING,LABEL_HEIGHT + BOUND_BOX_PADDING],
                       :width => LABEL_WIDTH,
                       :height => LABEL_HEIGHT
