@@ -1,42 +1,14 @@
-<div id="allDecksList">
-  <script type="text/javascript">
-    DeckList = {
-      init: function() {
-        $(".deleteDeck").click(DeckList.deleteDeck);
-      },
-
-      deleteDeck: function(event) {
-        event.preventDefault();
-        var deckId = $(event.target).attr("deckid");
-        $.ajax({
-          url: "/deck/delete_deck",
-          data: { deck_id: deckId },
-          success: function(html) {
-            $("#allDecksList").replaceWith(html);
-          }
-        });
-      }
-    }
-    $(document).ready(DeckList.init);
-  </script>
-  <% if @user %>
+<% if @user %>
+  <div class="allDecksBox">
     <h1>My Decks</h1>
-    <ul>
-      <% @decks.each do |deck| %>
-        <li>
-          <a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a>
-          (<a href="#" class="deleteDeck" deckId=<%= deck.id %>>x</a>)
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+    <%= render :partial => "alldecks",
+         :locals => { :decks => @user.decks }
+    %>
+  </div>
+<% end %>
+<div class="allDecksBox">
   <h1>Public Decks</h1>
-  <ul>
-    <% @public_decks.each do |deck| %>
-      <li>
-        <a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a>
-        (<a href="#" class="deleteDeck" deckId=<%= deck.id %>>x</a>)
-      </li>
-    <% end %>
-  </ul>
+  <%= render :partial => "alldecks",
+       :locals => { :decks => Deck.public_decks }
+  %>
 </div>
