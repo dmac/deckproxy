@@ -1,6 +1,5 @@
 <script type="text/javascript">
   CardDisplay = {
-    maxScroll: 3000,
     currFormat: null,
 
     init: function() {
@@ -45,8 +44,8 @@
     },
 
     onScroll: function(event) {
-      if (document.body.scrollTop > CardDisplay.maxScroll) {
-        CardDisplay.maxScroll += 3000;
+      if (document.body.scrollTop > Searcher.maxScroll) {
+        Searcher.maxScroll += 3000;
         var offset = $("#loadMore").val();
         $("#loadMore").remove();
         Searcher.search(offset, false);
@@ -61,7 +60,6 @@
         $("#searchBreadcrumbs").remove();
       }
       $("#searchbox").val("");
-      CardDisplay.maxScroll = 3000;
       Searcher.search(0, true);
     },
 
@@ -77,33 +75,6 @@
           } else {
             CardDisplay.deactivateCardMode();
           }
-        }
-      });
-    },
-
-    setFormat: function(format) {
-      $.ajax({
-        type: "POST",
-        url: "/search/set_format",
-        data: {
-          format: format
-        },
-        success: function() {
-          var offset = $("#loadMore").val();
-          Searcher.search(0, true, "");
-        }
-      });
-    },
-
-    sortGrid: function(sortOn) {
-      $.ajax({
-        type: "POST",
-        url: "/search/set_sort",
-        data: {
-          sort: sortOn
-        },
-        success: function() {
-          Searcher.search(0, true, "");
         }
       });
     },

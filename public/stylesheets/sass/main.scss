@@ -19,7 +19,11 @@
 }
 
 *[hidden=true] {
-  display: none;
+  display: none !important;
+}
+
+*[invisible=true] {
+  visibility: hidden !important;
 }
 
 body {
@@ -124,7 +128,7 @@ a:link, a:visited {
     -webkit-box-align: end;
     -moz-box-orient: vertical;
     -webkit-box-orient: vertical;
-    
+
     input {
       width: 95%;
       height: 1.5em;
@@ -132,7 +136,7 @@ a:link, a:visited {
       margin-bottom: 3px;
       border: 0px;
     }
-    
+
     #confirm {
       display: none;
     }
@@ -195,7 +199,7 @@ a:link, a:visited {
         width: 300px;
         height: 24px;
         font-size: 1.4em;
-        display: block;
+        display: inline-block;
 
 
         &.grayText { color: #D2D2D2; }
@@ -207,7 +211,21 @@ a:link, a:visited {
       padding: 0px;
       padding-top: 18px;
     }
-    
+
+  }
+
+  #advancedSearchTray {
+    display: table;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    width: 350px;
+    height: 20px;
+
+    * {
+      float: left;
+      display: table-cell;
+    }
   }
 
   #formatRow > *{
@@ -223,11 +241,12 @@ a:link, a:visited {
 
 #resultsSection {
   position: relative;
-  padding: 10px 10px 10px 9px;
+  padding: 1px 10px 10px 9px;
   max-height: 100%;
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
   min-width: 500px;
+  max-width: 850px;
   #searchBreadcrumbs {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -277,7 +296,6 @@ a:link, a:visited {
         height: 30px;
         width: 30px;
       }
-
     }
   }
 }
@@ -293,7 +311,7 @@ a:link, a:visited {
   display: -webkit-box;
   -moz-box-orient: vertical;
   -webkit-box-orient: vertical;
-  
+
   #deckcontent {
     padding: 0px 10px 0px 10px;
     max-height: 100%;

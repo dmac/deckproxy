@@ -12,6 +12,7 @@
 
         init: function() {
           $(document).keydown(Searcher.onKeyDown);
+          $("#advancedSearchTrigger").click(Searcher.onAdvancedClick);
           $("#searchbox").focus(Searcher.onSearchFocus);
           $("#searchbox").blur(Searcher.onSearchBlur);
         },
@@ -72,8 +73,9 @@
                 queries: queries,
                 offset: offset
               },
-              success: function(html) {
-                $("#searchResults").html(html);
+              success: function(returnedHTML) {
+                var prevResultsHTML = $("#searchResults").html();
+                $("#searchResults").html(prevResultsHTML + returnedHTML);
                 $("#searchResults .card").click(CardDisplay.onClickCard);
                 CardDisplay.attachScrollListener();
                 CardDisplay.handleCardMode();
@@ -92,6 +94,43 @@
 
           $("#searchbox").addClass("grayText");
           $("#searchbox").val('type "/" to search');
+        },
+
+        onAdvancedClick: function(event) {
+          event.preventDefault();
+          if ($("#advancedSearchTray").attr("invisible")) {
+            $("#advancedSearchTray").removeAttr("invisible");
+          }
+          else {
+            $("#advancedSearchTray").attr("invisible", 'true');
+          }
+        },
+
+        sortGrid: function(sortOn) {
+          $.ajax({
+            type: "POST",
+            url: "/search/set_sort",
+            data: {
+              sort: sortOn
+            },
+            success: function() {
+              Searcher.search(0, true, "");
+            }
+          });
+        },
+
+        setFormat: function(format) {
+          $.ajax({
+            type: "POST",
+            url: "/search/set_format",
+            data: {
+              format: format
+            },
+            success: function() {
+              var offset = $("#loadMore").val();
+              Searcher.search(0, true, "");
+            }
+          });
         },
 
         onKeyDown: function(event) {
@@ -120,29 +159,38 @@
 
     </script>
   </head>
-  <body>
+   <body>
     <div id="main">
       <div id="pageBox">
-  <div id="searchSection">
-    <div id="header">
-      <div id="searchboxDiv"> 
-	<input id="searchField" type="hidden" value="name" />
-	<input id="searchbox" class="grayText" value='type "/" to search' type="text" />
-      </div>
-      <div id="nav"><%= render :partial => "layouts/login" %></div>
-    </div>
-    <!--<div id="searchInstructions">
-      <table>
-        <tr>
-          <div id="formatRow">
-            <%
-            @format = ((session[:format]) ? session[:format] : 'all')
-            [ 'all', 'extended', 'standard', 'block'].each do |format| %>
-              <%= radio_button_tag 'format', format, @format == format, {
-                :onclick => "Searcher.setFormat('" + format + "');"
-                } %>
-              <%= label_tag "format_#{format}", format.humanize %>
-            <% end %>
+        <div id="searchSection">
+          <div id="header">
+            <div id="searchboxDiv">
+              <input id="searchField" type="hidden" value="name" />
+              <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
+              <a id="advancedSearchTrigger" href="#">Adv</a>
+            </div>
+            <div id="nav"><%= render :partial => "layouts/login" %></div>
+          </div>
+          <div id="advancedSearchTray" >
+            <div id="formatBox">
+              <label>Format:  </label>
+              <%=
+              option_string = ""
+              format_options = ['All', 'Extended', 'Standard', 'Block']
+
+              @format = ((session[:format]) ? session[:format] : 'all')
+              format_options.each do |format|
+                option_string = option_string + "<option" +
+                  ((@format == format.downcase) ? " selected='selected'>" : ">")
+                option_string = option_string + format + "</option>"
+              end
+              select_tag 'format',
+                option_string,
+                {:onchange => "Searcher.setFormat(" +
+                              "this.options[this.selectedIndex].value" +
+                              ");"}
+              %>
+            </div>
             <div id='sortByBox'>
               <label>Sort By:  </label>
               <%=
@@ -160,36 +208,13 @@
                               "this.options[this.selectedIndex].value" +
                               ");"}
               %>
-            <div>
+            </div>
           </div>
-        </tr>
-        <tr>
-          <td><span class="hotkey">/</span>: restart search</td>
-          <td><span class="hotkey">n</span>: search card name (name:)</td>
-          <td><span class="hotkey">t</span>: search card text (text:)</td>
-        </tr>
-        <tr>
-          <td><span class="hotkey">m</span>: search converted mana cost (mana:)</td>
-          <td><span class="hotkey">c</span>: search by mana color (color:)</td>
-          <td><span class="hotkey">y</span>: search by card type (type:)</td>
-        </tr>
-        <tr>
-          <td><span class="hotkey">s</span>: search by set (set:)</td>
-          <td><span class="hotkey bold">,</span>: search by power (power:)</td>
-          <td><span class="hotkey bold">.</span>: search by toughness (toughness:)</td>
-        </tr>
-        <tr>
-          <td><span class="hotkey bold">x</span>: toggle keyboard card selection</td>
-        </tr>
-      </table>
-    </div>
-      -->
-      <%= yield %>
-    
-    </div>
-    <%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck,
-      :viewing_deck => false} %>
-    </div>
+        <%= yield %>
+        </div>
+        <%= render :partial => "/search/deckmetadata", :locals => {:deck => @deck,
+          :viewing_deck => false} %>
+      </div>
     </div>
   </body>
 </html>

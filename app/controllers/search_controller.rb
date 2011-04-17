@@ -128,7 +128,7 @@ class SearchController < ApplicationController
   end
 
   def set_format
-    session[:format] = params[:format]
+    session[:format] = params[:format].downcase
     render :text => ""
   end
 
