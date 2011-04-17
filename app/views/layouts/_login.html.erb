@@ -45,7 +45,7 @@
     onLoginLinkClicked: function(event) {
       var link = $(event.target);
 
-      if (link.attr("id") != "logoutLink") {
+      if (link.attr("id") != "logoutLink" && link.attr("id") != "decksLink") {
         event.preventDefault();
       }
 
@@ -132,7 +132,8 @@
   <a id="loginLink" href="#">Login</a> |
   <a id="registerLink" href="#">Register</a> |
 <% end %>
-<a id="shortcutsLink" href="#">Keyboard Shortcuts</a>
+<a id="shortcutsLink" href="#">Shortcuts</a> |
+<a id="decksLink" href="/deck/">Decks</a>
 </span>
 <div id="login">
   <div id="loginInputs">

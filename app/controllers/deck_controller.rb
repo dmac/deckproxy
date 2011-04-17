@@ -32,7 +32,7 @@ class DeckController < ApplicationController
       deck = Deck.find(params[:deck_id])
       deck.destroy
     end
-    redirect_to :action => "index"
+    render "deck/index"
   end
 
 end

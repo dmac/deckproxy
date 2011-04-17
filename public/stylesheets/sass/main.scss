@@ -161,10 +161,7 @@ a:link, a:visited {
 #searchSection {
   margin-top: 0px;
   margin-left: 231px;
-  /*min-width: 600px;*/
-  /*max-width: 819px;*/
   height: 100%;
-
   display: -moz-box;
   display: -webkit-box;
   -moz-box-orient: vertical;
@@ -176,7 +173,8 @@ a:link, a:visited {
 
   #header {
     height: 40px;
-    min-width: 510px;
+    min-width: 530px;
+    width: 100%;
     @include gradient(#ccc, #eee);
     -moz-border-radius-bottomright: 10px;
     border-bottom-right-radius: 10px;
@@ -185,9 +183,13 @@ a:link, a:visited {
 
     #searchboxDiv {
       float: left;
+      height: 18px;
+      padding: 8px 0px 0px 0px;
+      margin: 0px;
       margin-left: 10px;
       #searchbox {
-        margin: 8px 10px 0px 0px;
+        margin: 0px 10px 0px 0px;
+        padding: 0px;
 	padding-left: 3px;
 	border: 0px;
         width: 300px;
@@ -195,11 +197,14 @@ a:link, a:visited {
         font-size: 1.4em;
         display: block;
 
+
         &.grayText { color: #D2D2D2; }
       }
     }
 
     #nav {
+      margin: 0px;
+      padding: 0px;
       padding-top: 18px;
     }
     
@@ -349,9 +354,8 @@ a:link, a:visited {
 }
 
 #allDecksList {
-  margin-left: 200px;
-
-  h1 { padding: 30px 0px 10px 0px;}
+  margin: 20px;
+  h1 { padding: 0px 0px 10px 0px;}
 
   ul {
     margin-left: 20px;
