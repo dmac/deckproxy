@@ -375,13 +375,11 @@ a:link, a:visited {
 }
 
 .allDecksBox {
-  margin: 10px 20px;
-
+  margin: 10px 20px 0px 231px;
   h1 {
-    -moz-box-flex: 1;
-    -webkit-box-flex: 1;
+    margin-left: 10px;
   }
   ul {
-    margin-left: 20px;
+    margin-left: 30px;
   }
 }
