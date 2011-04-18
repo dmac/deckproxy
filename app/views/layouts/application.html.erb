@@ -167,13 +167,7 @@
             <div id="searchboxDiv">
               <input id="searchField" type="hidden" value="name" />
               <input id="searchbox" class="grayText" value='type "/" to search' type="text" />
-              <a id="advancedSearchTrigger" href="#">Adv</a>
-            </div>
-            <div id="nav"><%= render :partial => "layouts/login" %></div>
-          </div>
-          <div id="advancedSearchTray" >
-            <div id="formatBox">
-              <label>Format:  </label>
+              <label>in format</label>
               <%=
               option_string = ""
               format_options = ['All', 'Extended', 'Standard', 'Block']
@@ -190,12 +184,10 @@
                               "this.options[this.selectedIndex].value" +
                               ");"}
               %>
-            </div>
-            <div id='sortByBox'>
-              <label>Sort By:  </label>
+              <label>, sorted by</label>
               <%=
               option_string = ""
-              sort_options = ['Name', 'Color', 'Mana Cost', 'Type',
+              sort_options = ['Name', 'Color', 'Cost', 'Type',
                               'Set', 'Power', 'Toughness']
               sort_options.each do |option|
                 option_string = option_string + "<option" +
@@ -208,7 +200,10 @@
                               "this.options[this.selectedIndex].value" +
                               ");"}
               %>
+
+              
             </div>
+            <div id="nav"><%= render :partial => "layouts/login" %></div>
           </div>
         <%= yield %>
         </div>

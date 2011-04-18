@@ -177,7 +177,7 @@ a:link, a:visited {
 
   #header {
     height: 40px;
-    min-width: 530px;
+    min-width: 695px;
     width: 100%;
     @include gradient(#ccc, #eee);
     -moz-border-radius-bottomright: 10px;
@@ -192,17 +192,20 @@ a:link, a:visited {
       margin: 0px;
       margin-left: 10px;
       #searchbox {
-        margin: 0px 10px 0px 0px;
+        margin: 0px 3px 0px 0px;
         padding: 0px;
 	padding-left: 3px;
 	border: 0px;
-        width: 300px;
+        width: 170px;
         height: 24px;
         font-size: 1.4em;
         display: inline-block;
 
 
         &.grayText { color: #D2D2D2; }
+      }
+      select {
+        width: 95px;
       }
     }
 
