@@ -157,14 +157,16 @@ a:link, a:visited {
 }
 
 #pageBox {
-  width: 95%;
   margin: auto;
+  width: 95%;
+  max-width: 1050px;
+  min-width: 920px;
   height: 100%;
 }
 
 #searchSection {
   margin-top: 0px;
-  margin-left: 231px;
+  width: 100%;
   height: 100%;
   display: -moz-box;
   display: -webkit-box;
@@ -177,8 +179,7 @@ a:link, a:visited {
 
   #header {
     height: 40px;
-    min-width: 695px;
-    width: 100%;
+    margin-left: 231px;
     @include gradient(#ccc, #eee);
     -moz-border-radius-bottomright: 10px;
     border-bottom-right-radius: 10px;
@@ -244,12 +245,11 @@ a:link, a:visited {
 
 #resultsSection {
   position: relative;
+  margin-left: 231px;
   padding: 1px 10px 10px 9px;
   max-height: 100%;
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
-  min-width: 500px;
-  max-width: 850px;
   #searchBreadcrumbs {
     margin-top: 10px;
     margin-bottom: 20px;
