@@ -1,0 +1,34 @@
+<div class="decksList">
+  <script type="text/javascript">
+    DeckList = {
+      init: function() {
+        $(".deleteDeck").click(DeckList.deleteDeck);
+      },
+
+      deleteDeck: function(event) {
+        event.preventDefault();
+        var deckId = $(event.target).attr("deckid");
+        $.ajax({
+          url: "/deck/delete_deck",
+          data: { deck_id: deckId },
+          success: function(html) {
+            $(event.target).closest(".decksList").replaceWith(html);
+          }
+        });
+      }
+    }
+    $(document).ready(DeckList.init);
+  </script>
+  <ul>
+    <% if decks.length > 0
+      decks.each do |deck| %>
+        <li>
+          <a href=<%= "/deck/view/" + deck.deck_hash %> ><%=h deck.name %></a>
+          (<a href="#" class="deleteDeck" deckId=<%= deck.id %>>x</a>)
+        </li>
+      <% end
+      else %>
+       No decks found
+      <% end %>
+  </ul>
+</div>
