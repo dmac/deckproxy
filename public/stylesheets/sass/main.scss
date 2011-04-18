@@ -374,10 +374,13 @@ a:link, a:visited {
   }
 }
 
-#allDecksList {
-  margin: 20px;
-  h1 { padding: 0px 0px 10px 0px;}
+.allDecksBox {
+  margin: 10px 20px;
 
+  h1 {
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+  }
   ul {
     margin-left: 20px;
   }
