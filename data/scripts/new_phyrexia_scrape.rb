@@ -39,8 +39,6 @@ lines.push("\t\tCardSet.create({ :name => 'New Phyrexia', :myr_id => 'NPH'," +
            " :lackey_id => '', :supported_codes=> 'NPH', :block_id => " +
            " scars_block.id, :date => '2011-05'})")
 
-#jhawk initialize the migration here like adding card_set
-
 card_tables.each_with_index do |card_table, index|
   name = card_table.css("table tr:nth-of-type(1) td:nth-of-type(1) a:nth-of-type(2)").attr("name")
 
@@ -61,8 +59,6 @@ card_tables.each_with_index do |card_table, index|
       end
     end
   end
-
-  #jhawk also do sort_color
 
   sort_color = ""
   COLOR_LETTERS.each_index do |pos|
@@ -101,8 +97,6 @@ card_tables.each_with_index do |card_table, index|
   mana = $~[0].to_i if cost.match(/\d+/)
   mana += $~[0].size if cost.match(/\D+/)
   mana = -1 if color == "Lnd"
-
-
 
   line = "\t\tCard.create({ "
   line = line + ":name => \"" + name + "\", "
