@@ -563,6 +563,13 @@ Mirrodin Besieged:
   block: Scars of Mirrodin
   date: 2011-02
 
+New Phyrexia:
+  name: New Phyrexia
+  myr_id: NPH
+  lackey_id: #?
+  supported_codes: NPH
+  block: Scars of Mirrodin
+  date: 2011-05
 
 # 0000-X dates are so these sets appear last on set sort
 Portal:
