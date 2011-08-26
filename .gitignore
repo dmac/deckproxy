@@ -3,3 +3,5 @@ config/database.mysql.yml
 log
 tmp
 public/stylesheets/*.css
+bin
+public/images/scans
