@@ -122,6 +122,15 @@ Magic 2011:
   block: Core
   core_num: 13
   date: 2010-07
+  
+Magic 2012:
+  name: Magic 2012
+  myr_id: M12
+  lackey_id: 2012
+  supported_codes:
+  block: Core
+  core_num: 14
+  date: 2011-07
 
 Arabian Nights:
   name: Arabian Nights

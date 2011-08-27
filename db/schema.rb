@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20110129015132) do
     t.integer "toughness_int"
     t.string  "power_text",     :limit => 1024
     t.string  "toughness_text", :limit => 1024
-    t.string  "sort_color",     :limit => 1024
-    t.string  "sort_set",       :limit => 1024
+    t.string  "sort_color",     :limit => 1024, :default => "6C"
+    t.string  "sort_set",       :limit => 1024, :default => "0000-00"
   end
 
   create_table "decks", :force => true do |t|
