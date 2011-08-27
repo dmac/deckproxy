@@ -22,8 +22,16 @@ Card_Skeleton = {
   <% unless (defined? is_no_result_card && is_no_result_card) %>
     <label id="card_selector"></label>
   <% end %>
+  <%
+    # To use local file images set the var below to true
+    local = true
+    if !local %>
   <img src="https://s3-us-west-1.amazonaws.com/deckproxy.com/scans/<%= card.edition.downcase %>/<%= card.number.to_s %>.jpg"
      onLoad="Card_Skeleton.fillCard(this);" hidden="true"/>
+  <% else %>
+  <img src="images/scans/<%= card.edition.downcase %>/<%= card.number.to_s %>.jpg"
+       onLoad="Card_Skeleton.fillCard(this);" hidden="true"/>
+  <% end %>
   <div class="container">
     <div class="title_bar">
       <label class="name"><%= card.name %></label>

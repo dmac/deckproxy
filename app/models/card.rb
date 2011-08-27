@@ -17,6 +17,7 @@ class Card < ActiveRecord::Base
         "%#{query.split(/\s+/).map { |word| word.capitalize }.join(" ")}%"] }
   }
   named_scope :by_text, lambda { |query|
+    query.gsub!(/tap/, '%T:%')
     { :conditions => ["cards.text ILIKE ? OR cards.text ILIKE ?", "%#{query}%", "%#{query.capitalize}%"] }
   }
   named_scope :by_type, lambda { |query|
